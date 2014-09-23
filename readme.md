@@ -4,6 +4,8 @@ vital
 
 **A bare bones WordPress theme created for internal use by [Tedworth & Oscar][]**
 
+![](https://github.com/sleepingKiwi/vital/blob/master/screenshot.png)
+
 ---
 
 Used primarily as a starting point for bespoke themes written by [Tedworth & Oscar][]. This code is maintained for internal use and as such may be sparsely documented in parts. 
@@ -21,6 +23,8 @@ The templates and function files owe a big debt to [Roots][], [_S][], [HTML5 Boi
 Development of *vital* is made infinitely easier by [Grunt][] and [Bower][].
 
 Styling (with [sass][]) builds upon [inuitcss][] by [@csswizardry][] and relies on [grunt-autoprefixr][] .
+
+Image used in screenshot.png: *Surgical-Anatomical Tables by Anton Nuhn, 1846* thanks to [Mary Margret][]
 
 Credits to external resources and references are usually maintained in the theme's files where the code appears.
 
@@ -41,3 +45,4 @@ Rather than take a completely 'bare bones' approach the theme includes many comp
 [inuitcss]: http://github.com/inuitcss
 [@csswizardry]: https://twitter.com/csswizardry
 [grunt-autoprefixr]: https://github.com/nDmitry/grunt-autoprefixer
+[Mary Margret]: https://www.flickr.com/photos/double-m2/5557733238/in/set-72157626344216704
