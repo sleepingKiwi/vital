@@ -1,0 +1,193 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: vital\n"
+"POT-Creation-Date: 2014-09-24 04:00-0000\n"
+"PO-Revision-Date: 2014-09-24 04:00-0000\n"
+"Last-Translator: \n"
+"Language-Team: Tedworth & Oscar\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;__ngettext:1,2;_n:1,2;"
+"__ngettext_noop:1,2;_n_noop:1,2;_nc:4c,1,2;_c;_x:1,2c;_nx:4c,1,2;"
+"_nx_noop:4c,1,2;_ex:1,2c\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+
+#: ../404.php:8
+msgid "404"
+msgstr ""
+
+#: ../404.php:9
+msgid "Page cannot not be found"
+msgstr ""
+
+#: ../404.php:15
+msgid ""
+"Sorry the requested resource could not be found. Maybe using the search form "
+"below or menu above can help you find what you're looking for?"
+msgstr ""
+
+#: ../archive.php:18
+#, php-format
+msgid "Author: %s"
+msgstr ""
+
+#: ../archive.php:23
+#, php-format
+msgid "Day: %s"
+msgstr ""
+
+#: ../archive.php:28
+#, php-format
+msgid "Month: %s"
+msgstr ""
+
+#: ../archive.php:30
+msgctxt "monthly archives date format"
+msgid "F Y"
+msgstr ""
+
+#: ../archive.php:35
+#, php-format
+msgid "Year: %s"
+msgstr ""
+
+#: ../archive.php:37
+msgctxt "yearly archives date format"
+msgid "Y"
+msgstr ""
+
+#: ../archive.php:42
+msgid "Asides"
+msgstr ""
+
+#: ../archive.php:45
+msgid "Galleries"
+msgstr ""
+
+#: ../archive.php:48
+msgid "Images"
+msgstr ""
+
+#: ../archive.php:51
+msgid "Videos"
+msgstr ""
+
+#: ../archive.php:54
+msgid "Quotes"
+msgstr ""
+
+#: ../archive.php:57
+msgid "Links"
+msgstr ""
+
+#: ../archive.php:60
+msgid "Statuses"
+msgstr ""
+
+#: ../archive.php:63
+msgid "Audios"
+msgstr ""
+
+#: ../archive.php:66
+msgid "Chats"
+msgstr ""
+
+#: ../archive.php:69
+msgid "Archives"
+msgstr ""
+
+#: ../comments.php:20
+#, php-format
+msgctxt ""
+"\n"
+"                    comments title"
+msgid "One response to %2$s"
+msgid_plural "%1$s responses to %2$s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../comments.php:34 ../comments.php:59
+msgid "Comment navigation"
+msgstr ""
+
+#: ../comments.php:37 ../comments.php:62
+msgid "&larr; Older Comments"
+msgstr ""
+
+#: ../comments.php:40 ../comments.php:65
+msgid "Newer Comments &rarr;"
+msgstr ""
+
+#: ../comments.php:76
+msgid "Comments are closed."
+msgstr ""
+
+#: ../footer.php:18
+msgid "Copyright"
+msgstr ""
+
+#: ../header.php:87
+msgid "Skip to content"
+msgstr ""
+
+#: ../header.php:123
+msgid "Menu"
+msgstr ""
+
+#: ../search.php:11
+#, php-format
+msgid "Search Results for: %s"
+msgstr ""
+
+#: ../template-parts/content-none.php:3
+msgid "Nothing Found"
+msgstr ""
+
+#: ../template-parts/content-none.php:9
+#, php-format
+msgid ""
+"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: ../template-parts/content-none.php:13
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+
+#: ../template-parts/content-none.php:18
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help?"
+msgstr ""
+
+#: ../template-parts/content-page.php:7
+msgctxt "An untitled page title"
+msgid "{untitled}"
+msgstr ""
+
+#: ../template-parts/content-page.php:25
+#: ../template-parts/content-single.php:29 ../template-parts/content.php:36
+msgid "Pages:"
+msgstr ""
+
+#: ../template-parts/content-page.php:30
+msgid "Edit"
+msgstr ""
+
+#: ../template-parts/content-search.php:7
+#: ../template-parts/content-single.php:7 ../template-parts/content.php:8
+msgctxt "An untitled post title"
+msgid "{untitled}"
+msgstr ""
+
+#: ../template-parts/content.php:28 ../template-parts/content.php:30
+msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
