@@ -1,0 +1,202 @@
+/*------------------------------------*\
+    $Posts & Content
+\*------------------------------------*/
+
+//applies to whole post
+.hentry{
+
+}
+
+
+/**
+ * Entry Header
+ */
+.entry-header{}//entry-header <header>
+.entry-title{
+	//TEXT OVERLFOW ELLIPSIS
+	/*
+	overflow:hidden;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis;
+	*/
+
+
+	//OR TEXT OVERFLOW WORD WRAP....
+	//hyphens are mostly horrible so by default I disable them but in some cases it might be nice?
+	/*
+	-webkit-hyphens: auto;
+	-moz-hyphens:    auto;
+	-ms-hyphens:     auto;
+	hyphens:         auto;
+	*/
+	-webkit-hyphens: none;
+	-moz-hyphens:    none;
+	-ms-hyphens:     none;
+	hyphens:         none;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+
+	margin-bottom: 0;
+}//end .entry-title <h1> (or whatever) inside .entry-header
+
+.entry-meta{
+	color: #999;
+	margin-bottom:$base-spacing-unit;
+    margin-bottom:($base-spacing-unit / $base-font-size)*1rem;
+}
+
+
+
+
+
+/**
+ * Entry Content
+ */
+.entry-summary{
+	-ms-word-wrap: break-word;
+	word-wrap: break-word;
+}
+.entry-content{
+	-ms-word-wrap: break-word;
+	word-wrap: break-word;
+	
+	img {  
+		max-width: 100%;
+		height:auto; 
+		width:auto; /*ie-8 scaling needs width*/
+
+		//optional to give default margin on img...
+		margin-bottom:$base-spacing-unit;
+    	margin-bottom:($base-spacing-unit / $base-font-size)*1rem;
+	}
+
+
+	.picturefill-wrap.size-full{
+		display: block;
+		min-height: 80px;
+		background: url('../img/loader.gif') no-repeat center;
+	}
+
+	.picturefill-wrap.aligncenter img { 
+		margin-right: auto; 
+		margin-left: auto; 
+		display: block; 
+		clear: both; 
+	}
+
+	@include at-least($valet){
+		.alignleft, img.alignleft { 
+			margin-right: 1.5em; 
+			display: inline; 
+			float: left; 
+			text-align: left;
+		}
+		.alignright, img.alignright { 
+			margin-left: 1.5em; 
+			display: inline; 
+			float: right; 
+			text-align: right;
+		}
+		.aligncenter, img.aligncenter, .picturefill-wrap.aligncenter img{ 
+			margin-right: auto; 
+			margin-left: auto; 
+			display: block; 
+			clear: both; 
+		}
+	}
+
+
+	video, object, embed, iframe, .wp-audio-shortcode { 
+		max-width: 100%; 
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom:$base-spacing-unit;
+	}
+
+
+	.responsible-video{
+		position: relative;
+	    padding-bottom: 56.25%; /* 16/9 ratio */
+	    padding-top: 30px; /* IE6 workaround*/
+	    height: 0;
+	    overflow: hidden;
+	    margin-bottom:$base-spacing-unit;
+
+	    object, embed, iframe{
+	    	position: absolute;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		    margin-bottom: 0;
+	    }
+	}
+
+
+	pre, code {
+		background: #eee;
+		border: 1px solid #cecece;
+		padding: 2px;
+	}
+
+	.page-links{
+		margin-bottom:$base-spacing-unit;
+    	margin-bottom:($base-spacing-unit / $base-font-size)*1rem;
+	}
+
+	.post-password-form label{
+		display:inline;
+	}
+
+}//end .entry-content
+
+
+.wp-caption {
+	background: #eee;
+	padding: 0.5em;
+	max-width:100%;
+	margin-bottom:$base-spacing-unit;
+    margin-bottom:($base-spacing-unit / $base-font-size)*1rem;
+	
+	/* images inside wp-caption */
+	img {
+		display: block;
+		margin:0 auto;
+		max-width: 100%;
+		height:auto;
+		width: auto;
+	}
+	
+	p.wp-caption-text {
+		font-size: 0.85em;
+		margin: 0.5em 0;
+		text-align: center;
+	}
+	
+}//end .wp-caption
+
+
+
+
+
+/**
+ * Entry Footer
+ */
+.entry-footer{
+	color: #999;
+	margin-bottom:($base-spacing-unit*2);
+    margin-bottom:(($base-spacing-unit*2) / $base-font-size)*1rem;
+}
+
+
+
+
+/**
+ * NOT FOUND
+ */
+.not-found{
+	text-align:center;
+
+	margin-bottom:$base-spacing-unit*2;
+}

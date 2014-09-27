@@ -1,0 +1,49 @@
+/******************************************************************
+Stylesheet: IE Stylesheet
+******************************************************************/
+
+/*
+//Useful
+@import "variables/defaults";
+@import "bourbon/bourbon";
+@import "variables/mixins";
+@import "variables/breakpoints";
+@import "variables/brand";
+*/
+
+
+/************** 
+Attribute Hacks 
+***************/
+ 
+/* IE6 
+#once { _color: blue } 
+*/
+ 
+/* IE6, IE7 
+#doce { *color: blue; }
+*/
+
+body{
+	min-width: 960px;
+	*width: 960px;
+	*margin:0 auto;
+}
+
+.grid__item{
+	*display:inline;
+	*zoom:1;
+}
+
+
+//normally this is inside a MQ
+.dropdown-menu{
+	display: none;
+}
+.dropdown:hover .dropdown-menu{
+	display: block;
+	clip: auto;
+    min-height:8em;
+    max-height:100em;
+    padding:0 0 0.5em;
+}

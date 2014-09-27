@@ -1,0 +1,98 @@
+/*------------------------------------*\
+    $BRAND
+\*------------------------------------*/
+/**
+ * General brand styles - mostly colour choices but other often used variables will be added here
+ * Typography variables are set in the _fonts.scss file further down 
+ */
+
+
+
+
+/*------------------------------------*\
+    $COLOUR
+\*------------------------------------*/
+
+/**
+ * Main body text colour
+ */
+$brand-c-main: #333;
+
+/**
+ * Main light on dark (or vice versa) text colour - an inverse to the main colour
+ */
+$brand-c-inverse: #eee;
+
+/**
+ * Main link colour
+ */
+$brand-c-link: #200;
+
+/**
+ * Main highlight colour (for hovered links etc.)
+ */
+$brand-c-highlight: #600;
+
+/**
+ * Main background colour for body
+ * body background colour is almost certainly overwritten by the colour/img defined in lib/init.php custom background so remember to specify this colour there too
+ */
+$brand-c-body-back: #fff; 
+
+/**
+ * Base UI colour overrides a default
+ */
+
+$brand-c-base-ui: #eee;
+$base-ui-color: $brand-c-base-ui;
+
+
+
+
+
+/*------------------------------------*\
+    $TRANSITIONS
+\*------------------------------------*/
+
+/**
+ * General transition timing
+ */
+
+$brand-transition: 600ms;
+
+
+
+
+
+/*------------------------------------*\
+	$BOX-SHADOW
+\*------------------------------------*/
+
+/**
+ * Box shadows which are commonly reused
+ */
+
+$brand-box-shadow: 1px 1px 2px 0 rgba(0,0,0,0.2);
+
+
+
+
+/*------------------------------------*\
+    $RADIUS
+\*------------------------------------*/
+
+$brand-round: 4px;
+
+
+
+
+
+/*------------------------------------*\
+    $LAYOUT
+\*------------------------------------*/
+
+/**
+ * Max layout width
+ */
+
+$brand-layout-max: 1140px;

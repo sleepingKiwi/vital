@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: vital\n"
-"POT-Creation-Date: 2014-09-24 04:00-0000\n"
-"PO-Revision-Date: 2014-09-24 04:00-0000\n"
+"POT-Creation-Date: 2014-09-27 21:34-0000\n"
+"PO-Revision-Date: 2014-09-27 21:35-0000\n"
 "Last-Translator: \n"
 "Language-Team: Tedworth & Oscar\n"
-"Language: English\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.6.9\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;__ngettext:1,2;_n:1,2;"
 "__ngettext_noop:1,2;_n_noop:1,2;_nc:4c,1,2;_c;_x:1,2c;_nx:4c,1,2;"
 "_nx_noop:4c,1,2;_ex:1,2c\n"
@@ -18,6 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: ..\n"
+"X-Poedit-SearchPath-2: ../lib\n"
 
 #: ../404.php:8
 msgid "404"
@@ -133,12 +134,241 @@ msgstr ""
 msgid "Copyright"
 msgstr ""
 
-#: ../header.php:87
+#: ../header.php:100
 msgid "Skip to content"
 msgstr ""
 
-#: ../header.php:123
+#: ../header.php:136
 msgid "Menu"
+msgstr ""
+
+#: ../lib/back-compat.php:25 ../lib/back-compat.php:33
+#: ../lib/back-compat.php:44
+#, php-format
+msgid ""
+"This theme requires at least WordPress version 3.6. You are running version "
+"%s. Please upgrade and try again."
+msgstr ""
+
+#: ../lib/cleanup.php:163
+msgid "Continued"
+msgstr ""
+
+#: ../lib/custom-post-type.php:31
+msgid "Custom Types"
+msgstr ""
+
+#: ../lib/custom-post-type.php:32
+msgid "Custom Post"
+msgstr ""
+
+#: ../lib/custom-post-type.php:33
+msgid "All Custom Posts"
+msgstr ""
+
+#: ../lib/custom-post-type.php:34
+msgid "Add New"
+msgstr ""
+
+#: ../lib/custom-post-type.php:35
+msgid "Add New Custom Type"
+msgstr ""
+
+#: ../lib/custom-post-type.php:36 ../lib/template-tags.php:194
+#: ../lib/vital-comments.php:16 ../lib/vital-comments.php:48
+#: ../template-parts/content-page.php:30
+msgid "Edit"
+msgstr ""
+
+#: ../lib/custom-post-type.php:37
+msgid "Edit Post Types"
+msgstr ""
+
+#: ../lib/custom-post-type.php:38
+msgid "New Post Type"
+msgstr ""
+
+#: ../lib/custom-post-type.php:39
+msgid "View Post Type"
+msgstr ""
+
+#: ../lib/custom-post-type.php:40
+msgid "Search Post Type"
+msgstr ""
+
+#: ../lib/custom-post-type.php:41
+msgid "Nothing found in the Database."
+msgstr ""
+
+#: ../lib/custom-post-type.php:42
+msgid "Nothing found in Trash"
+msgstr ""
+
+#: ../lib/custom-post-type.php:45
+msgid "This is the example custom post type"
+msgstr ""
+
+#: ../lib/custom-post-type.php:82
+msgid "Custom Categories"
+msgstr ""
+
+#: ../lib/custom-post-type.php:83
+msgid "Custom Category"
+msgstr ""
+
+#: ../lib/custom-post-type.php:84
+msgid "Search Custom Categories"
+msgstr ""
+
+#: ../lib/custom-post-type.php:85
+msgid "All Custom Categories"
+msgstr ""
+
+#: ../lib/custom-post-type.php:86
+msgid "Parent Custom Category"
+msgstr ""
+
+#: ../lib/custom-post-type.php:87
+msgid "Parent Custom Category:"
+msgstr ""
+
+#: ../lib/custom-post-type.php:88
+msgid "Edit Custom Category"
+msgstr ""
+
+#: ../lib/custom-post-type.php:89
+msgid "Update Custom Category"
+msgstr ""
+
+#: ../lib/custom-post-type.php:90
+msgid "Add New Custom Category"
+msgstr ""
+
+#: ../lib/custom-post-type.php:91
+msgid "New Custom Category Name"
+msgstr ""
+
+#: ../lib/custom-post-type.php:105
+msgid "Custom Tags"
+msgstr ""
+
+#: ../lib/custom-post-type.php:106
+msgid "Custom Tag"
+msgstr ""
+
+#: ../lib/custom-post-type.php:107
+msgid "Search Custom Tags"
+msgstr ""
+
+#: ../lib/custom-post-type.php:108
+msgid "All Custom Tags"
+msgstr ""
+
+#: ../lib/custom-post-type.php:109
+msgid "Parent Custom Tag"
+msgstr ""
+
+#: ../lib/custom-post-type.php:110
+msgid "Parent Custom Tag:"
+msgstr ""
+
+#: ../lib/custom-post-type.php:111
+msgid "Edit Custom Tag"
+msgstr ""
+
+#: ../lib/custom-post-type.php:112
+msgid "Update Custom Tag"
+msgstr ""
+
+#: ../lib/custom-post-type.php:113
+msgid "Add New Custom Tag"
+msgstr ""
+
+#: ../lib/custom-post-type.php:114
+msgid "New Custom Tag Name"
+msgstr ""
+
+#: ../lib/template-tags.php:34 ../lib/template-tags.php:98
+msgid "Post navigation"
+msgstr ""
+
+#: ../lib/template-tags.php:38
+msgctxt "Previous post link"
+msgid "&laquo;"
+msgstr ""
+
+#: ../lib/template-tags.php:39
+msgctxt "Next post link"
+msgid "&raquo;"
+msgstr ""
+
+#: ../lib/template-tags.php:44
+msgid "<span class=\"meta-nav\">&laquo;</span> Older posts"
+msgstr ""
+
+#: ../lib/template-tags.php:48
+msgid "Newer posts <span class=\"meta-nav\">&raquo;</span>"
+msgstr ""
+
+#: ../lib/template-tags.php:154
+#, php-format
+msgctxt "post date"
+msgid "Posted on %s"
+msgstr ""
+
+#: ../lib/template-tags.php:159
+#, php-format
+msgctxt "post author"
+msgid "by %s"
+msgstr ""
+
+#: ../lib/template-tags.php:176 ../lib/template-tags.php:182
+msgid ", "
+msgstr ""
+
+#: ../lib/template-tags.php:178
+#, php-format
+msgid "Posted in %1$s"
+msgstr ""
+
+#: ../lib/template-tags.php:184
+#, php-format
+msgid "Tagged %1$s"
+msgstr ""
+
+#: ../lib/template-tags.php:190
+msgid "Leave a comment"
+msgstr ""
+
+#: ../lib/template-tags.php:190
+msgid "1 Comment"
+msgstr ""
+
+#: ../lib/template-tags.php:190
+msgid "% Comments"
+msgstr ""
+
+#: ../lib/vital-comments.php:16
+msgid "Pingback:"
+msgstr ""
+
+#: ../lib/vital-comments.php:39
+#, php-format
+msgid "%s <span class=\"says\">says:</span>"
+msgstr ""
+
+#: ../lib/vital-comments.php:45
+#, php-format
+msgctxt "1: date, 2: time"
+msgid "%1$s at %2$s"
+msgstr ""
+
+#: ../lib/vital-comments.php:52
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: ../lib/widgets.php:12
+msgid "Primary Sidebar"
 msgstr ""
 
 #: ../search.php:11
@@ -176,10 +406,6 @@ msgstr ""
 #: ../template-parts/content-page.php:25
 #: ../template-parts/content-single.php:29 ../template-parts/content.php:36
 msgid "Pages:"
-msgstr ""
-
-#: ../template-parts/content-page.php:30
-msgid "Edit"
 msgstr ""
 
 #: ../template-parts/content-search.php:7

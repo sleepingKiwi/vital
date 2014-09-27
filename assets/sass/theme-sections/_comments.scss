@@ -1,0 +1,194 @@
+/*------------------------------------*\
+    $Comments
+\*------------------------------------*/
+
+.comments-area{
+	-ms-word-wrap: break-word;
+	word-wrap: break-word;
+}
+/**
+ * Comment list styles
+ */
+.comment-list {
+
+	margin:0;
+	
+#commentform{
+		li{
+			text-align:center;
+		}
+	}
+
+	#respond{
+		background:white;
+		border-radius: $brand-round;
+		box-shadow: $brand-box-shadow;
+	}
+	
+	li { 
+		position: relative; 
+		clear: both; 
+		overflow: hidden;
+		list-style-type: none; 
+		margin-bottom: 1.5em; 
+		padding: 0.7em 0.4em; 
+		text-align:left;
+		
+		ul.children {
+			margin: 0;
+		} /* end .commentlist li ul.children */
+	}
+	
+	li[class*=depth-] { 
+		margin-top: 1.1em; 
+	}
+			
+	li.depth-1 { 
+		margin-left: 0; 
+		margin-top: 0; 
+	}
+	
+	li:not(.depth-1) { 
+		margin-right: -10px; 
+		margin-left: -10px;
+		margin-top: 0; 
+		padding-bottom: 0.3em; 
+	}
+	
+	li.depth-2 {
+		margin-left:5px;
+		margin-right:2px;
+	}
+	li.depth-3 {
+		margin-left:5px;
+		margin-right:2px;
+	}
+	li.depth-4 {
+		margin-left:5px;
+		margin-right:2px;
+	}
+	li.depth-5 {
+		margin-left:5px;
+		margin-right:2px;
+	}
+	
+	/* general comment classes */
+	.alt {}
+	.odd { 
+		background: #efefef; 
+		border:1px solid #dedede;
+		box-shadow: $brand-box-shadow;
+		border-radius: $brand-round;
+	}
+	.even { 
+		background: #f7f7f7; 
+		border:1px solid lighten($brand-c-highlight,70%);
+		box-shadow: $brand-box-shadow;
+		border-radius: $brand-round;
+	}
+	.parent {}
+	.comment {}
+	.children {}
+	.pingback {
+		color:#999;
+		.vcard{
+			img.avatar {
+				display:none;
+			}
+		}
+	}
+	.bypostauthor {
+		border-left:solid 5px $brand-c-link;
+	}
+	.comment-author {}
+	.comment-author-admin {
+		border-left:solid 5px $brand-c-link;
+	}
+	.thread-alt {}
+	.thread-odd {}
+	.thread-even {}	
+			
+	/* vcard */
+	.vcard { 
+		position:static;
+		margin-left: 0; 
+		
+		time {
+			float: right;
+		
+			a {
+				color: #999; 
+				text-decoration: none; 
+				
+				&:hover {
+					text-decoration: underline;
+				}
+				
+			}
+			
+		}
+		
+		img.avatar {
+			/*position: absolute; 
+			left: 10px; 
+			padding: 2px; 
+			border: 1px solid #cecece; 
+			background: #fff; 	
+			display:none;	*/
+		}
+			
+	} /* end .commentlist .vcard */
+	
+	/* comment content */
+	.comment_content { 
+		margin-left: 50px; 
+			
+		p {
+			margin: 0.7335em 0 1.5em; 
+			font-size: 1em; 
+			line-height: 1.5em; 	
+		}
+		
+	} /* end .commentlist .comment_content */
+	
+	/* comment reply link */
+	.comment-reply-link { 
+		text-decoration: none; 
+		float: right;  
+		background: lighten($brand-c-highlight, 10%); 
+		padding: 3px 5px; 
+		color: #fff; 
+		opacity: 0.65; 
+		margin-bottom: 10px; 
+		font-weight: normal;
+		font-size: 0.9em; 
+	
+		&:hover,
+		&:focus {
+			opacity: 1;
+		}
+		
+	} /* end .commentlist .comment-reply-link */
+					
+} /* end .comment-list */
+
+
+
+
+
+/**
+ * Comment Form Styles
+ */
+.comment-respond{
+	margin:($base-spacing-unit*2) 0 0;
+    margin:(($base-spacing-unit*2) / $base-font-size)*1rem 0 0;
+}
+
+
+//if using ajax comment posting in the plugins.js and custom.php
+#comment-status p{
+	display:inline-block;
+	padding:$base-spacing-unit*0.5;
+	background: lighten($brand-c-highlight, 40%);
+	margin:0;
+}

@@ -25,9 +25,9 @@
 
         <?php 
             if( class_exists('Vitally_Responsible') ){
-                 do_action( 'vitally_responsible_content', __('Continue reading <span class="meta-nav">&rarr;</span>', 'vital') ;
+                 do_action( 'vitally_responsible_content', __('Continue reading <span class="meta-nav">&rarr;</span>', 'vital') );
             }else{
-                the_content( __('Continue reading <span class="meta-nav">&rarr;</span>', 'vital') ;
+                the_content( __('Continue reading <span class="meta-nav">&rarr;</span>', 'vital') );
             }
         ?>
 

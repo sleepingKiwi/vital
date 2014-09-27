@@ -25,6 +25,7 @@ We hope that you enjoy your stay - Tedworth & Oscar.
 /*
  *
  * For more icon/favicon options and to generate: http://css-tricks.com/favicon-quiz/
+ * Generator: http://realfavicongenerator.net/
  * Make sure to put files at root even if you're including links below too...
  * Generate icons at the above link from the icon-300.psd file in the assets folder
  *
@@ -67,6 +68,18 @@ We hope that you enjoy your stay - Tedworth & Oscar.
     var doc = document, docEl = doc.documentElement;
     docEl.className = docEl.className.replace(/(^|\s)no-js(\s|$)/, " js ");
 </script>
+
+
+
+
+
+<?php // GET RID OF THIS! ?>
+<?php //jquery served up the html5bp way - see lib > scripts.php for some reasoning behind this ?>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="<?php echo get_template_directory_uri(); ?>/assets/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
+
+
+
 
 
 <?php wp_head(); ?>
