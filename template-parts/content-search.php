@@ -13,7 +13,7 @@
 
         <?php if ( 'post' == get_post_type() ) : ?>
         <div class="entry-meta">
-            <?php _vital_posted_on(); ?>
+            <?php vital_posted_on(); ?>
         </div><!-- .entry-meta -->
         <?php endif; ?>
     </header><!-- .entry-header -->
@@ -23,6 +23,6 @@
     </div><!-- .entry-summary -->
 
     <footer class="entry-footer">
-        <?php _vital_entry_footer(); ?>
+        <?php vital_entry_footer(); ?>
     </footer><!-- .entry-footer -->
 </article><!-- #post-## -->

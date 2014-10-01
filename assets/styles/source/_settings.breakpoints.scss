@@ -1,0 +1,38 @@
+/*------------------------------------*\
+    $BREAKPOINTS
+\*------------------------------------*/
+// http://css-tricks.com/naming-media-queries/
+// http://css-tricks.com/sass-style-guide/
+/**
+ * Additional breakpoint names have been included to allow for filling in the gaps if a design demands it
+ * Need more? - go nuts - http://en.wikipedia.org/wiki/Royal_and_noble_ranks - but these seemed most memorable!
+ */
+
+
+ $serf: 0; //optionally used by grid system to represent all sizes up to the first breakpoint
+//$peon:
+//$peasant:
+$valet: 30.1em; //480px 
+//$gentleman: 
+$squire: 48em; //768px
+//$knight:
+$baron: 64.4em; //1030px
+//$earl: 
+$duke: 77.5em; //1240px
+//$archduke:
+//$queen:
+
+$breakpoints: (
+	//"peon"		"screen and (min-width: #{$peon})",
+	//"peasant"		"screen and (min-width: #{$peasant})",	
+	"valet"			"screen and (min-width: #{$valet})",
+	//"gentleman"	"screen and (min-width: #{$gentleman})",
+	"squire"		"screen and (min-width: #{$squire})",
+	//"knight"		"screen and (min-width: #{$knight})",
+	"baron"			"screen and (min-width: #{$baron})",
+	//"earl"		"screen and (min-width: #{$earl})",
+	"duke"			"screen and (min-width: #{$duke})",
+	//"archduke"	"screen and (min-width: #{$archduke})",
+	//"queen"		"screen and (min-width: #{$queen})",
+    "retina"        "(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)"
+) !default;

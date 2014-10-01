@@ -4,9 +4,8 @@
  * CUSTOM SEARCH FORM LAYOUT - FROM BONES
  */
 function vital_wpsearch($form) {
-    $form = '<form role="search" method="get" id="searchform" action="' . home_url( '/' ) . '" >
-    <label class="screen-reader-text" for="s">Search for:</label>
-    <input type="search" value="' . get_search_query() . '" name="s" id="s" placeholder="Search the Site..." x-webkit-speech />
+    $form = '<form role="search" method="get" id="searchform" class="search-form" action="' . home_url( '/' ) . '" >
+    <input type="search" value="' . get_search_query() . '" name="s" id="s" class="search-input" x-webkit-speech /><label class="search-label" for="s">'.__('Search','vital').'</label>
     ' . /*INPUT BUTTON COMMENTED OUT BY DEFAULT... <input type="submit" id="searchsubmit" value="'. esc_attr__('Search') .'" /> .*/ '
     </form>';
     return $form;

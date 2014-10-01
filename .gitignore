@@ -29,3 +29,10 @@ nbproject
 
 #project specific
 vital.mo
+.sass-cache
+assets/bower_components
+node_modules
+assets/dist
+assets/styles/dist
+assets/js/dist
+assets/img/icons/dist

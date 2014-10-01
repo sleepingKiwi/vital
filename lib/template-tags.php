@@ -95,35 +95,85 @@ function vital_number_nav( $nav_id, $before = '', $after = '' ) {
         $start_page = 1;
     }
 
-    echo $before.'<nav role="navigation" id="'. esc_attr( $nav_id ) .'" class="number-navigation"><h4 class="screen-reader-text">'. __( 'Post navigation', 'vital' ) .'</h4><ol class="vital_page_navi clearfix">'."";
+    echo $before.'<nav role="navigation" id="'. esc_attr( $nav_id ) .'" class="number-navigation"><h4 class="screen-reader-text">'. __( 'Post navigation', 'vital' ) .'</h4><ol class="vital-page-nav clearfix">'."";
 
     $first_page_text = '&laquo; First <span class="mobile-nav-text">Page</span>';
     if ($paged >= 2) {
-        echo '<li class="bpn-first-page-link"><a title="First Page" href="'.get_pagenum_link().'" data-page-num="1"><span class="vitalicon vitalicon-skip-back" aria-hidden="true"></span> <span class="mobile-nav-text">First Page</span></a></li>';
-        echo '<li class="bpn-prev-link"><a title="Previous Page" href="'.get_pagenum_link($paged-1).'" data-page-num="'.($paged-1).'"><span class="vitalicon vitalicon-previous" aria-hidden="true"></span> <span class="mobile-nav-text">Previous Page</span></a></li>';
+        echo '<li class="vnn-first-page-link"><a title="First Page" href="'.get_pagenum_link().'" data-page-num="1"><span class="vitalicon vitalicon-step-backward-main"></span> <span class="mobile-nav-text">First Page</span></a></li>';
+        echo '<li class="vnn-prev-link"><a title="Previous Page" href="'.get_pagenum_link($paged-1).'" data-page-num="'.($paged-1).'"><span class="vitalicon vitalicon-chevron-left-main"></span> <span class="mobile-nav-text">Previous Page</span></a></li>';
     }else{
-        echo '<li class="bpn-first-page-link bpn-no-link"><span class="vitalicon vitalicon-skip-back" aria-hidden="true"></span> <span class="mobile-nav-text">First Page</span></li>';
-        echo '<li class="bpn-prev-link bpn-no-link"><span class="vitalicon vitalicon-previous" aria-hidden="true"></span> <span class="mobile-nav-text">Previous Page</span></li>';
+        echo '<li class="vnn-first-page-link vnn-no-link"><span class="vitalicon vitalicon-step-backward-main"></span> <span class="mobile-nav-text">First Page</span></li>';
+        echo '<li class="vnn-prev-link vnn-no-link"><span class="vitalicon vitalicon-chevron-left-main"></span> <span class="mobile-nav-text">Previous Page</span></li>';
     }
 
 
     for($i = $start_page; $i  <= $end_page; $i++) {
         if($i == $paged) {
-            echo '<li class="bpn-current standard-page-number page-num-'.$i.'">'.$i.'</li>';
+            echo '<li class="vnn-current standard-page-number page-num-'.$i.'">'.$i.'</li>';
         } else {
             echo '<li class="standard-page-number page-num-'.$i.'"><a href="'.get_pagenum_link($i).'" data-page-num="'.$i.'">'.$i.'</a></li>';
         }
     }
     $last_page_text = 'Last <span class="mobile-nav-text">Page</span> &raquo;';
     if ($paged < $max_page) {
-        echo '<li class="bpn-next-link"><a title="Next Page" href="'.get_pagenum_link($paged+1).'" data-page-num="'.($paged+1).'"><span class="mobile-nav-text">Next Page</span> <span class="vitalicon vitalicon-next" aria-hidden="true"></span></a></li>';
-        echo '<li class="bpn-last-page-link"><a title="Last Page" href="'.get_pagenum_link($max_page).'" data-page-num="'.$max_page.'"><span class="vitalicon vitalicon-skip-ahead" aria-hidden="true"></span> <span class="mobile-nav-text">Last Page</span></a></li>';
+        echo '<li class="vnn-next-link"><a title="Next Page" href="'.get_pagenum_link($paged+1).'" data-page-num="'.($paged+1).'"><span class="mobile-nav-text">Next Page</span> <span class="vitalicon vitalicon-chevron-right-main"></span></a></li>';
+        echo '<li class="vnn-last-page-link"><a title="Last Page" href="'.get_pagenum_link($max_page).'" data-page-num="'.$max_page.'"><span class="vitalicon vitalicon-step-forward-main"></span> <span class="mobile-nav-text">Last Page</span></a></li>';
     }else{
-        echo '<li class="bpn-next-link bpn-no-link"><span class="mobile-nav-text">Next Page</span> <span class="vitalicon vitalicon-next" aria-hidden="true"></span></li>';
-        echo '<li class="bpn-last-page-link bpn-no-link"><span class="vitalicon vitalicon-skip-ahead" aria-hidden="true"></span> <span class="mobile-nav-text">Last Page</span></li>';
+        echo '<li class="vnn-next-link vnn-no-link"><span class="mobile-nav-text">Next Page</span> <span class="vitalicon vitalicon-chevron-right-main"></span></li>';
+        echo '<li class="vnn-last-page-link vnn-no-link"><span class="vitalicon vitalicon-step-forward-main"></span> <span class="mobile-nav-text">Last Page</span></li>';
     }
     echo '</ol></nav>'.$after."";
 } /* end page navi */
+
+
+
+
+
+/**
+ * LOAD MORE LINKS
+ * Called above the main navigation on pages that want inf scrolling type ability...
+ *
+ * $paired_nav argument gives the ID of a traditional nav. 
+ * If it's available a class of .also-included will be added to page numbers in that nav
+ * following the naming pattern $(navID+' .page-num-'+currentPage).addClass('also-included');
+ */
+function vital_load_more_link( $paired_nav ){
+    global $wp_query;
+
+    $max = $wp_query->max_num_pages;
+    $paged = ( get_query_var('paged') > 1 ) ? get_query_var('paged') : 1;
+    $npl=explode('"',get_next_posts_link()); 
+    if( isset($npl[1]) ){
+        $npl_url = $npl[1]; 
+        $last_page_class = '';
+    }else{
+        $npl_url = ''; 
+        $last_page_class = 'not-needed';
+    }
+    $paired_nav_id = isset($paired_nav) ? $paired_nav : '';
+
+    //building the more-posts div
+    $load_more_nav = '<div class="more-posts ' . $last_page_class . '" '; 
+        $load_more_nav .= 'data-max-pages="' . $max . '" '; 
+        $load_more_nav .= 'data-current-page="' . $paged . '" '; 
+        $load_more_nav .= 'data-npl="' . $npl_url . '" ';
+        $load_more_nav .= 'data-nav-id="' . $paired_nav_id . '"';
+    $load_more_nav .= '>';
+
+        if( isset($npl[1]) ){
+            $load_more_nav .= get_next_posts_link(
+                '<span class="load-more-icon"></span> 
+                <span class="load-text">'.__('Load more posts', 'vital').'</span>'
+            ); 
+        }else{
+            $load_more_nav .= '<span class="load-more-icon"></span> 
+            <span class="load-text">'.__('Load more posts', 'vital').'</span>';
+        }
+
+    $load_more_nav .=  '</div>';
+
+    echo $load_more_nav;
+}
 
 
 
@@ -175,23 +225,23 @@ function vital_entry_footer() {
         /* translators: used between list items, there is a space after the comma */
         $categories_list = get_the_category_list( __( ', ', 'vital' ) );
         if ( $categories_list && vital_categorised_blog() ) {
-            printf( '<span class="cat-links">' . __( 'Posted in %1$s', 'vital' ) . '</span>', $categories_list );
+            printf( '<span class="cat-links footer-meta-item">' . __( 'Posted in %1$s', 'vital' ) . '</span>', $categories_list );
         }
 
         /* translators: used between list items, there is a space after the comma */
         $tags_list = get_the_tag_list( '', __( ', ', 'vital' ) );
         if ( $tags_list ) {
-            printf( '<span class="tags-links">' . __( 'Tagged %1$s', 'vital' ) . '</span>', $tags_list );
+            printf( '<span class="tags-links footer-meta-item">' . __( 'Tagged %1$s', 'vital' ) . '</span>', $tags_list );
         }
     }
 
     if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-        echo '<span class="comments-link">';
+        echo '<span class="comments-link footer-meta-item">';
         comments_popup_link( __( 'Leave a comment', 'vital' ), __( '1 Comment', 'vital' ), __( '% Comments', 'vital' ) );
         echo '</span>';
     }
 
-    edit_post_link( __( 'Edit', 'vital' ), '<span class="edit-link">', '</span>' );
+    edit_post_link( __( 'Edit', 'vital' ), '<span class="edit-link footer-meta-item">', '</span>' );
 }
 
 

@@ -1,0 +1,42 @@
+/**
+ * TEDWORTH & OSCAR ADMIN CSS
+ */
+
+a{
+    transition: color 0.4s, background-color 0.4s;
+}
+
+#wpadminbar>#wp-toolbar>#wp-admin-bar-root-default #wp-admin-bar-wp-logo > .ab-item .ab-icon {
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+    padding:0;
+    background-image: url(../../img/admin-bar-logo.png) !important;
+    background-position: 0 -20px;
+    background-repeat: no-repeat;
+    text-indent: -999px;
+    transition: none;
+}
+
+#wpadminbar>#wp-toolbar>#wp-admin-bar-root-default #wp-admin-bar-wp-logo > .ab-item:hover .ab-icon {
+    background-position: 0 0px;
+}
+
+/*For custom warning messages*/
+.tando-warning-wrap{
+    padding:1.5em 0;
+}
+.tando-custom-warning{
+    background:#222;
+    padding:1em;
+    color:#eee;
+    border-radius: 3px;
+    box-shadow: 1px 1px 2px 0 rgba(0,0,0,0.2);
+}
+
+
+/* http://simplebits.com/notebook/2008/08/14/ampersands-2/ */
+span.amp {
+  font-family: Baskerville,'Goudy Old Style',Palatino,'Book Antiqua',serif;
+  font-style: italic;
+}

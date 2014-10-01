@@ -1,0 +1,35 @@
+/*------------------------------------*\
+    $Sidebar
+\*------------------------------------*/
+
+.main-sidebar, .has-sidebar{
+    @include media-query(squire){
+        display: inline-block;
+        vertical-align: top;
+    }
+}
+
+
+.has-sidebar{
+
+    @include media-query(squire){
+        width:70%;
+        padding-right:$bsu;
+    }
+}
+
+/**
+ * The sidebar itself.
+ */
+.main-sidebar{
+    
+    padding:$bsu;
+    text-align: center;
+
+    @include media-query(squire){
+        width:30%;
+        text-align: left;
+
+        background: darken($brand-c-body-back, 2%);
+    }
+}

@@ -20,5 +20,4 @@
         </main><!-- #main -->
     </div><!-- #primary --><!-- inline-block-fix
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

@@ -64,6 +64,29 @@ We hope that you enjoy your stay - Tedworth & Oscar.
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
 
 
+<?php
+/**
+ * JAVASCRIPT IN THIS THEME
+ * ------------------------
+ * There are a couple of inline snippets in the head here
+ * Everything else is loaded in the footer!
+ * JS in the footer is loaded asynchronously and queued up in lib/scripts.php
+ * This article has great reference for javascript loading techniques:
+ * https://www.igvita.com/2014/05/20/script-injected-async-scripts-considered-harmful/
+ *
+ * It's tempting to run a BBC style 'cutting the mustard' test to decide whether to load 
+ * the main script file or not. However it means we can't use the async keyword on that script
+ * and more worryingly would bypass the browsers 'speculative parser'
+ * The approach we've taken is to run that test inside the main js file... it means users on
+ * crummy browsers are downloading a lot of wasted .js so it should be weighed up on every project..
+ * to conditionally load the file we could use https://github.com/filamentgroup/loadJS or
+ * https://github.com/filamentgroup/enhance
+ *
+ * TODO:
+ * Properly look into and run tests around filamentgroups core workflow: 
+ * https://github.com/filamentgroup/Southstreet
+ */
+?>
 <script>
     var doc = document, docEl = doc.documentElement;
     docEl.className = docEl.className.replace(/(^|\s)no-js(\s|$)/, " js ");
@@ -71,18 +94,44 @@ We hope that you enjoy your stay - Tedworth & Oscar.
 
 
 
-
-
-<?php // GET RID OF THIS! ?>
-<?php //jquery served up the html5bp way - see lib > scripts.php for some reasoning behind this ?>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="<?php echo get_template_directory_uri(); ?>/assets/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
-
-
-
-
-
 <?php wp_head(); ?>
+
+
+
+<?php 
+/**
+ * GRUNTICONS
+ * ----------
+ * loading appropriate css for grunticons 
+ */
+?>
+<script>
+<?php
+$grunticon_loader = get_template_directory_uri().'/assets/img/icons/dist/grunticon.loader.js';
+echo file_get_contents($grunticon_loader);
+?>
+grunticon(["<?php echo get_template_directory_uri(); ?>/assets/img/icons/dist/icons.data.svg.css", "<?php echo get_template_directory_uri(); ?>/assets/img/icons/dist/icons.data.png.css", "<?php echo get_template_directory_uri(); ?>/assets/img/icons/dist/icons.fallback.css"]);
+</script>
+<noscript><link href="<?php echo get_template_directory_uri(); ?>/assets/img/icons/dist/icons.fallback.css" rel="stylesheet"></noscript>
+
+
+
+
+<?php
+/**
+ * HTML5 SHIV
+ * ----------
+ * HTML5Shiv for IE - could inline this but bloats the head for non-ie browsers and IE < 9 can just suck it up.
+ * https://github.com/aFarkas/html5shiv
+ * would enqueue this through WP but there's no reliable way to filter scripts unlike style_loader_tag
+ */
+?>
+<!--[if lt IE 9]>
+    <script src="<?php echo get_template_directory_uri() . '/assets/bower_components/html5shiv/dist/html5shiv.min.js'; ?>"></script>
+<![endif]-->
+
+
+
 
 
 <?php //preferable to chuck humans.txt at site root 
@@ -132,7 +181,7 @@ We hope that you enjoy your stay - Tedworth & Oscar.
             ?> 
             <nav id="site-navigation" class="main-navigation" role="navigation">
 
-                <a class="menu-toggle" title="Open site menu" href="#footer-navigation">
+                <a class="menu-toggle" title="Open site menu" href="#site-navigation">
                     <?php _e( 'Menu', 'vital' ); ?>
                 </a>
 

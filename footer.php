@@ -14,10 +14,8 @@
             <?php }//has_nav_menu ?>
     
             <div class="attribution">
-                <p>
-                    <?php _e('Copyright', 'vital'); ?> 
-                    <?php echo date('Y'); ?> <?php bloginfo('name'); ?>
-                </p>
+                <p class="copyright"><?php _e('Copyright', 'vital'); ?> 
+                    <?php echo date('Y'); ?> <?php bloginfo('name'); ?></p>  
                 <p>
                     Header Font: 
                     <a 
@@ -27,22 +25,10 @@
                         Goudy Bookletter 1911
                     </a>
                 </p>
-
                 <div class="tando-footer">
-                    <div class="threedwrap">
-                        <div class="front-threed threed-side">
-                            <a href="http://tedworthandoscar.co.uk" target="_blank">
-                                <span class="amperbrand"></span>
-                            </a>
-                        </div>
-                        <div class="back-threed threed-side">
-                            <a href="http://tedworthandoscar.co.uk" target="_blank">
-                                <span class="amperbrand amperbrand-back"></span>
-                            </a>
-                        </div>
-                    </div>
-                </div><!--tando-footer-->
-                <p class="promotional">Tedworth <span class="amp">&amp;</span> Oscar</p>
+                    <a href="http://tedworthandoscar.co.uk" target="_blank"><span class="amperbrand"></span></a>
+                </div>
+                <p class="promotional">site by Tedworth <span class="amp">&amp;</span> Oscar</p>
             </div>
         
         </div> <!-- .wrap -->

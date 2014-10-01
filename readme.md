@@ -1,6 +1,6 @@
 vital
 ====
- - v 0.2
+ - v 0.8.0
 
 ![](https://github.com/sleepingKiwi/vital/blob/master/screenshot.png)
 
@@ -31,6 +31,7 @@ Credits to external resources and references are usually maintained in the theme
 ---
 
 Rather than take a completely 'bare bones' approach the theme includes many components which we frequently find ourselves using. If you do end up using the theme as a starting point yourself don't forget to strip out any code you don't use before publishing!
+
 
 [Tedworth & Oscar]: http://tedworthandoscar.co.uk
 [Bones]: https://github.com/eddiemachado/bones

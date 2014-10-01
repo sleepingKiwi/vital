@@ -1,0 +1,97 @@
+/*------------------------------------*\
+    $BRAND
+\*------------------------------------*/
+/**
+ * General brand styles - mostly colour choices but other often used variables will be added here
+ * Typography variables are set in the _base.fonts.scss file further down 
+ */
+
+
+/*------------------------------------*\
+    $COLOUR
+\*------------------------------------*/
+
+/**
+ * Main body text colours
+ */
+$brand-c-main: #444;
+$inuit-base-text-color: $brand-c-main;
+
+/**
+ * Main light on dark (or vice versa) text colour - an inverse to the main colour
+ */
+$brand-c-inverse: #fcfcfc;
+
+/**
+ * Main link colour
+ */
+$brand-c-link: #d4604e;
+
+/**
+ * Main highlight colour (for hovered links etc.)
+ */
+$brand-c-highlight: #bf4d3b;
+
+/**
+ * Main background colour for body
+ */
+$brand-c-body-back: #fff; 
+$inuit-base-background-color: $brand-c-body-back;
+
+/**
+ * Base UI colour overrides a default
+ */
+
+$brand-c-base-ui: #eee;
+$base-ui-color: $brand-c-base-ui;
+
+
+
+
+
+/*------------------------------------*\
+    $TRANSITIONS
+\*------------------------------------*/
+
+/**
+ * General transition timing
+ */
+
+$brand-transition: 600ms;
+
+
+
+
+
+/*------------------------------------*\
+	$BOX-SHADOW
+\*------------------------------------*/
+
+/**
+ * Box shadows which are commonly reused
+ */
+
+$brand-box-shadow: 1px 1px 2px 0 rgba(0,0,0,0.2);
+
+
+
+
+/*------------------------------------*\
+    $RADIUS
+\*------------------------------------*/
+
+$brand-round: 4px;
+
+
+
+
+
+/*------------------------------------*\
+    $LAYOUT
+\*------------------------------------*/
+
+/**
+ * Max layout width
+ */
+
+$brand-layout-max: 1140px;

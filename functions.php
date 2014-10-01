@@ -111,7 +111,6 @@ require_once locate_template('lib/config.php');
  * -------
  * Clean up wp_head() - from Roots
  * Add and remove body_class() classes
- * Custom search form (from roots) - submit button commented out by default...
  * Wrap embedded media as suggested by Readability
  * Clean up the_excerpt()
  * Don't return the default description in the RSS feed if it hasn't been changed
@@ -165,6 +164,11 @@ require_once locate_template('lib/widgets.php');
 /**
  * SCRIPTS AND STYLESHEETS
  * -----------------------
+ * Register & Enqueue scripts and styles
+ * Livereload script if on localhost
+ * add defer and async to main script
+ * conditional comments around IE stylesheet
+ * deregister default contact form 7 styles
  */
 require_once locate_template('lib/scripts.php');           
 

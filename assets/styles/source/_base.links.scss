@@ -1,0 +1,31 @@
+/*------------------------------------*\
+    $LINKS
+\*------------------------------------*/
+
+a, a:visited { 
+
+	color: $brand-c-link; 
+
+	text-decoration: none;
+
+	transition: color $brand-transition ease-in-out, background $brand-transition ease-in-out;
+
+	&:hover, &:focus {
+		color: $brand-c-highlight;
+	}
+	
+	/* on click */
+	&:active {
+		
+	}
+	
+	/* mobile tap color */
+	&:link {
+		/* 
+		this highlights links on iPhones/iPads. 
+		so it basically works like the :hover selector
+		for mobile devices.
+		*/ 
+		-webkit-tap-highlight-color : rgba($brand-c-highlight, 0.2); 
+	}
+}

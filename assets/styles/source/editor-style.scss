@@ -1,0 +1,63 @@
+/*
+Theme Name:   Tedworth & Oscar Vital Bones
+Styling the MCE
+*/
+
+/*------------------------------------*\
+    $IMPORTS
+\*------------------------------------*/
+@import "settings.brand";
+@import "settings.font-defaults";
+@import "inuit-defaults/settings.defaults";
+@import "settings.breakpoints";
+@import "inuit-responsive-settings/settings.responsive";
+@import "inuit-functions/tools.functions";
+@import "inuit-mixins/tools.mixins";
+@import "inuit-responsive-tools/tools.responsive";
+@import "tools.aliases";
+
+/*------------------------------------*\
+    $GENERIC
+\*------------------------------------*/
+/**
+ * Generic utility styles etc. - generally the same for every site
+ */
+@import "inuit-normalize/generic.normalize";
+@import "inuit-reset/generic.reset";
+@import "inuit-box-sizing/generic.box-sizing";
+@import "generic.fonts";
+
+
+html .mceContentBody{
+  width: 90%;
+  margin: 0 auto;
+
+  max-width: $brand-layout-max;
+
+  font-family: $brand-ff-main;
+}
+
+h1,.alpha, 
+h2,.beta, 
+h3,.gamma,
+h4,.delta,
+h5,.epsilon,
+h6,.zeta{
+  font-family: $brand-ff-header;
+}
+
+
+a, a:visited { 
+  color: $brand-c-link; 
+
+  /* on hover */
+  &:hover, &:focus {
+    color: $brand-c-highlight;
+  }
+  
+  /* on click */
+  &:active {
+    color: $brand-c-highlight;
+  }
+  
+}

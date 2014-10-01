@@ -1,0 +1,283 @@
+/*------------------------------------*\
+    $NAV
+\*------------------------------------*/
+.skip-link{
+    display:block;
+    text-align:center;
+}
+
+/**
+ * Header navigation styles
+ */
+.main-navigation {
+
+    text-align: center;
+    padding: 0 0 1em;
+
+
+    .menu-toggle{
+        display: block;
+        margin:0 auto;
+
+        padding: 0.8em 0 0.6em;
+
+        color:$brand-c-main;
+
+        &:hover, &:focus{
+            color:$brand-c-highlight;
+        }
+
+        //hidden at wider sizes
+        @include media-query(squire){
+            display: none;
+        }
+    }//end .menu-toggle
+
+
+    //The toggle is set to link to the footer nav if js isn't present so we don't hide it by default
+    .no-js & .menu-toggle{
+        //display:none;
+    }
+
+
+    //Instead we hide the <ul> without js
+    .no-js & .menu{
+        display: none;
+    }
+
+
+    //hiding menu in header 
+    .menu{
+
+        //hidden until expanded
+        border: 0 transparent solid; margin: -1px auto; overflow: hidden; padding: 0; max-height:1px; min-height:0; clip: rect(0 0 0 0); opacity:0;
+        transition: max-height 600ms ease-out, min-height 600ms ease-in, padding 600ms ease-in, background-color 600ms ease-in-out, opacity 400ms ease, border 500ms ease;
+
+    }//-end .menu (<ul>)
+
+    //expanding menu 
+    .no-js & .menu, .expanded-mobile-menu{
+        transition: max-height 800ms ease-in, min-height 500ms ease-out, padding 400ms ease-in, opacity 400ms ease;
+
+        /* min/max heights allow me to css transition to height auto */
+        clip: auto;
+        min-height:8em;
+        max-height:100em;
+        padding:0 0 0.5em;
+        opacity: 1;
+    }
+
+
+    /**
+     * Wider screen header menu layouts
+     */
+    @include media-query(squire){
+
+        //expand menu at wider sizes
+        .menu, .no-js & .menu, .expanded-mobile-menu{
+            clip: auto;
+            min-height:0;
+            max-height:100em;
+            padding:0 0 0.5em;
+            opacity: 1;
+            overflow: visible;
+        }//end .menu
+
+    }//end wider screen ($squire)
+
+}//-end .main-navigation (header navigation menu <nav>)
+
+
+
+
+
+/**
+ * General navigation styles
+ */
+.menu{
+
+    margin:0;
+
+    //clearfixing the menus
+    *zoom: 1;
+    &:before, &:after { content: " "; display: table; }
+    &:after { clear: both; }
+
+
+    //li in  menus
+    li{
+
+        &:first-child {}
+                
+        &:last-child {}
+
+        @include media-query(squire){
+            display:inline-block;
+            *display: inline;
+            *zoom:1;
+            position: relative;
+            padding:0;
+        }//end li at-least($squire)
+
+    }//end .menu li
+
+
+    //links in menus
+    a{
+
+        display: block;
+        padding: 0.5em 0;
+        border-radius: $brand-round;
+
+        &:hover, &:focus{
+            background-color: darken($brand-c-body-back, 2%);
+        }
+
+        @include media-query(squire){
+            padding:0.3em 0.5em;
+        }
+
+    }//end .menu a
+
+    .focused a{
+        background-color: darken($brand-c-body-back, 2%);
+    }
+
+    //dropdown menus
+    .dropdown-menu{
+
+        //get progressively smaller and more indented
+        margin:0;
+        font-size: 0.95em;
+        padding-left:4px;
+
+        //hidden until expanded
+        border: 0 transparent solid; margin: -1px auto; overflow: hidden; padding: 0; max-height:1px; min-height:0; clip: rect(0 0 0 0); opacity:0;
+        transition: max-height 600ms ease-out, min-height 600ms ease-in, padding 600ms ease-in, background-color 600ms ease-in-out, opacity 400ms ease, border 500ms ease;
+
+    }//end .menu .dropdown-menu
+
+    .active-dropdown{
+        transition: max-height 800ms ease-in, min-height 500ms ease-out, padding 500ms ease-out, opacity 800ms ease-out;
+
+        clip: auto;
+        min-height:1.5em;
+        max-height:100em;
+        padding:0.4em 0;
+        opacity:1;
+    }//end mobile active dropdowns
+
+    //wider screen dropdowns
+    @include media-query(squire){
+        .dropdown-menu{
+
+            position: absolute;
+            clip: auto;
+            z-index: $brand-z-1--dropdown-menu;
+            top: 100%;
+            left:0;
+            white-space:nowrap;
+            text-align: left;
+            padding:0.4em;
+            -webkit-transform: translateZ(0);
+
+            li{
+                display: block;
+                padding-top: 0.3em;
+                padding-bottom: 0.3em;
+
+                &:last-child {
+                    padding-bottom: 1px;
+                }
+            }
+
+        }//end .dropdown-menu ($squire)
+
+        .dropdown:hover .dropdown-menu, .active-dropdown{
+            transition: max-height 800ms ease-in, min-height 500ms ease-out, padding 500ms ease-out, opacity 800ms ease-out, border 500ms ease;
+
+            min-height:1.5em;
+            max-height:100em;
+            padding:0.4em;
+            opacity:1;
+
+            background: darken($brand-c-body-back, 5%);
+            border-radius: $brand-round;
+            //box-shadow: $brand-box-shadow;
+            .dropdown-menu{ //multi level dropdowns don't get extra box-shadow or padding
+                box-shadow: none;
+                padding: 0 0 0 4px;
+            }
+        }//end hovered dropdown
+
+        .dropdown:hover > a {
+            background-color: darken($brand-c-body-back, 2%); //keep hovered link styles whilst hovering over sub-items
+        }
+
+    }//end wide screen dropdowns ($squire)
+        
+
+    //second level dropdown menu - they get a '-' prefixed
+    .dropdown-menu .dropdown-menu{
+
+        //overriding wide screen absolute positioning for dropdowns
+        position: relative;
+        top:auto;
+        left: auto;
+        padding: 0;
+        @include media-query(squire){
+            padding: 0 0 0 4px;
+        }
+        a{
+            &:before{
+                content: "- ";
+            }
+        }
+    }//end .dropdown-menu .dropdown-menu
+
+
+    /**
+     * dropdown toggles - links to expand/show dropdowns
+     */
+    .dropdown-toggle{
+
+        position: relative;
+
+        &:after{
+            content: " [+]";
+            font-size: 0.9em;
+            color: lighten($brand-c-main, 20%);
+            vertical-align: top;
+
+            @include media-query(squire){
+                content: none;
+            }
+        }//end .dropdown-toggle:after
+
+    }//end .menu .dropdown-toggle
+    .active-dropdown-link{
+        &:after{
+            content: " [-]";
+        }
+    }
+
+}//end .menu
+
+
+
+
+
+/**
+ * Footer navigation
+ */
+.footer-navigation{
+    text-align: center;
+    padding: 1em 0;
+
+    @include media-query(squire){
+        .dropdown-menu{
+            // no dropdowns in footer for wide screens by default
+            display: none;
+        }
+    }
+}//end .footer-navigation

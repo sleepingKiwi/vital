@@ -145,7 +145,7 @@ function vital_setup() {
      * if you have issues with getting the editor to show your changes then use this instead:
      * add_editor_style('editor-style.css?' . time());
      */
-    add_editor_style( get_template_directory() . 'assets/css/editor-style.css' );
+    add_editor_style( '/assets/styles/dist/editor-style.min.css' );
 
 
 

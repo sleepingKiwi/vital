@@ -1,0 +1,231 @@
+/*------------------------------------*\
+    $Comments
+\*------------------------------------*/
+
+.comments-area{
+    hyphens: none;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+/**
+ * Comment list styles
+ */
+.comment-list {
+
+    margin:0;
+    
+    .comment { 
+        position: relative; 
+        clear: both; 
+        overflow: hidden;
+        list-style-type: none; 
+        margin-bottom: $bsu; 
+        padding: $bsu-s; 
+        text-align:left;
+        
+        ul.children {
+            margin: 0;
+        } // .commentlist li ul.children 
+    }
+    
+    .comment[class*=depth-] { 
+        margin-top: $bsu; 
+    }
+            
+    .comment.depth-1 { 
+        margin-left: 0; 
+        margin-top: 0; 
+    }
+    
+    .comment:not(.depth-1) { 
+        margin-right: -10px; 
+        margin-left: -10px;
+        margin-top: 0; 
+        padding-bottom: $bsu-s; 
+    }
+    
+    .comment.depth-2 {
+        margin-left:5px;
+        margin-right:2px;
+    }
+    .comment.depth-3 {
+        margin-left:5px;
+        margin-right:2px;
+    }
+    .comment.depth-4 {
+        margin-left:5px;
+        margin-right:2px;
+    }
+    .comment.depth-5 {
+        margin-left:5px;
+        margin-right:2px;
+    }
+    
+    /* general comment classes */
+    .alt {}
+    .odd { 
+        background: #efefef; 
+        //border:1px solid #dedede;
+        box-shadow: none;
+        border-radius: $brand-round;
+    }
+    .even { 
+        background: #f7f7f7; 
+        //border:1px solid lighten($brand-c-highlight,70%);
+        box-shadow: none;
+        border-radius: $brand-round;
+    }
+    .parent {}
+    .comment {}
+    .children {}
+    .pingback {
+        color:#999;
+        .vcard{
+            img.avatar {
+                display:none;
+            }
+        }
+    }
+    .bypostauthor {
+        border-left:solid 5px $brand-c-link;
+    }
+    .comment-author {}
+    .thread-alt {}
+    .thread-odd {}
+    .thread-even {} 
+             
+} /* end .comment-list */
+
+
+
+.comment-form{
+    li{
+        text-align:center;
+    }
+}
+
+
+
+.comment-author {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: $base-spacing-unit;
+
+    text-align: center;
+
+    img{
+        border-radius: 200px;
+    }
+
+    cite{
+        font-size: 2em;
+        line-height: 1;
+    }
+
+    .comment-meta-date{
+
+    }
+
+    time {
+        
+        a {
+            color: #999; 
+            text-decoration: none; 
+            
+            &:hover {
+                text-decoration: underline;
+            }
+            
+        }
+        
+    }
+
+    .comment-edit-link{
+        float: right;
+    }
+
+    img, cite, .comment-meta-date{
+        display: block;
+        margin:0 auto $base-spacing-unit*0.5;
+
+        @include media-query(squire){
+            display: inline-block;
+            *display:inline;
+            *zoom:1;
+            margin-right:$base-spacing-unit*0.5;
+            vertical-align: middle;
+            line-height: 44px;
+        }
+    }
+    cite{
+        margin-bottom: 0;
+        font-style: normal;
+    }
+    @include media-query(squire){
+        text-align: left;
+        .comment-meta-date{
+            vertical-align: bottom;
+            margin-bottom: 0.1em;
+        }
+    }
+}// .comment-author
+
+
+
+
+.comment_content { 
+    margin-left: $bsu-l; 
+        
+    p {
+        margin: $bsu-s 0 $bsu;     
+    }
+    
+}
+    
+
+.comment-reply-link { 
+    text-decoration: none; 
+    float: right;  
+    background: lighten($brand-c-highlight, 10%); 
+    padding: 3px 5px; 
+    color: #fff; 
+    opacity: 0.65; 
+    margin-bottom: $bsu-s;
+    font-weight: normal;
+    font-size: 0.9em; 
+
+    &:hover,
+    &:focus {
+        opacity: 1;
+    }
+}
+
+
+
+
+
+/**
+ * Comment Form Styles
+ */
+.comment-respond{
+    margin:($base-spacing-unit*2) 0 $base-spacing-unit;
+    margin:(($base-spacing-unit*2) / $base-font-size)*1rem 0 $base-spacing-unit;
+
+    input,textarea{
+        width: 100%;
+    }
+
+    #submit{
+        max-width: 300px;
+
+        background: $brand-c-link;
+
+        .category-all-in-a-day &{
+            background: $brand-c-link;
+        }
+    }
+}
+
+.comment .comment-respond{
+    //if it's inside a comment (reply)
+    padding: $bsu-s;
+}

@@ -1,0 +1,35 @@
+/*---------------------------------------------*\
+    $YOU SHOULD UPDATE YOUR BROWSER MY FRIEND
+\*---------------------------------------------*/
+
+/*
+//potentially useful
+@import "settings.brand";
+@import "settings.font-defaults";
+@import "inuit-defaults/settings.defaults";
+@import "settings.breakpoints";
+@import "inuit-responsive-settings/settings.responsive";
+@import "inuit-functions/tools.functions";
+@import "inuit-mixins/tools.mixins";
+@import "inuit-responsive-tools/tools.responsive";
+@import "tools.aliases";
+*/
+
+
+/************** 
+Attribute Hacks 
+***************/
+ 
+/* IE6 
+#once { _color: blue } 
+*/
+ 
+/* IE6, IE7 
+#doce { *color: blue; }
+*/
+
+body{
+	min-width: 960px;
+	*width: 960px;
+	*margin:0 auto;
+}

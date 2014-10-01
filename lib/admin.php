@@ -106,7 +106,7 @@ add_action('load-page.php','add_custom_help_page');
  * [3] - calling it only on the login page
  */
 function vital_login_css() {
-    echo '<link rel="stylesheet" href="' . get_stylesheet_directory_uri() . '/assets/css/login.css">';
+    echo '<link rel="stylesheet" href="' . get_stylesheet_directory_uri() . '/assets/styles/dist/login.min.css">';
 }
 // [1]
 function vital_login_url() { 
@@ -211,7 +211,7 @@ function vital_add_colors() {
     //http://codex.wordpress.org/Function_Reference/wp_admin_css_color
     wp_admin_css_color( 
         'tedworth', 'Tedworth', 
-        get_stylesheet_directory_uri() . '/assets/css/tedworth-colours.css',
+        get_stylesheet_directory_uri() . '/assets/styles/dist/tedworth-colours.min.css',
         array( '#212121', '#333333', '#F7F1E3', '#d4604e' ),
         array( 'base' => '#f1f2f3', 'focus' => '#fff', 'current' => '#fff' )
     );
@@ -245,7 +245,7 @@ add_filter( 'get_user_option_admin_color', 'vital_tedworth_default', 5 );
  */
 function vital_load_custom_wp_admin_style(){
 
-    wp_register_style( 'custom_admin_css', get_stylesheet_directory_uri() . '/assets/css/admin.css', false, '1.0.0' );
+    wp_register_style( 'custom_admin_css', get_stylesheet_directory_uri() . '/assets/styles/dist/admin.min.css', false, '1.0.0' );
     wp_enqueue_style( 'custom_admin_css' );
 
     /**

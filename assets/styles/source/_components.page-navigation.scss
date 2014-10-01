@@ -1,0 +1,215 @@
+/*------------------------------------*\
+    $Page Navigation
+\*------------------------------------*/
+
+
+/**
+ * Ajax nav
+ */
+.more-posts{
+    text-align: center;
+    //text-transform: uppercase;
+
+    position: relative;
+    z-index: $brand-z-1--more-posts-link;
+
+    a{
+        display:block;
+    }
+
+    .no-js &, &.not-needed{
+        display: none;
+    }
+
+}//.more-posts
+
+    .load-more-icon{
+        display: block;
+        width:0;
+        height:0;
+        margin:0 auto $bsu*0.5;
+        background-color: #fcfcfc;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 200px;
+        //box-shadow: $brand-box-shadow;
+        background-image: url('../../img/loader.gif');
+        transition: height $brand-transition*0.5 ease, width $brand-transition*0.5 ease;
+    }
+
+    .loading-content .load-more-icon{
+        width:90px;
+        height:90px;
+
+        background-image:url('../../img/loader.gif');
+    }
+
+
+
+
+
+/**
+ * Simple nav
+ */
+.paging-navigation, .post-navigation{ 
+    margin: 1em 0; 
+
+    .nav-previous, .nav-next{
+        hyphens:         auto;
+        word-wrap: break-word;
+        max-width: 50%;
+    }
+
+    .nav-previous{
+        float: left;
+        text-align: left;
+    }
+
+    .nav-next{
+        float: right;
+        text-align:right;
+    }
+}
+
+
+
+/**
+ * NUMBERED NAV
+ */
+$vnn-number-padding: 0.6em 0.9em 0.4em;
+
+
+
+.number-navigation{ //<nav>
+    position: relative;
+    z-index: $brand-z-1--vital-page-nav;
+
+    margin:0 auto $base-spacing-unit;
+    text-align: center;
+
+    @include media-query(squire){
+        transition: opacity $brand-transition ease;
+        opacity: 0.8;
+        padding:$base-spacing-unit 0;
+
+        &:hover{
+            opacity: 1;
+        }
+    }
+}
+
+
+
+.vital-page-nav { //<ol> inside .number-navigation
+
+    position: relative;
+    z-index: $brand-z-1--vital-page-nav;
+
+    text-align:left;
+    margin:0;
+
+    @include media-query(squire){
+        text-align: center;
+        display: inline-block;
+    }
+
+    li{
+        display: inline-block;
+        *display: inline;
+        *zoom:1;
+        vertical-align: top;
+        width:50%;
+        text-align: center;
+        border: 2px solid $brand-c-body-back;
+        background: lighten($brand-c-link, 30%);
+        border-radius: $brand-round;
+
+        @include media-query(squire){
+            border: 0;
+            background: transparent;
+            width: auto;
+        }
+
+    }//.vital-page-nav li
+
+    a, a:visited {
+        padding: $vnn-number-padding; 
+        display: block; 
+        text-decoration: none; 
+        position: relative; 
+        color: $brand-c-main;
+        
+        &:hover, 
+        &:focus {
+            //color: $brand-c-highlight;
+        }
+    }
+
+    //class applied when this page number is loaded via ajax
+    .also-included a{
+        padding: $vnn-number-padding; 
+        position: relative; 
+        background: desaturate($brand-c-highlight,30%);
+        color: $brand-c-inverse;
+        //pointer-events: none;
+        //cursor: default;
+
+        @include media-query(squire){
+            background: transparent;
+            border-bottom: 1px dashed desaturate($brand-c-highlight, 35%); 
+            color: desaturate($brand-c-link, 35%);
+        }
+    }
+
+    .vitalicon{
+        display: none;
+        @include media-query(squire){
+            display: inline-block;
+        }
+    }
+    
+}//.vital-page-nav
+
+/* current page link */ 
+.vnn-current { 
+    padding: $vnn-number-padding; 
+    position: relative; 
+    background: $brand-c-highlight;
+    color: $brand-c-inverse;
+    pointer-events: none;
+    cursor: default;
+
+    @include media-query(squire){
+        background: transparent;
+        border-bottom: 1px dashed $brand-c-highlight; 
+        color: $brand-c-link;
+    }
+
+}//end .vnn-current
+
+.vnn-no-link{
+    padding: $vnn-number-padding; 
+    position: relative;
+    color: #bbb;
+
+    background: darken($brand-c-body-back,2%);
+
+    @include media-query(squire){
+        background: transparent;
+    }
+}
+
+.vnn-prev-link, .vnn-next-link, .vnn-first-page-link, .vnn-last-page-link{
+    display: block;
+    width: 100%;
+
+    @include media-query(squire){
+        display: inline-block;
+        *display: inline;
+        *zoom:1;
+        width: auto;
+        .mobile-nav-text{
+            display: none;
+        }
+    }
+}

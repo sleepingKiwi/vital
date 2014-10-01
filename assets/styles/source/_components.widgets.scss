@@ -1,0 +1,22 @@
+/*------------------------------------*\
+    $Widgets
+\*------------------------------------*/
+
+.widget {
+    padding: 0.2em;
+    margin-bottom:($bsu*1.5);
+    margin-bottom:(($bsu*1.5) / $base-font-size)*1rem;
+
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+    ul {
+        margin: 0;
+        list-style: none;
+    }
+}
+
+.widget-1{
+    margin-top:($bsu*1.5);
+    margin-top:(($bsu*1.5) / $base-font-size)*1rem;
+}

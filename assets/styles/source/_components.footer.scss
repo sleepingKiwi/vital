@@ -1,0 +1,52 @@
+/*------------------------------------*\
+    $FOOTER
+\*------------------------------------*/
+
+.attribution {
+    @include inuit-font-size(14px);
+    color:#999;
+    text-align:center;
+    padding-top: $bsu*0.5;
+    border-top: 1px solid #999;
+
+    .copyright{
+        margin-bottom: 0;
+    }
+
+    .promotional{
+        -webkit-font-smoothing: antialiased;
+        /*fix for thin text on css transitions...*/
+        opacity:0;
+        margin:$bsu-s 0;
+        color:#555;
+        line-height:1;
+        transition: opacity 0.8s ease-in;
+    }
+    .promotional-show{
+        transition: opacity 1.2s ease-in;
+        opacity:1;
+    }
+}
+
+.tando-footer{
+
+    a{
+        width:50px;
+        height:50px;
+        border-radius: 100px;
+        position:relative;
+        display:block;
+        margin:0 auto;
+
+        .amperbrand{
+            display:block;
+            width:20px;
+            height:20px;
+            background:url('../../img/admin-bar-logo.png');
+            position:relative;
+            top:15px;
+            left:15px;
+        }
+
+    }
+}

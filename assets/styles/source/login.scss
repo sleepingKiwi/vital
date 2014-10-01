@@ -1,0 +1,250 @@
+/*------------------------------------*\
+	TEDWORTH & OSCAR - LOGIN CSS
+\*------------------------------------*/
+
+@import "settings.brand";
+@import "settings.font-defaults";
+@import "inuit-defaults/settings.defaults";
+@import "settings.breakpoints";
+@import "inuit-responsive-settings/settings.responsive";
+@import "inuit-functions/tools.functions";
+@import "inuit-mixins/tools.mixins";
+@import "inuit-responsive-tools/tools.responsive";
+@import "tools.aliases";
+
+
+@font-face {
+    font-family: 'goudyBookletter1911';
+    src: url('../../fonts/documentation/goudy-b-1911/goudy_bookletter_1911-webfont.eot');
+    src: url('../../fonts/documentation/goudy-b-1911/goudy_bookletter_1911-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../fonts/documentation/goudy-b-1911/goudy_bookletter_1911-webfont.woff') format('woff'),
+         url('../../fonts/documentation/goudy-b-1911/goudy_bookletter_1911-webfont.ttf') format('truetype'),
+         url('../../fonts/documentation/goudy-b-1911/goudy_bookletter_1911-webfont.svg#goudyBookletter1911') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'bebas';
+    src: url('../../fonts/documentation/bebas-neue-fontfacekit/bebasneue_regular_macroman/BebasNeue-webfont.eot');
+    src: url('../../fonts/documentation/bebas-neue-fontfacekit/bebasneue_regular_macroman/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../fonts/documentation/bebas-neue-fontfacekit/bebasneue_regular_macroman/BebasNeue-webfont.woff') format('woff'),
+         url('../../fonts/documentation/bebas-neue-fontfacekit/bebasneue_regular_macroman/BebasNeue-webfont.ttf') format('truetype'),
+         url('../../fonts/documentation/bebas-neue-fontfacekit/bebasneue_regular_macroman/BebasNeue-webfont.svg#bebas') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+$docs-link: #d4604e;
+$docs-highlight: lighten($docs-link, 10%);
+
+$docs-main: #221f1f;
+
+$docs-ff-main: goudyBookletter1911, $serif;
+$docs-ff-header: bebas, $sans-serif;
+
+::-moz-selection { background:  lighten($brand-c-inverse,5%); color: #000; text-shadow: none; }
+::selection { background: lighten($brand-c-inverse,5%); color: #000; text-shadow: none; }
+a::-moz-selection { background: $docs-link; color: $brand-c-inverse; text-shadow: none; }
+a::selection { background: $docs-link; color: $brand-c-inverse; text-shadow: none; }
+
+
+body.login {
+	background:url(../../img/cream_pixels.png);
+	//background: #fff;
+	font-family:$docs-ff-main;
+	font-size:1em;
+
+	@include media-query(retina){
+		background-size: 160px 160px;
+		background-image:url(../../img/cream_pixels_@2X.png);
+	}
+} 
+
+
+#login {} /* the form box */
+
+/*body class of login*/
+.login{
+
+	/*
+	This is the Wordpress logo in the admin area.
+	You'll have to load your own images and mess
+	with the width and height.
+	*/
+	 h1 a {
+		background: url(../../img/login-logo.png) no-repeat top center; /* make sure to replace this! */
+		width: 326px;
+		height: 67px;
+		text-indent: -9999px;
+		overflow: hidden;
+		padding-bottom: 15px;
+		display: block;
+		margin:0;
+	}
+
+	 form {
+		margin:0;
+		padding: $bsu;
+		font-weight: normal;
+		background: transparent;
+		border: none;
+		border-top: 0;
+		border-bottom:1px solid #ddd;
+				box-shadow: none;
+
+		label{
+			font-family: $docs-ff-header;
+			color:#444;
+			@include inuit-font-size(18px);
+			letter-spacing: 2px;
+		}
+
+		.input{
+			// Suppress red glow that Firefox
+		    // adds to form fields by default.
+		    &:invalid {
+		    box-shadow: none;
+		    }
+
+		    box-sizing: border-box;
+
+		    margin:$bsu-s auto $bsu;
+		    border:0;
+
+		    padding:$bsu-s 0 $bsu-s $bsu-s*1.5;
+
+		    display:inline-block;
+		    *display:inline;
+		    *zoom:1;
+		    vertical-align:middle;
+
+		    white-space:normal;
+
+		    background: #efefef;
+		    box-shadow: none;
+
+		    line-height:1;
+		    font-family: $docs-ff-main;
+		    font-weight: normal;
+		    color: $brand-c-main;
+
+		    width:400px;
+		    max-width: 100%;
+
+		    transition: all $brand-transition ease;
+
+		    &::placeholder {
+		        color: #ccc;
+		    }
+
+		    &:focus, &:active{
+		        &::placeholder {
+		            color: #aaa;
+		        }
+		    }
+		}/* input */
+	}/* login form */
+
+	.message{
+		background:transparent;
+		border:none;
+		text-align:center;
+		padding-top: 0;
+	}
+
+	#login_error{
+		@extend .message;
+		color:#660000;
+
+		a{
+			color:#222;
+				    transition: color 0.4s, border 0.4s;
+
+			&:hover{
+				color:#660000;
+			}
+		}
+	}
+
+
+	input:-webkit-autofill {
+	    background: rgba(255,255,255,0.3);
+	}
+
+
+
+	input[type=checkbox]:checked:before{
+		color: $docs-link;
+	}
+
+
+	/*
+	You'll have to override some of the default styles
+	but since we're referencing the id, it should be easy.
+	*/
+	 #wp-submit {
+		background:transparent;
+		outline:0;
+		height:auto;
+		padding:$bsu-s $bsu;
+		font-weight:normal;
+
+		margin-top: $bsu-s;
+
+		font-family: $docs-ff-header;
+		color:$docs-link;
+		border: 2px solid $docs-link;
+
+		box-shadow: none;
+
+		@include inuit-font-size(18px);
+		letter-spacing: 3px;
+
+		transition: all $brand-transition ease;
+
+		&:hover, &:focus{
+			box-shadow: none;
+			color: #f7f7f7;
+			background:$docs-link;
+		}
+	} /* login button*/
+
+	form .forgetmenot{
+		padding:$bsu 0 0;
+
+		label{
+			@include inuit-font-size(14px);
+		}
+	}
+
+	#nav, #backtoblog{
+		text-align:center;
+		margin-left:8px;
+
+		a{
+			color:#444 !important;
+			text-decoration:none;
+			border-bottom:solid 1px $docs-link;
+			padding-bottom:0.1em;
+			transition: color 0.4s, border 0.4s;
+
+			@include inuit-font-size(16px);
+
+			letter-spacing: 1px;
+
+			&:hover, &:focus{
+				color:$docs-link !important;
+				border-bottom:solid 1px #222;
+			}
+		}
+	}
+
+	#nav{
+		padding-top:2em;
+	}
+
+}/*end login body class*/
+

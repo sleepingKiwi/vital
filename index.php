@@ -2,7 +2,7 @@
 // The main template file. http://codex.wordpress.org/Template_Hierarchy
 get_header(); ?>
 
-    <div id="primary" class="content-area">
+    <div id="primary" class="content-area has-sidebar">
         <main id="main" class="site-main" role="main">
 
         <?php if ( have_posts() ) : ?>
@@ -22,8 +22,12 @@ get_header(); ?>
             <?php endwhile; ?>
 
             <?php 
-                //for numbered nav call vital_number_nav( 'nav-below' );
-                vital_content_nav( 'nav-below' ); 
+                // link for ajax based loading of the next page
+                // if you want it to interact with the nav below pass the same ID
+                vital_load_more_link( 'nav-below' );
+
+                // for text nav call vital_content_nav( 'nav-below' );
+                vital_number_nav( 'nav-below' );
             ?>
 
         <?php else : ?>

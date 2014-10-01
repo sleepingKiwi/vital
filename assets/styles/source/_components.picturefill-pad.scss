@@ -1,0 +1,72 @@
+/*------------------------------------*\
+    $PICTUREFILL PADDING
+\*------------------------------------*/
+.picturefill-wrap-padded{
+    position: relative;
+
+    display: inline-block;
+    *display: inline;
+    *zoom:1;
+
+    max-width: 100%;
+
+    .no-js &{
+        /**
+         * php assigns fixed widths to these wraps but those assume that 
+         * the largest image variant will be available which may not be the 
+         * case with js disabled depending on which fallback image we load...
+         */
+        width: auto;
+    }
+
+    .picturefill-padder{
+        height: 0;
+        width: 100%;
+
+        display: inline-block;
+        *display: inline;
+        *zoom:1;
+
+        position: static;
+        left:0;
+        top:0;
+        z-index: 0;
+
+        background: url('../../img/loader.gif') no-repeat center darken($brand-c-body-back,2%);
+
+        .no-js &{
+            display: none;
+        }
+    }
+
+    img{
+        position: relative;
+        z-index: 1;
+    }
+}
+
+.picturefill-wrap, .picturefill{
+    img{
+        opacity:0;
+        transition: opacity $brand-transition ease;
+
+        vertical-align: top;
+        max-width:100%;
+        height: auto;
+
+        .no-js &{
+            opacity:1;
+        }
+    }
+}
+
+.picturefill-loaded{
+    .picturefill-padder{
+        position: absolute;
+        background-image: none;
+    }
+
+    img{
+        opacity:1;
+    }
+}

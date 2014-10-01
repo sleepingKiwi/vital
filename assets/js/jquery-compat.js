@@ -1,0 +1,1 @@
+var jQuery_vital = $.noConflict(true);

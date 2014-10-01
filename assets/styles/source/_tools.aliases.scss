@@ -1,0 +1,8 @@
+//I use base-spacing-unit all the time so alias it to a much shorter version!
+$base-spacing-unit: $inuit-base-spacing-unit;
+$bsu: $inuit-base-spacing-unit;
+$bsu-s: $inuit-base-spacing-unit--small; // half size
+$bsu-l: $inuit-base-spacing-unit--large; // double size
+
+$base-font-size: $inuit-base-font-size;
+$base-line-height: $inuit-base-line-height;

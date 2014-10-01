@@ -1,0 +1,21 @@
+{
+    "browser": true,
+    "bitwise": false,
+    "curly": true,
+    "eqeqeq": true,
+    "eqnull": true,
+    "immed": true,
+    "latedef": true,
+    "newcap": true,
+    "noarg": true,
+    "undef": true,
+    "strict": false,
+    "trailing": false,
+    "smarttabs": true,
+    "quotmark": "single",
+    "devel": true,
+    "globals": {
+        "jQuery_vital": true,
+        "VitalUtility": true
+    }
+}

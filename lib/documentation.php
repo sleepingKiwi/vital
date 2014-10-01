@@ -41,7 +41,7 @@ function vital_docs_enqueue($hook) {
     //wp_register_script( $handle, $src, $deps, $ver, $in_footer );
     wp_register_script( 
         'vital-doc-scripts', 
-        get_template_directory_uri() . '/assets/js/vital-docs-ck.js', 
+        get_template_directory_uri() . '/assets/js/dist/vital-docs.min.js', 
         array( 'jquery' ), 
         '', 
         true 
@@ -51,7 +51,7 @@ function vital_docs_enqueue($hook) {
     //wp_register_style( $handle, $src, $deps, $ver, $media );
     wp_register_style( 
         'vital-doc-styles', 
-        get_stylesheet_directory_uri() . '/assets/css/vital-docs.css', 
+        get_stylesheet_directory_uri() . '/assets/styles/dist/vital-docs.min.css', 
         array(), 
         '', 
         'all' 

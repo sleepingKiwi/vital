@@ -1,0 +1,77 @@
+/*------------------------------------*\
+    $Search Inputs
+\*------------------------------------*/
+.search-form{
+    position: relative;
+    width: 400px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.search-input, .search-input[type="search"]{
+    text-indent: $bsu*3; //this animates text away from label...
+
+    transition: all $brand-transition*0.5 ease;
+
+    background:#efefef;
+
+    font-weight: normal;
+
+    &::placeholder {
+        color: #efefef;
+        text-indent: 0;
+    }
+}
+
+.search-label{
+    display: inline-block;
+    position: absolute;
+    top: ($bsu-s*0.5) + 2px;
+    left: 0;
+    line-height: 1;
+    padding: $bsu-s*0.5 $bsu-s;
+    color: lighten($brand-c-main, 10%);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    transition: all $brand-transition*0.5 ease-in-out;
+
+    border-radius: 3px;
+    background: rgba($brand-c-highlight,0);
+    
+    &:after {
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 0;
+        top: 100%;
+        left: 50%;
+        margin-left: -3px;
+        border-left: 3px solid transparent;
+        border-right: 3px solid transparent;
+        border-top: 3px solid rgba($brand-c-highlight,0);
+        transition: all $brand-transition*0.5 ease-in-out;
+    }
+}
+
+
+
+.search-input:focus,
+.search-input:active {
+  color: $brand-c-main;
+  text-indent: 0;
+  background: #efefef;
+  
+  &::-webkit-input-placeholder {
+    color: #aaa;
+  }
+  + label {
+    color: #fff;
+    background: rgba($brand-c-highlight,1);
+    transform: translateY(-40px);
+    
+    &:after {
+      border-top: 4px solid rgba($brand-c-highlight,1);
+    }
+  }
+}

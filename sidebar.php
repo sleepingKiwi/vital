@@ -1,4 +1,4 @@
-    --><div id="secondary" class="widget-area" role="complementary">
+    --><div id="secondary" class="widget-area main-sidebar" role="complementary">
 
         <?php do_action( 'before_sidebar' ); ?>
 

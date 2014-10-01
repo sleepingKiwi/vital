@@ -1,0 +1,24 @@
+/*------------------------------------*\
+    $WORDPRESS FRONT END ADMIN
+\*------------------------------------*/
+
+/**
+ * TWEAKING THE ADMIN BAR ON FRONT END
+ */
+#wpadminbar>#wp-toolbar>#wp-admin-bar-root-default #wp-admin-bar-wp-logo > .ab-item .ab-icon {
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+    padding:0;
+    background-image: url('../../img/admin-bar-logo.png') !important;
+    background-position: 0 -20px;
+    background-repeat: no-repeat;
+    text-indent: -999px;
+
+
+    transition: none;
+}
+
+#wpadminbar>#wp-toolbar>#wp-admin-bar-root-default #wp-admin-bar-wp-logo > .ab-item:hover .ab-icon {
+    background-position: 0 0px;
+}
