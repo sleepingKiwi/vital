@@ -1,6 +1,7 @@
 /*------------------------------------*\
     $Search Inputs
 \*------------------------------------*/
+//inspiration: http://codepen.io/MichaelArestad/pen/ohLIa
 .search-form{
     position: relative;
     width: 400px;
@@ -65,7 +66,7 @@
   &::-webkit-input-placeholder {
     color: #aaa;
   }
-  + label {
+  + .search-label {
     color: #fff;
     background: rgba($brand-c-highlight,1);
     transform: translateY(-40px);

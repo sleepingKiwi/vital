@@ -1,6 +1,6 @@
 {
   "name": "vital",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "A bare bones WordPress theme created for internal use by Tedworth & Oscar.",
   "main": "Gruntfile.js",
   "dependencies": {},

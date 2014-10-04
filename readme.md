@@ -1,6 +1,6 @@
 vital
 ====
- - v 0.8.0
+ - v 0.9.0
 
 ![](https://github.com/sleepingKiwi/vital/blob/master/screenshot.png)
 

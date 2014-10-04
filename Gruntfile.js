@@ -52,7 +52,7 @@ module.exports = function(grunt) {
                 files: [
                     'assets/styles/dist/*.min.css',
                     'assets/js/dist/*.min.js',
-                    'assets/img/**/*.{png,jpg,gif}'
+                    //'assets/img/**/*.{png,jpg,gif}'
                 ],
                 options: { livereload: true }
             }

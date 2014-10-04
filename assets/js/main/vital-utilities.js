@@ -51,7 +51,7 @@ var VitalUtility = (function( w, $ ){
         var fillArray = [];
         $('.data-deferred').each(function(){
 
-            $this = $(this);
+            var $this = $(this);
             var self = this;
 
             if( $.inY( $this, 25 ) ){
@@ -72,6 +72,7 @@ var VitalUtility = (function( w, $ ){
 
         });
 
+        /* global picturefill */
         picturefill(fillArray);
 
     }

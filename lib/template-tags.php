@@ -99,11 +99,11 @@ function vital_number_nav( $nav_id, $before = '', $after = '' ) {
 
     $first_page_text = '&laquo; First <span class="mobile-nav-text">Page</span>';
     if ($paged >= 2) {
-        echo '<li class="vnn-first-page-link"><a title="First Page" href="'.get_pagenum_link().'" data-page-num="1"><span class="vitalicon vitalicon-step-backward-main"></span> <span class="mobile-nav-text">First Page</span></a></li>';
-        echo '<li class="vnn-prev-link"><a title="Previous Page" href="'.get_pagenum_link($paged-1).'" data-page-num="'.($paged-1).'"><span class="vitalicon vitalicon-chevron-left-main"></span> <span class="mobile-nav-text">Previous Page</span></a></li>';
+        echo '<li class="vnn-first-page-link"><a title="First Page" href="'.get_pagenum_link().'" data-page-num="1"><span class="vitalicon vitalicon-previous-main"></span> <span class="mobile-nav-text">First Page</span></a></li>';
+        echo '<li class="vnn-prev-link"><a title="Previous Page" href="'.get_pagenum_link($paged-1).'" data-page-num="'.($paged-1).'"><span class="vitalicon vitalicon-backward-main"></span> <span class="mobile-nav-text">Previous Page</span></a></li>';
     }else{
-        echo '<li class="vnn-first-page-link vnn-no-link"><span class="vitalicon vitalicon-step-backward-main"></span> <span class="mobile-nav-text">First Page</span></li>';
-        echo '<li class="vnn-prev-link vnn-no-link"><span class="vitalicon vitalicon-chevron-left-main"></span> <span class="mobile-nav-text">Previous Page</span></li>';
+        echo '<li class="vnn-first-page-link vnn-no-link"><span class="vitalicon vitalicon-previous-main"></span> <span class="mobile-nav-text">First Page</span></li>';
+        echo '<li class="vnn-prev-link vnn-no-link"><span class="vitalicon vitalicon-backward-main"></span> <span class="mobile-nav-text">Previous Page</span></li>';
     }
 
 
@@ -116,11 +116,11 @@ function vital_number_nav( $nav_id, $before = '', $after = '' ) {
     }
     $last_page_text = 'Last <span class="mobile-nav-text">Page</span> &raquo;';
     if ($paged < $max_page) {
-        echo '<li class="vnn-next-link"><a title="Next Page" href="'.get_pagenum_link($paged+1).'" data-page-num="'.($paged+1).'"><span class="mobile-nav-text">Next Page</span> <span class="vitalicon vitalicon-chevron-right-main"></span></a></li>';
-        echo '<li class="vnn-last-page-link"><a title="Last Page" href="'.get_pagenum_link($max_page).'" data-page-num="'.$max_page.'"><span class="vitalicon vitalicon-step-forward-main"></span> <span class="mobile-nav-text">Last Page</span></a></li>';
+        echo '<li class="vnn-next-link"><a title="Next Page" href="'.get_pagenum_link($paged+1).'" data-page-num="'.($paged+1).'"><span class="mobile-nav-text">Next Page</span> <span class="vitalicon vitalicon-forward-main"></span></a></li>';
+        echo '<li class="vnn-last-page-link"><a title="Last Page" href="'.get_pagenum_link($max_page).'" data-page-num="'.$max_page.'"><span class="vitalicon vitalicon-next-main"></span> <span class="mobile-nav-text">Last Page</span></a></li>';
     }else{
-        echo '<li class="vnn-next-link vnn-no-link"><span class="mobile-nav-text">Next Page</span> <span class="vitalicon vitalicon-chevron-right-main"></span></li>';
-        echo '<li class="vnn-last-page-link vnn-no-link"><span class="vitalicon vitalicon-step-forward-main"></span> <span class="mobile-nav-text">Last Page</span></li>';
+        echo '<li class="vnn-next-link vnn-no-link"><span class="mobile-nav-text">Next Page</span> <span class="vitalicon vitalicon-forward-main"></span></li>';
+        echo '<li class="vnn-last-page-link vnn-no-link"><span class="vitalicon vitalicon-next-main"></span> <span class="mobile-nav-text">Last Page</span></li>';
     }
     echo '</ol></nav>'.$after."";
 } /* end page navi */

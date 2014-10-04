@@ -167,6 +167,49 @@ function vital_dashboard_tweaks_render($wp_toolbar) {
     $wp_toolbar->remove_menu('view-site');
         // optional, delete comments as many websites don't even have those enabled.
     //$wp_toolbar->remove_menu('comments'); 
+
+
+
+    /* CUSTOMISE HOWDY */
+    //we re-add (using add_menu function) the menu in the top right but with our new text. This maintains all the sub menu items etc.
+    //we have to pull a load of user info to reliably customise this though.
+    $user_id = get_current_user_id();
+    $current_user = wp_get_current_user();
+    $profile_url = get_edit_profile_url( $user_id );
+
+    if ( 0 != $user_id ) {
+
+        /* Add the "My Account" menu */
+        $avatar = get_avatar( $user_id, 28 );
+        $class = empty( $avatar ) ? '' : 'with-avatar';
+
+        date_default_timezone_set('Europe/London');
+        $time = date('H');
+
+        if ($time < "12") {
+            $howdy = sprintf( __('Good Morning, %1$s'), $current_user->display_name );
+        } else
+        if ($time >= "12" && $time < "18") {
+            $howdy = sprintf( __('Good Afternoon, %1$s'), $current_user->display_name );
+        } else
+        if ($time >= "18") {
+            $howdy = sprintf( __('Good Evening, %1$s'), $current_user->display_name );
+        } else {
+            //should never see this!
+            $howdy = sprintf( __('Hello, %1$s'), $current_user->display_name );
+        }
+
+        $wp_toolbar->add_menu( array(
+            'id' => 'my-account',
+            'parent' => 'top-secondary',
+            'title' => $howdy . $avatar,
+            'href' => $profile_url,
+            'meta' => array(
+                'class' => $class,
+            ),
+        ) );
+
+    }
 }
 add_action( 'admin_bar_menu', 'vital_dashboard_tweaks_render', 999 );
 

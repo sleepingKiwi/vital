@@ -9,7 +9,17 @@
                 if (has_nav_menu('footer-nav')){ 
             ?> 
             <nav id="footer-navigation" class="footer-navigation" role="navigation">
-                <?php wp_nav_menu( array( 'theme_location' => 'footer-nav' ) ); ?>
+                
+                <?php 
+                /**
+                 * This transient is deleted in lib/fragment-cache.php every time this menu is updated
+                 * See the nav in header.php for a fuller explanation!
+                 */
+                vital_fragment_cache('nav_footer-nav', WEEK_IN_SECONDS, function() {
+                    wp_nav_menu( array( 'theme_location' => 'footer-nav' ) ); 
+                });
+                ?>
+
             </nav><!-- #site-navigation -->
             <?php }//has_nav_menu ?>
     

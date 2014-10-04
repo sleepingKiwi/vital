@@ -36,7 +36,7 @@ jQuery_vital(document).ready(function($) {
                                 currentPage ++;
 
                                 if(navID){
-                                    $(navID+' .page-num-'+currentPage).addClass('also-included');
+                                    $('#'+navID+' .page-num-'+currentPage).addClass('also-included');
                                 }
                                 
                                 nextLink = nextLink.replace(/\/page\/[0-9]?/, '/page/'+ (currentPage+1));

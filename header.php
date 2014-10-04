@@ -185,7 +185,34 @@ grunticon(["<?php echo get_template_directory_uri(); ?>/assets/img/icons/dist/ic
                     <?php _e( 'Menu', 'vital' ); ?>
                 </a>
 
-                <?php wp_nav_menu( array( 'theme_location' => 'main-nav' ) ); ?>
+
+                <?php 
+                    /**
+                     * USING TRANSIENTS TO CACHE THE MENU
+                     * ----------------------------------
+                     * This isn't for every theme or situation... - menus cached this way save a ton 
+                     * of queries on each page load BUT the 'active' classes won't function as
+                     * intended etc. 
+                     *
+                     * This transient is deleted in lib/fragment-cache.php every time this menu is updated
+                     * Currently there's no hook when the manage_locations tab is used to change menus
+                     * as noted: http://leaves-and-love.net/transients-speed-up-wordpress-theme/#gist7431266
+                     * so bare that in mind if there are issues...
+                     */
+                    vital_fragment_cache('nav_main-nav', WEEK_IN_SECONDS, function() {
+                        wp_nav_menu( array( 'theme_location' => 'main-nav' ) ); 
+                    });
+                ?>
+
+                <?php 
+                    /**
+                     * DON'T WANT TRANSIENTS?
+                     * ----------------------
+                     */
+                    //wp_nav_menu( array( 'theme_location' => 'main-nav' ) ); 
+                ?>
+
+
             </nav><!-- #site-navigation -->
             <?php } ?>
 

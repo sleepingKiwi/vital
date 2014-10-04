@@ -66,7 +66,40 @@ require_once locate_template('lib/theme-activation.php');
  * -----------------
  * is_element_empty function (from roots)
  */
-require_once locate_template('lib/utils.php');             
+require_once locate_template('lib/utils.php');
+
+
+
+
+
+/**
+ * CACHING TRANSIENTS
+ * ------------------
+ * Fragment cache function to cache arbitrary things!
+ * vital_fragment_cache($key, $ttl, $function)
+ * Function to clear a transient when passed a key (to clear transients set with the method above)
+ * vital_fragment_clear($key)
+ *
+ * clearing nav menu transients (optional in header and footer files)
+ */
+require_once locate_template('lib/fragment-cache.php');
+/**
+ * PERFORMANCE TESTING
+ * -------------------
+ * Not sure if your transient is making a difference?
+ * Try a cheeky one of these
+ * -
+ * timer_start();
+ * //CODE YOU WANT TO TEST
+ * timer_stop(1); echo 'Seconds';
+ * -
+ * Gives a poor man's indication of how long some arbitrary code takes to run.
+ * Try before & after caching to measure perf improvements...
+ * 
+ * For a good indication of page response time use Apache Bench http://www.petefreitag.com/item/689.cfm
+ * $  ab -n 100 -c 10 http://localhost:8888/wherever
+ * ^^ that example loads the requested page 100 times with 10 concurrent hits per go
+ */
 
 
 
@@ -149,14 +182,7 @@ require_once locate_template('lib/nav.php');
  */
 require_once locate_template('lib/widgets.php');           
 
-
-
-
-/**
- * OPTIONAL - REGISTERING AND DEFINING CUSTOM MENUS WITH TRANSIENTS CALL AS FUNCTIONS IN THEME
- * -------------------------------------------------------------------------------------------
- */
-//require_once locate_template('lib/menus.php');             
+          
 
 
 
@@ -260,7 +286,7 @@ require_once locate_template('lib/admin.php');
 
 /**
  * ADDING A DOCUMENTATION MENU ITEM AND FILLING IT WITH USEFUL TIPS!
- * -----------------
+ * -----------------------------------------------------------------
  */
 require_once locate_template('lib/documentation.php');     
 
