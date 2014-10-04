@@ -28,22 +28,29 @@
  * http://css-tricks.com/wordpress-fragment-caching-revisited/
  */
 function vital_fragment_cache($key, $ttl, $function) {
-  $key = apply_filters('fragment_cache_prefix','frag_').$key;
-  $output = get_transient($key);
-  if ( false === $output ) {
-    ob_start();
-    call_user_func($function);
-    $output = ob_get_clean();
-    set_transient($key, $output, $ttl);
-  }
-  echo $output;
-}
 
+    /**
+     * A logged in user can pass the query var v_c to bypass caching.
+     * mostly for debugging!
+     */
+    if ( is_user_logged_in() ) {
+        if( isset($_GET['v_c']) ){
+            call_user_func($function);
+            return;
+        }
+    }
 
-
-function vital_fragment_clear($key) {
     $key = apply_filters('fragment_cache_prefix','frag_').$key;
-    delete_transient('vitalMainMenu');
+    $output = get_transient($key);
+    if ( false === $output ) {
+        ob_start();
+        call_user_func($function);
+        $output = ob_get_clean();
+        set_transient($key, $output, $ttl);
+    }/*else{
+    echo 'FROM TRANSIENT frag_'.$key;
+    }*/
+    echo $output;
 }
 
 
