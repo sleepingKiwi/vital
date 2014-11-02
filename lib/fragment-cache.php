@@ -34,7 +34,7 @@ function vital_fragment_cache($key, $ttl, $function) {
      * mostly for debugging!
      */
     if ( is_user_logged_in() ) {
-        if( isset($_GET['v_c']) ){
+        if( isset($_GET['v_c']) || is_preview() ){
             call_user_func($function);
             return;
         }
@@ -52,6 +52,47 @@ function vital_fragment_cache($key, $ttl, $function) {
     }*/
     echo $output;
 }
+
+
+
+function vital_fragment_clear($key) {
+    $key = apply_filters('fragment_cache_prefix','frag_').$key;
+    delete_transient($key);
+}
+
+
+
+
+
+function vital_delete_all_transients(){
+    global $wpdb;
+
+    $sql = "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_frag_%'";
+    $clean_one = $wpdb -> query( $sql );
+    $sql_two = "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_frag_%'";
+    $clean_two = $wpdb -> query( $sql_two );
+
+    return $clean_one.'-'.$clean_two;
+}
+
+add_action("wp_ajax_vital_clear_transients", "vital_clear_transients");
+//add_action("wp_ajax_nopriv_vital_clear_transients", "vital_admin_must_login");
+function vital_clear_transients(){
+    if ( !isset($_POST['_tedworthandoscar-nonce']) || !wp_verify_nonce($_POST['_tedworthandoscar-nonce'],'vital-clear-transients') ){
+        echo 'nonce fail ';
+        exit("Now, now - we'll be having none of that.");
+    }else{
+
+        $deleted = vital_delete_all_transients();
+
+        wp_redirect( add_query_arg('transient-update', $deleted, $_SERVER["HTTP_REFERER"]) );
+    }
+
+    die();
+}
+
+
+
 
 
 

@@ -75,6 +75,17 @@ var VitalUtility = (function( w, $ ){
         /* global picturefill */
         picturefill(fillArray);
 
+
+        /**
+         * hide/show to top link.
+         */
+        var sd = $(window).scrollTop();
+        if (sd > 300) {
+            $('.dynamic-to-top').addClass('top-show');
+        } else {
+           $('.dynamic-to-top').removeClass('top-show');
+        }
+
     }
 
 

@@ -8,6 +8,8 @@ jQuery_vital(document).ready(function($) {
      *
      * responsive indicator injection - allows accurate js reading of current breakpoint
      *
+     * To Top Link
+     *
      * first run of content listeners
      *
      * set up scroll event handler if there are images to load
@@ -47,6 +49,22 @@ jQuery_vital(document).ready(function($) {
     $('body').prepend('<span class="responsive-indicator"></span>');
     var $responsiveIndicator = $('.responsive-indicator');
     var currentBreakpoint = 0; //the current responsive breakpoint - 0 is nothing so forces the resize function to set things!
+
+
+
+
+    /*------------------------------------*\
+        $To Top Link
+    \*------------------------------------*/
+    var $toTop = $('<a href="#page" class="dynamic-to-top" ><span class="vitalicon vitalicon-top"></span></a>');
+    $toTop.appendTo('body').click(function () {
+        $('html, body').stop().animate({
+            scrollTop: 2
+        }, 600);
+        return false;
+    });
+
+
 
 
 

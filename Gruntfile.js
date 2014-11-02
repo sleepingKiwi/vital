@@ -33,11 +33,11 @@ module.exports = function(grunt) {
         watch: {
             sass: {
                 files: ['assets/styles/source/**/*.{scss,sass}'],
-                tasks: ['sass:watch', 'newer:autoprefixer']
+                tasks: ['sass:watch', 'newer:autoprefixer', 'notify:styles']
             },
             js: {
                 files: '<%= jshint.all %>',
-                tasks: ['newer:jshint', 'newer:concat', 'newer:uglify']
+                tasks: ['newer:jshint', 'newer:concat', 'newer:uglify', 'notify:js']
             },
             //images: {
                 //files: ['assets/img/**/*.{png,jpg,gif}'],
@@ -238,6 +238,26 @@ module.exports = function(grunt) {
                 src: ['assets/img/source'],
                 dest: ['assets/img/dist']
             }
+        },
+
+
+
+        notify: {
+            styles: {
+              options: {
+                message: 'SASS compiled and prefixed', //required
+              }
+            },
+            js: {
+              options: {
+                message: 'Javascript minified and checked'
+              }
+            },
+            icons: {
+              options: {
+                message: 'Icons created'
+              }
+            }
         }
 
 
@@ -245,11 +265,11 @@ module.exports = function(grunt) {
 
 
     // register task
-    grunt.registerTask('styles', ['clean:styles', 'sass:dist', 'autoprefixer']);  
+    grunt.registerTask('styles', ['clean:styles', 'sass:dist', 'autoprefixer', 'notify:styles']);  
 
-    grunt.registerTask('js', ['clean:js', 'jshint', 'concat', 'uglify']);  
+    grunt.registerTask('js', ['clean:js', 'jshint', 'concat', 'uglify', 'notify:js']);  
 
-    grunt.registerTask('icons', ['clean:icons', 'svgmin', 'grunticon']);  
+    grunt.registerTask('icons', ['clean:icons', 'svgmin', 'grunticon', 'notify:icons']);
 
     grunt.registerTask('default', ['styles', 'js', 'icons']);  
 

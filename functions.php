@@ -79,6 +79,8 @@ require_once locate_template('lib/utils.php');
  * vital_fragment_cache($key, $ttl, $function)
  * Function to clear a transient when passed a key (to clear transients set with the method above)
  * vital_fragment_clear($key)
+ * function to delete all transients created by this theme.
+ * method of calling that function from the admin area (through admin-ajax.php)
  *
  * clearing nav menu transients (optional in header and footer files)
  */

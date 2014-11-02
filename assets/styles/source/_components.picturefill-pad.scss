@@ -26,6 +26,7 @@
         display: inline-block;
         *display: inline;
         *zoom:1;
+        vertical-align: top;
 
         position: static;
         left:0;
@@ -45,6 +46,13 @@
     }
 }
 
+.wp-caption{
+    .picturefill-wrap-padded{
+        display: block;
+        margin:0 auto;
+    }
+}
+
 .picturefill-wrap, .picturefill{
     img{
         opacity:0;
@@ -60,6 +68,17 @@
     }
 }
 
+.picturefill-loading{
+    img{
+        position: absolute;
+        top:0;
+        left:0;
+        width: 100%;
+        height: auto;
+        z-index: 1;
+    }
+}
+
 .picturefill-loaded{
     .picturefill-padder{
         position: absolute;
@@ -68,5 +87,6 @@
 
     img{
         opacity:1;
+        position: relative;
     }
 }

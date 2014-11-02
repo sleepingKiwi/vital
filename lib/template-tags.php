@@ -35,8 +35,16 @@ function vital_content_nav( $nav_id ) {
 
     <?php if ( is_single() ) : // navigation links for single posts ?>
 
-        <?php previous_post_link( '<div class="nav-previous">%link</div>', '<span class="pn-nav"><span class="meta-nav">' . _x( '&laquo;', 'Previous post link', 'vital' ) . '</span> %title</span>' ); ?>
-        <?php next_post_link( '<div class="nav-next">%link</div>', '<span class="pn-nav">%title <span class="meta-nav">' . _x( '&raquo;', 'Next post link', 'vital' ) . '</span></span>' ); ?>
+        <?php 
+        $gpp = get_previous_post();
+        $prev_post = !empty( $gpp ) ? $gpp : (object)array('post_title'=>'previous');
+        //print_r($prev_post);
+        previous_post_link( '<div class="nav-previous">%link</div>', '<span class="vitalicon vitalicon-backward-main"></span><span class="pn-nav">'.strip_tags($prev_post->post_title).'</span>' ); ?>
+        <?php 
+        $gnp = get_next_post();
+        $next_post = !empty( $gnp ) ? $gnp : (object)array('post_title'=>'next');
+        //print_r($next_post);
+        next_post_link( '<div class="nav-next">%link</div>', '<span class="pn-nav">'.strip_tags($next_post->post_title).'</span><span class="vitalicon vitalicon-forward-main"></span>' ); ?>
 
     <?php elseif ( $wp_query->max_num_pages > 1 && ( is_home() || is_archive() || is_search() ) ) : // navigation links for home, archive, and search pages ?>
 

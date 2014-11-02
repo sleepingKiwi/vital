@@ -18,7 +18,7 @@ add_action('admin_menu', 'vital_admin_add_pages');
 //add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
 function vital_admin_add_pages() {
     add_menu_page( 
-        'Design Database Documentation', 
+        'Theme Documentation', 
         'Documentation', 
         'publish_posts', 
         'vital-documentation', 
@@ -115,11 +115,11 @@ function vital_documentation_content() {
                     <h3>Using The Site</h3>
                 </li>
                 <li>
-                    <a href="#cadencia">Using The Site</a>
+                    <a href="#vital">Using The Site</a>
                     <ul>
-                        <li><a href="#cadencia-general">Sub Option</a></li>
-                        <li><a href="#cadencia-social">Sub Option</a></li>
-                        <li><a href="#cadencia-translations">Sub Option</a></li>
+                        <li><a href="#vital-general">Sub Option</a></li>
+                        <li><a href="#vital-social">Sub Option</a></li>
+                        <li><a href="#vital-translations">Sub Option</a></li>
                     </ul>
                 </li>
                 <li class="vital-doc-section-header">
@@ -229,6 +229,15 @@ function vital_documentation_content() {
         <a class="vital-doc-theme-image-link" href="<?php echo get_admin_url(); ?>themes.php?theme=<?php echo $this_theme->get_stylesheet(); ?>" >
             <img class="vital-doc-theme-image" src="<?php echo $this_theme->get_screenshot(); ?>" />
         </a>
+
+
+        <form role="form" action="<?php echo admin_url('admin-ajax.php?action=vital_clear_transients'); ?>" method="post" style="margin:2em auto; padding:2em; background:#ebebeb; border-radius:10px; box-shadow:inset 1px 1px 2px 0 rgba(0,0,0,0.2); text-align:center; width:90%; max-width:400px;">
+            <h5>Delete theme transients.<br><small>This button is mainly for debugging and troubleshooting. You shouldn't need to use it under normal conditions!</small></h5>
+            <?php $transient_update = (isset($_GET['transient-update']) ? $_GET['transient-update'] : null); if($transient_update == 'success') { echo '<div class="updated"><p><strong>Transients cleared</strong></p></div>'; } ?>
+            <p class="submit" style="text-align:center; padding:0; margin:0;"><input style="text-align:center; font-family:monospace;" type="submit" name="submit" value="Clear Transients" class="button button-primary"></p>
+            <?php wp_nonce_field('vital-clear-transients', '_tedworthandoscar-nonce'); ?>
+        </form>
+
     </footer>
     
   </div> <!-- end .vital-documentation -->

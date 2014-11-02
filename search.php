@@ -3,16 +3,21 @@
     <section id="primary" class="content-area has-sidebar">
         <main id="main" class="site-main" role="main">
 
-        <?php if ( have_posts() ) : ?>
-
             <header class="page-header">
                 <h1 class="page-title">
-                    <?php printf( 
-                        __( 'Search Results for: %s', 'vital' ), 
-                        '<span>' . get_search_query() . '</span>' 
-                    ); ?>
+                    <?php global $wp_query;
+                    $total_results = $wp_query->found_posts;
+                    if($total_results == 0){ ?>
+                        <span>No Results for:</span> <?php echo esc_attr(get_search_query()); ?>
+                    <?php }elseif($total_results == 1){ ?>
+                        <span>1 Search Result for:</span> <?php echo esc_attr(get_search_query()); ?>
+                    <?php }else{ ?>
+                        <span><?php echo $total_results; ?> Search Results for:</span> <?php echo esc_attr(get_search_query()); ?>
+                    <?php } ?>
                 </h1>
             </header><!-- .page-header -->
+
+        <?php if ( have_posts() ) : ?>
 
             <?php // doing a loop ?>
             <?php while ( have_posts() ) : the_post(); ?>
@@ -32,7 +37,7 @@
 
         <?php else : ?>
 
-            <?php get_template_part( 'no-results', 'search' ); ?>
+            <?php get_template_part( 'template-parts/content', 'none' ); ?>
 
         <?php endif; ?>
 

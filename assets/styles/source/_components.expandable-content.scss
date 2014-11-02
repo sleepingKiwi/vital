@@ -1,0 +1,51 @@
+/*------------------------------------*\
+    $EXPANDABLE CONTENT
+\*------------------------------------*/
+
+/*******************
+HIDDEN TEXT SECTIONS
+*******************/
+.vitally-expandable{
+    border: 0; 
+    margin: -1px auto; 
+    overflow: hidden; 
+    padding: 0; 
+    max-height:1px; 
+    min-height:0; 
+    clip: rect(0 0 0 0); 
+    opacity:0;
+
+
+    transition: max-height 800ms ease, min-height 800ms ease, padding 800ms ease, opacity 800ms ease;
+}
+
+.expand-show, .no-js .vitally-expandable, .single-page-primary .vitally-expandable, .single-post .vitally-expandable{
+    transition: max-height 1200ms ease-in, min-height 700ms ease-out, opacity 800ms ease;
+
+    clip: auto;
+    min-height:3em;
+    max-height:2000em;
+    padding:0.5em 0;
+    opacity: 1;
+}
+
+.expand-link, .expand-link:visited{
+    display:block;
+    text-align:center;
+    margin-bottom:($base-spacing-unit);
+    margin-bottom:($base-spacing-unit / $base-font-size)*1rem;
+
+    font-family:$brand-ff-header;
+    font-size:1.5em;
+    letter-spacing:1px;
+
+    color: $brand-c-main;
+
+    &:hover, &:focus{
+        color: $brand-c-highlight;
+    }
+}
+
+.no-js .expand-link, .single-page-primary .expand-link, .single-post .expand-link{
+    display:none;
+}

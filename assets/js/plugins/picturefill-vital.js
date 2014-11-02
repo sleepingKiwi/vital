@@ -22,7 +22,7 @@
 
         /* T&O edit */
         //optionally use a passed array of elements rather than looking at all spans... useful for lazy loads
-        var ps = (fillArray === undefined) ? w.document.getElementsByTagName( 'span' ) : fillArray;
+        var ps = (fillArray === undefined)||(!(fillArray instanceof Array)) ? w.document.getElementsByTagName( "span" ) : fillArray;
 
         // Loop the pictures
         for( var i = 0, il = ps.length; i < il; i++ ){
@@ -62,27 +62,30 @@
                 }
 
                 /* Added by T&O */
-                    //http://markdalgleish.com/2011/03/self-executing-anonymous-functions/
-                    //http://www.mennovanslooten.nl/blog/post/62
+                //http://markdalgleish.com/2011/03/self-executing-anonymous-functions/
+                //http://www.mennovanslooten.nl/blog/post/62
 
                 //removing loaded class if it exists
-                    //http://stackoverflow.com/questions/195951/change-an-elements-css-class-with-javascript
+                //http://stackoverflow.com/questions/195951/change-an-elements-css-class-with-javascript
                 ps[i].className = ps[i].className.replace( /(?:^|\s)picturefill-loaded(?!\S)/g , '' );
 
                 //adding loaded class after load
                 /*jshint loopfunc: true */
                 picImg.onload = (
-                    function (pictureFillParent) {
-                        return function() {
-                            pictureFillParent.className += ' picturefill-loaded';
-                        };
-                    }
+                function (pictureFillParent) {
+                    return function() {
+                    pictureFillParent.className = pictureFillParent.className.replace( /(?:^|\s)picturefill-loading(?!\S)/g , '' );
+                    pictureFillParent.className += ' picturefill-loaded';
+                    };
+                }
                 )( ps[i] ); 
-                /* End T&O Additions */
+
 
                 picImg.src = '';
                 picImg.src =  matchedEl.getAttribute( 'data-src' );
+                ps[i].className += ' picturefill-loading';
                 matchedEl.appendChild( picImg );
+                /* End T&O Additions */
             }
             else if( picImg ){
                 picImg.parentNode.removeChild( picImg );

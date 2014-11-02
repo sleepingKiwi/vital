@@ -47,15 +47,11 @@ jQuery_vital(document).ready(function($) {
 
                                 holderDiv.find('.vitally-expandable .picturefill-wrap').addClass('data-deferred').attr('data-deferred', '');
 
-                                if( $('#archives-container').length > 0 ){
-                                    $('#archives-container').append( holderDiv.html() );
-                                    $('#archives-container').mixItUp('remix','all');
-                                }else{
-                                    $morePosts.before( holderDiv.html() );
-                                }
+                                $morePosts.before( holderDiv.html() );
 
                                 //add any listeners that might be needed on newly ajaxed content
                                 VitalUtility.contentListeners();
+                                //VitalUtility.requestAnimationTick('scroll');
                             }
 
                         }
