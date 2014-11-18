@@ -112,6 +112,13 @@
         display:inline;
     }
 
+    hr{
+        margin-bottom: $bsu;
+        border:0;
+        height: 1px;
+        background-color: $brand-c-subtle;
+    }
+
 }//end .entry-content
 
 

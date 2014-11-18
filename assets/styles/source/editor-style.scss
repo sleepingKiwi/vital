@@ -62,3 +62,10 @@ a, a:visited {
   }
   
 }
+
+hr{
+    margin-bottom: $bsu;
+    border:0;
+    height: 1px;
+    background-color: $brand-c-subtle;
+}

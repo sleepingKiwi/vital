@@ -62,17 +62,23 @@
   color: $brand-c-main;
   text-indent: 0;
   background: #efefef;
+
+    /* IE 10+ hack... IE9/10/11 all render padding/indent on text inputs squiffy when combined with focus/active styles... */
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        background: transparent;
+        text-indent: $bsu*3;
+    }
   
   &::-webkit-input-placeholder {
     color: #aaa;
   }
   + .search-label {
     color: #fff;
-    background: rgba($brand-c-highlight,1);
+    background: rgba($brand-c-link,1);
     transform: translateY(-40px);
     
     &:after {
-      border-top: 4px solid rgba($brand-c-highlight,1);
+      border-top: 4px solid rgba($brand-c-link,1);
     }
   }
 }

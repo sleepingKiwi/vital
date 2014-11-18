@@ -157,7 +157,12 @@ module.exports = function(grunt) {
                         'assets/js/vendor/**/*.js',
                         'assets/js/plugins/**/*.js',
                         //'assets/bower_components/**/*.js',
-                        'assets/js/main/**/*.js'
+                        // THESE COME IN MANUALLY TO ENSURE CORRECT ORDER (especially for IE8)
+                        'assets/js/main/vital-utilities.js',
+                        'assets/js/main/load-more-posts.js',
+                        'assets/js/main/nav.js',
+                        'assets/js/main/main.js',
+                        'assets/js/main/window-load.js'
                     ],
                     'assets/js/dist/vital-docs.js': [
                         'assets/js/docs/**/*.js'

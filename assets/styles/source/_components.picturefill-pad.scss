@@ -46,6 +46,11 @@
     }
 }
 
+a > .picturefill-wrap-padded{
+    //removing spacing
+    vertical-align: top;
+}
+
 .wp-caption{
     .picturefill-wrap-padded{
         display: block;
@@ -83,6 +88,7 @@
     .picturefill-padder{
         position: absolute;
         background-image: none;
+        opacity: 0;
     }
 
     img{
