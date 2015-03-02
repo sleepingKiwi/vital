@@ -152,7 +152,8 @@ module.exports = function(grunt) {
                 files: {
                     'assets/js/dist/main.js': [
                         'assets/bower_components/jquery/dist/jquery.js',
-                        'assets/bower_components/filament-fixed/fixedfixed.js',
+                        //'assets/bower_components/filament-fixed/fixedfixed.js',
+                        //currently using custom version of above inside plugins...
                         'assets/js/jquery-compat.js',
                         'assets/js/vendor/**/*.js',
                         'assets/js/plugins/**/*.js',

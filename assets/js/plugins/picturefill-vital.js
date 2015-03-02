@@ -22,7 +22,7 @@
 
         /* T&O edit */
         //optionally use a passed array of elements rather than looking at all spans... useful for lazy loads
-        var ps = (fillArray === undefined)||(!(fillArray instanceof Array)) ? w.document.getElementsByTagName( "span" ) : fillArray;
+        var ps = (fillArray === undefined)||(!(fillArray instanceof Array)) ? w.document.getElementsByTagName( 'span' ) : fillArray;
 
         // Loop the pictures
         for( var i = 0, il = ps.length; i < il; i++ ){

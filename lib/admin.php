@@ -54,7 +54,7 @@ add_action('admin_menu', 'disable_default_dashboard_widgets');
  */
 function vital_info_widget() {
     echo '
-        <p>Full documentation for your new theme can be found in the <a href="'.get_admin_url().'admin.php?page=vital-documentation">Documentation</a> section.</p>
+        <p>Full documentation for your theme can be found in the <a href="'.get_admin_url().'admin.php?page=vital-documentation">Documentation</a> section.</p>
 
         <p>-</p>
 
@@ -65,7 +65,7 @@ function vital_info_widget() {
 
 // calling all custom dashboard widgets
 function vital_custom_dashboard_widgets() {
-    wp_add_dashboard_widget('vital_info_widget', '<img src="' . get_stylesheet_directory_uri() . '/assets/img/ted-head.png" alt="tedworth & Oscar"/>', 'vital_info_widget');
+    wp_add_dashboard_widget('vital_info_widget', '<img style="vertical-align:middle; margin-right:6px;" src="' . get_stylesheet_directory_uri() . '/assets/img/ted-top.png" alt="tedworth & Oscar"/> <span style="vertical-align:middle;" >Using your theme</span>', 'vital_info_widget');
     // add any others here too (obv)
 }
 
@@ -129,7 +129,7 @@ add_filter('login_headertitle', 'vital_login_title');
  * CUSTOMISE ADMIN FOOTER
  */
 function vital_custom_admin_footer() {
-    echo '<span id="footer-thankyou">Developed by <a href="http://tedworthandoscar.co.uk" target="_blank">Tedworth <span class="amp">&amp;</span> Oscar</a></span>. | Powered by <a href="http://www.wordpress.org">WordPress</a>';
+    echo '<span id="footer-thankyou">Developed by <a href="http://tedworthandoscar.co.uk" target="_blank">Tedworth <span class="amp">&amp;</span> Oscar</a></span>. Powered by <a href="http://www.wordpress.org">WordPress</a>';
 }
 add_filter('admin_footer_text', 'vital_custom_admin_footer');
 
