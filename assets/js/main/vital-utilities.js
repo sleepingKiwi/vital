@@ -101,17 +101,33 @@ var VitalUtility = (function( w, $ ){
     * http://www.html5rocks.com/en/tutorials/speed/animations/ 
     */
     var _animationTicking = false;
+    var _animateResize = false;
+    var _animateScroll = false;
 
     //called by requestAnimationTick on pages with deferred images
-    function _pageUpdateTick(type){
+    function _pageUpdateTick(){
 
-        _scrollUpdate();
+        if(_animateScroll){
+            _scrollUpdate();
+            _animateScroll = false;
+        }
+
+        if(_animateResize){
+            _resizeUpdate();
+            _animateResize = false;
+        }
 
         _animationTicking = false;
 
     }//pageUpdateTick
 
     function requestAnimationTick(type){
+        //console.log(type);
+        if(type === 'scroll'){
+            _animateScroll = true;
+        }else if(type === 'resize'){
+            _animateResize = true;
+        }
 
         if(!_animationTicking){
             requestAnimationFrame(_pageUpdateTick);
@@ -130,7 +146,11 @@ var VitalUtility = (function( w, $ ){
     \*------------------------------------*/
     function _expandersClick(){
 
-        $('.vitally-expandable .picturefill-wrap').addClass('in-an-expander');
+        //$('.vitally-expandable .picturefill-wrap').addClass('in-an-expander');
+        //disabled on single by default
+        if(!$('body').hasClass('single-post')){
+            $('.vitally-expandable .picturefill-wrap').addClass('in-an-expander');
+        }
 
         $('.expand-link').off('click');
         $('.expand-link').on('click', function(e){

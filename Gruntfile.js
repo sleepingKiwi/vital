@@ -151,6 +151,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'assets/js/dist/main.js': [
+                        'assets/js/mustard/pre.js',
                         'assets/bower_components/jquery/dist/jquery.js',
                         //'assets/bower_components/filament-fixed/fixedfixed.js',
                         //currently using custom version of above inside plugins...
@@ -163,7 +164,8 @@ module.exports = function(grunt) {
                         'assets/js/main/load-more-posts.js',
                         'assets/js/main/nav.js',
                         'assets/js/main/main.js',
-                        'assets/js/main/window-load.js'
+                        'assets/js/main/window-load.js',
+                        'assets/js/mustard/post.js'
                     ],
                     'assets/js/dist/vital-docs.js': [
                         'assets/js/docs/**/*.js'

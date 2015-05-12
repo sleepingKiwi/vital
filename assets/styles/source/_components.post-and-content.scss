@@ -59,6 +59,11 @@
         margin-bottom:($bsu / $base-font-size)*1rem;
     }
 
+    //remove margin on single images within a paragraph (double margin issues)
+    p > a:only-child img, p > img:only-child, p > .picturefill:only-child img{
+        margin-bottom: 0;
+    }
+
     .picturefill-wrap.aligncenter img, .picturefill-wrap.alignnone img { 
         margin-right: auto; 
         margin-left: auto; 

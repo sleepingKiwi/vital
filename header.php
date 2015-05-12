@@ -88,8 +88,11 @@ We hope that you enjoy your stay - Tedworth & Oscar.
  */
 ?>
 <script>
-    var doc = document, docEl = doc.documentElement;
-    docEl.className = docEl.className.replace(/(^|\s)no-js(\s|$)/, " js ");
+    //cut the mustard test: http://gomakethings.com/ditching-jquery-for-vanilla-js/
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+        var doc = document, docEl = doc.documentElement;
+        docEl.className = docEl.className.replace(/(^|\s)no-js(\s|$)/, " js ");
+    }
 </script>
 
 

@@ -6,6 +6,9 @@
     hyphens: none;
     word-wrap: break-word;
     overflow-wrap: break-word;
+
+    max-width: $brand-layout-content;
+    margin:0 auto;
 }
 /**
  * Comment list styles
@@ -38,24 +41,15 @@
     }
     
     .comment:not(.depth-1) { 
-        margin-right: -10px; 
-        margin-left: -10px;
+        margin-left:5px;
+        margin-right:2px;
         margin-top: 0; 
         padding-bottom: $bsu-s; 
     }
     
-    .comment.depth-2 {
-        margin-left:5px;
-        margin-right:2px;
-    }
-    .comment.depth-3 {
-        margin-left:5px;
-        margin-right:2px;
-    }
-    .comment.depth-4 {
-        margin-left:5px;
-        margin-right:2px;
-    }
+    .comment.depth-2,
+    .comment.depth-3,
+    .comment.depth-4,
     .comment.depth-5 {
         margin-left:5px;
         margin-right:2px;
@@ -108,7 +102,7 @@
 
 .comment-author {
     border-bottom: 1px solid rgba(0,0,0,0.1);
-    margin-bottom: $base-spacing-unit;
+    margin-bottom: $bsu-s;
 
     text-align: center;
 
@@ -119,6 +113,9 @@
     cite{
         font-size: 2em;
         line-height: 1;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
     }
 
     .comment-meta-date{
@@ -158,16 +155,29 @@
     }
     cite{
         margin-bottom: 0;
-        font-style: normal;
+        //font-family: $brand-ff-italic;
+        //font-style: italic;
+
+        a, a:visited{
+            color: $brand-c-main;
+
+            &:hover, &:focus{
+                color: $brand-c-highlight;
+            }
+        }
     }
     @include media-query(squire){
         text-align: left;
-        .comment-meta-date{
-            vertical-align: bottom;
-            margin-bottom: 0.1em;
-        }
     }
 }// .comment-author
+
+.comment-metadata{
+    margin: 0 auto $bsu;
+
+    a, a:visited{
+        //color: $brand-c-subtle;
+    }
+}
 
 
 
@@ -185,16 +195,18 @@
 .comment-reply-link { 
     text-decoration: none; 
     float: right;  
-    background: lighten($brand-c-highlight, 10%); 
+    background: $brand-c-link; //lighten($brand-c-highlight, 10%); 
     padding: 3px 5px; 
-    color: #fff; 
+    color: $brand-c-inverse; 
     opacity: 0.65; 
     margin-bottom: $bsu-s;
     font-weight: normal;
     font-size: 0.9em; 
+    transition: opacity $brand-transition ease;
 
     &:hover,
     &:focus {
+        color: $brand-c-inverse;
         opacity: 1;
     }
 }

@@ -25,7 +25,7 @@ jQuery_vital(document).ready(function($) {
                     $morePosts.find('a').addClass('loading-content');
 
 
-                    holderDiv.load(nextLink + ' .post',
+                    holderDiv.load(nextLink + ' .js-load-more-content',
                         function(response, status, xhr) {
 
                             if ( status === 'error' ) {

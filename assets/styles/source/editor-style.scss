@@ -36,6 +36,11 @@ html .mceContentBody{
   max-width: $brand-layout-max;
 
   font-family: $brand-ff-main;
+
+  img{
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 h1,.alpha, 

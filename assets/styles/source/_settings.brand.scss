@@ -99,3 +99,8 @@ $brand-round: 4px;
  */
 
 $brand-layout-max: 1140px;
+
+/**
+ * Content width (if smaller)
+ */
+$brand-layout-content: $brand-layout-max;

@@ -24,11 +24,13 @@ jQuery_vital(document).ready(function($) {
         if (!(e.which > 1 || e.shiftKey || e.altKey || e.metaKey)) {
             e.preventDefault();
             e.stopImmediatePropagation();
-
+            var $this = $(this);
             if($('.menu').hasClass('expanded-mobile-menu')){
                 $('.menu').removeClass('expanded-mobile-menu');
+                $this.removeClass('menu-open');
             }else{
                 $('.menu').addClass('expanded-mobile-menu');
+                $this.addClass('menu-open');
             }
         }
     }).click( VitalUtility.clickKiller );
@@ -119,6 +121,7 @@ jQuery_vital(document).ready(function($) {
     $('.main-navigation a').focus(function(){
         if(!$('.menu').hasClass('expanded-mobile-menu')){
             $('.menu').addClass('expanded-mobile-menu');
+            $('.menu-toggle').addClass('menu-open');
         }
     }).blur(function(){
     //

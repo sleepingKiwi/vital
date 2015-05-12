@@ -33,7 +33,7 @@ function vital_comment( $comment, $args, $depth ) {
                          * e.g. &amp;d=mm
                          */ 
                         ?>
-                        <img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5($bgauthemail); ?>?s=32&amp;d=mm" class="load-gravatar avatar avatar-48 photo" height="32" width="32" src="<?php echo get_template_directory_uri(); ?>/assets/img/pixel.gif" />
+                        <img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5($bgauthemail); ?>?s=48&amp;d=mm" class="load-gravatar avatar avatar-48 photo" height="48" width="48" src="<?php echo get_template_directory_uri(); ?>/assets/img/pixel.gif" />
 
                     <?php } ?>
                     <?php printf( __( '%s <span class="says">says:</span>', 'vital' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
