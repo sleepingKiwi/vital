@@ -28,23 +28,10 @@ function vital_scripts() {
      */
     wp_register_style( 'vital-ie-styles', get_stylesheet_directory_uri() . '/assets/styles/dist/ie.min.css', array(), '' );
 
-
     /**
-     * jQuery is loaded concatenated with our other scripts in the footer (thanks to grunt)
-     * this can actually lead to some rubbish situations where we conflict with other plugins trying
-     * to use jquery. The ideal solution would be to lose our jQuery dependancy...
-     * for the moment we've given our jquery version it's own no_conflict name: jQuery_vital
-     *
-     * this means if another plugin wants to load jquery it can do so...
-     * obviously that's not the ideal solution because it means 2 copies of jquery which is not
-     * what we want. but for now it avoids conflict.
-     * current workflow is to ensure no plugins use jquery when site goes live and encourage clients
-     * to be sparing when adding new plugins...
+     * IE < 8 TYPOGRAPHICAL STYLESHEET
      */
-    /*if (!is_admin()) {
-        wp_deregister_script('jquery');
-        wp_register_script('jquery', '', '', '2.1.1', true);
-    }*/
+    wp_register_style( 'vital-typographical', get_stylesheet_directory_uri() . '/assets/styles/dist/typographical.min.css', array(), '' );
 
 
 
@@ -67,6 +54,7 @@ function vital_scripts() {
      */
     wp_enqueue_style('vital-styles');
     wp_enqueue_style('vital-ie-styles');
+    wp_enqueue_style('vital-typographical');
     wp_enqueue_script('vital-scripts');
 
 
@@ -107,13 +95,17 @@ add_filter( 'clean_url', 'vital_defer_async', 11, 1 );
 
 
 /**
- * ADDING CONDITIONAL WRAPPER AROUND IE STYLESHEET
+ * ADDING CONDITIONAL WRAPPER AROUND STYLESHEETS
  * source: http://code.garyjones.co.uk/ie-conditional-style-sheets-wordpress/
  * unfortunately the same isn't possible with script - see how html5shiv loads in header.php
  */
 function vital_ie_conditional( $tag, $handle ) {
     if ( 'vital-ie-styles' == $handle ){
-        $tag = '<!--[if lt IE 9]>' . "\n" . $tag . '<![endif]-->' . "\n";
+        $tag = '<!--[if IE 8]>' . "\n" . $tag . '<![endif]-->' . "\n";
+    }else if( 'vital-styles' == $handle ){
+        $tag = '<!--[if gt IE 7]><!-->' . "\n" . $tag . '<!--<![endif]-->' . "\n";
+    }else if( 'vital-typographical' == $handle ){
+        $tag = '<!--[if lt IE 8]>' . "\n" . $tag . '<![endif]-->' . "\n";
     }
     return $tag;
 }

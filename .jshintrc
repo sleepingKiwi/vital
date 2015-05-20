@@ -15,7 +15,8 @@
     "quotmark": "single",
     "devel": true,
     "globals": {
-        "jQuery_vital": true,
-        "VitalUtility": true
+        "apollo": true,
+        "verge": true,
+        "vital": true
     }
 }

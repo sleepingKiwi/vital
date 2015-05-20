@@ -70,7 +70,7 @@ function vital_content_nav( $nav_id ) {
  * Tweaked from Bones
  */
 function vital_number_nav( $nav_id, $before = '', $after = '' ) {
-	global $wpdb, $wp_query;
+    global $wpdb, $wp_query;
     $request = $wp_query->request;
     $posts_per_page = intval(get_query_var('posts_per_page'));
     $paged = intval(get_query_var('paged'));
@@ -166,6 +166,8 @@ function vital_load_more_link( $paired_nav ){
         $load_more_nav .= 'data-current-page="' . $paged . '" '; 
         $load_more_nav .= 'data-npl="' . $npl_url . '" ';
         $load_more_nav .= 'data-nav-id="' . $paired_nav_id . '"';
+        $load_more_nav .= 'data-default-text="' . __('Load more posts', 'vital') . '"';
+        $load_more_nav .= 'data-finished-text="' . __('All posts have been loaded', 'vital') . '"';
     $load_more_nav .= '>';
 
         if( isset($npl[1]) ){
@@ -192,10 +194,10 @@ function vital_load_more_link( $paired_nav ){
  * Prints HTML with meta information for the current post-date/time and author.
  */
 function vital_posted_on() {
-	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+    $time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
 
-	/* 
-	// Useful to display 'updated' date next to original published date. but disabled by default
+    /* 
+    // Useful to display 'updated' date next to original published date. but disabled by default
     if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
         $time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
     }
@@ -259,37 +261,37 @@ function vital_entry_footer() {
  * Returns true if a blog has more than 1 category
  */
 function vital_categorised_blog() {
-	if ( false === ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
-		// Create an array of all the categories that are attached to posts
-		$all_the_cool_cats = get_categories( array(
-			'fields'     => 'ids',
+    if ( false === ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
+        // Create an array of all the categories that are attached to posts
+        $all_the_cool_cats = get_categories( array(
+            'fields'     => 'ids',
             'hide_empty' => 1,
 
             // We only need to know if there is more than one category.
             'number'     => 2,
-		) );
+        ) );
 
-		// Count the number of categories that are attached to the posts
-		$all_the_cool_cats = count( $all_the_cool_cats );
+        // Count the number of categories that are attached to the posts
+        $all_the_cool_cats = count( $all_the_cool_cats );
 
-		set_transient( 'all_the_cool_cats', $all_the_cool_cats );
-	}
+        set_transient( 'all_the_cool_cats', $all_the_cool_cats );
+    }
 
-	if ( $all_the_cool_cats > 1 ) {
-		// This blog has more than 1 category so vital_categorised_blog should return true
-		return true;
-	} else {
-		// This blog has only 1 category so vital_categorised_blog should return false
-		return false;
-	}
+    if ( $all_the_cool_cats > 1 ) {
+        // This blog has more than 1 category so vital_categorised_blog should return true
+        return true;
+    } else {
+        // This blog has only 1 category so vital_categorised_blog should return false
+        return false;
+    }
 }
 
 /**
  * Flush out the transients used in vital_categorised_blog
  */
 function vital_category_transient_flusher() {
-	// Like, beat it. Dig?
-	delete_transient( 'all_the_cool_cats' );
+    // Like, beat it. Dig?
+    delete_transient( 'all_the_cool_cats' );
 }
 add_action( 'edit_category', 'vital_category_transient_flusher' );
 add_action( 'save_post',     'vital_category_transient_flusher' );

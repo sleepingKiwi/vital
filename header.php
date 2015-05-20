@@ -29,6 +29,8 @@ We hope that you enjoy your stay - Tedworth & Oscar.
  * Make sure to put files at root even if you're including links below too...
  * Generate icons at the above link from the icon-300.psd file in the assets folder
  *
+ * CURRENTLY NOT INCLUDING THE MULTIPLE PNG ICON SIZES BECAUSE THEY ARE ALL REQUESTED BY CHROME/FIREFOX...
+ *
 */ 
 ?>
 <!-- favicons -->
@@ -42,11 +44,6 @@ We hope that you enjoy your stay - Tedworth & Oscar.
 <link rel="apple-touch-icon" sizes="76x76" href="<?php echo get_template_directory_uri(); ?>/assets/img/favicons/apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" sizes="152x152" href="<?php echo get_template_directory_uri(); ?>/assets/img/favicons/apple-touch-icon-152x152.png">
 <link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_template_directory_uri(); ?>/assets/img/favicons/apple-touch-icon-180x180.png">
-<link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/assets/img/favicons/favicon-192x192.png" sizes="192x192">
-<link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/assets/img/favicons/favicon-160x160.png" sizes="160x160">
-<link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/assets/img/favicons/favicon-96x96.png" sizes="96x96">
-<link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/assets/img/favicons/favicon-16x16.png" sizes="16x16">
-<link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/assets/img/favicons/favicon-32x32.png" sizes="32x32">
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="msapplication-TileImage" content="<?php echo get_template_directory_uri(); ?>/assets/img/favicons/mstile-144x144.png">
 <meta name="msapplication-config" content="<?php echo get_template_directory_uri(); ?>/assets/img/favicons/browserconfig.xml">
@@ -147,6 +144,15 @@ grunticon(["<?php echo get_template_directory_uri(); ?>/assets/img/icons/dist/ic
 </head>
     
 <body <?php body_class(); ?>>
+
+<!--[if lt IE 8]>
+<div style="background:#efefef; padding:24px; margin-bottom:24px;">
+<p>Because you're viewing this site using a very old browser you're being shown a simplified, text focused, version.</p>
+<p>All of the site content is still present in this simpler design, but unfortunately the full (and beautiful) site layout is not compatible with such an old web browser!</p>
+<h4 style="margin:0;">To see the full site layout please visit using <a href="http://browsehappy.com/">a more modern browser.</a></h4>
+</div>
+<![endif]-->
+
 <div id="page" class="hfeed site">
     <a class="screen-reader-text skip-link" href="#content" title="Skip to content">
         <?php _e( 'Skip to content', 'vital' ); ?>

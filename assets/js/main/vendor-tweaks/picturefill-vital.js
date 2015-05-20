@@ -28,8 +28,11 @@
         for( var i = 0, il = ps.length; i < il; i++ ){
 
             /* Added by T&O */
-            if( ps[ i ].getAttribute( 'data-deferred' ) !== null ){
-                continue;
+            //skip data deferred images unless we don't pass the mustard..
+            if ( 'querySelector' in document && 'addEventListener' in window ) {
+                if( ps[ i ].getAttribute( 'data-deferred' ) !== null ){
+                    continue;
+                }
             }
             /* End T&O Additions */
 

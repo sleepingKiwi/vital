@@ -71,6 +71,7 @@ module.exports = function(grunt) {
                     'assets/styles/dist/editor-style.css': 'assets/styles/source/editor-style.scss',
                     'assets/styles/dist/admin.css': 'assets/styles/source/admin.scss',
                     'assets/styles/dist/ie.css': 'assets/styles/source/ie.scss',
+                    'assets/styles/dist/typographical.css': 'assets/styles/source/typographical.scss',
                     'assets/styles/dist/login.css': 'assets/styles/source/login.scss',
                     'assets/styles/dist/tedworth-colours.css': 'assets/styles/source/tedworth-colours.scss',
                     'assets/styles/dist/vital-docs.css': 'assets/styles/source/vital-docs.scss',
@@ -137,7 +138,6 @@ module.exports = function(grunt) {
             all: [
                 //we don't hint vendor or bower_components...
                 'assets/js/main/**/*.js',
-                'assets/js/plugins/**/*.js',
                 'assets/js/docs/**/*.js'
             ]
         },
@@ -151,21 +151,32 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'assets/js/dist/main.js': [
-                        'assets/js/mustard/pre.js',
-                        'assets/bower_components/jquery/dist/jquery.js',
+                            //picturefill comes in outside of the cut the mustard test...
+                        'assets/js/main/vendor-tweaks/picturefill-vital.js',
+                            //wrapping all script in a test for browsers that 'cut the mustard'
+                        'assets/js/structural/mustard-pre.js',
+                            //currently using custom version of this inside plugins...
                         //'assets/bower_components/filament-fixed/fixedfixed.js',
-                        //currently using custom version of above inside plugins...
-                        'assets/js/jquery-compat.js',
+                            //no longer depending on jQuery so this isn't used
+                        //'assets/js/jquery-compat.js',
+                            //verge for screen measurements
+                        'assets/bower_components/verge/verge.js',
+                            //class wrangling support for naff browsers
+                        'assets/bower_components/apollo.js/dist/apollo.js',
+                            //all 3rd party scripts which aren't served by bower
                         'assets/js/vendor/**/*.js',
-                        'assets/js/plugins/**/*.js',
-                        //'assets/bower_components/**/*.js',
-                        // THESE COME IN MANUALLY TO ENSURE CORRECT ORDER (especially for IE8)
-                        'assets/js/main/vital-utilities.js',
-                        'assets/js/main/load-more-posts.js',
-                        'assets/js/main/nav.js',
+                            //'customised' 3rd party scripts...
+                        'assets/js/main/vendor-tweaks/fixedfixed-vital.js',
+                            //we wrap all of our own code in a closure for the sake of privacy
+                        'assets/js/structural/vital-closure-pre.js',
+                            //all of our individual modules
+                        'assets/js/main/modules/**/*.js',
+                            //our 'init' script which co-ordinates modules as required
                         'assets/js/main/main.js',
-                        'assets/js/main/window-load.js',
-                        'assets/js/mustard/post.js'
+                            //closing the closure for our main code - can still be augmented later
+                        'assets/js/structural/vital-closure-post.js',
+                            //closing the wrapping if() for the 'cut the mustard' test
+                        'assets/js/structural/mustard-post.js'
                     ],
                     'assets/js/dist/vital-docs.js': [
                         'assets/js/docs/**/*.js'

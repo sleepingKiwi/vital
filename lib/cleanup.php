@@ -29,6 +29,27 @@ function vital_head_cleanup() {
         remove_action('wp_head', 'rel_canonical');
         add_action('wp_head', 'vital_rel_canonical');
     }
+    
+
+    //removing emoji scripts:
+    //https://wordpress.org/plugins/disable-emojis/
+    //http://wordpress.stackexchange.com/questions/185577/disable-emojicons-introduced-with-wp-4-2
+    remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+    remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+    remove_action( 'wp_print_styles', 'print_emoji_styles' );
+    remove_action( 'admin_print_styles', 'print_emoji_styles' );    
+    remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+    remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );  
+    remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+    add_filter( 'tiny_mce_plugins', 'vital_disable_emojis_tinymce' );
+}
+
+function vital_disable_emojis_tinymce( $plugins ) {
+    if ( is_array( $plugins ) ) {
+        return array_diff( $plugins, array( 'wpemoji' ) );
+    } else {
+        return array();
+    }
 }
 
 function vital_rel_canonical() {

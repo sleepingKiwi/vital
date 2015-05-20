@@ -157,7 +157,7 @@
 
     }//end .menu .dropdown-menu
 
-    .active-dropdown{
+    .active-dropdown, .active-dropdown .dropdown-menu{
         transition: max-height 800ms ease-in, min-height 500ms ease-out, padding 500ms ease-out, opacity 800ms ease-out;
 
         clip: auto;
