@@ -69,16 +69,27 @@ function vital_content_nav( $nav_id ) {
  * NUMBERED PAGE NAVIGATION
  * Tweaked from Bones
  */
-function vital_number_nav( $nav_id, $before = '', $after = '' ) {
-    global $wpdb, $wp_query;
-    $request = $wp_query->request;
-    $posts_per_page = intval(get_query_var('posts_per_page'));
+function vital_number_nav( $nav_id, $before = '', $after = '', $custom_query = false ) {
+
+    if($custom_query){
+        $the_query = $custom_query;
+    }else{
+        global $wp_query;
+        $the_query = $wp_query;
+    }
+
+    //global $wpdb;
+
+    $request = $the_query->request;
+    //$posts_per_page = intval(get_query_var('posts_per_page'));
+    $posts_per_page = intval($the_query->query_vars['posts_per_page']);
+    //echo $posts_per_page;
     $paged = intval(get_query_var('paged'));
     if( !get_query_var('paged') ){ 
         $paged = intval(get_query_var('page')); 
     }
-    $numposts = $wp_query->found_posts;
-    $max_page = $wp_query->max_num_pages;
+    $numposts = $the_query->found_posts;
+    $max_page = $the_query->max_num_pages;
     if ( $numposts <= $posts_per_page ) { return; }
     if(empty($paged) || $paged == 0) {
         $paged = 1;
@@ -145,12 +156,18 @@ function vital_number_nav( $nav_id, $before = '', $after = '' ) {
  * If it's available a class of .also-included will be added to page numbers in that nav
  * following the naming pattern $(navID+' .page-num-'+currentPage).addClass('also-included');
  */
-function vital_load_more_link( $paired_nav ){
-    global $wp_query;
+function vital_load_more_link( $paired_nav, $custom_query = false ){
+    if($custom_query){
+        $the_query = $custom_query;
+    }else{
+        global $wp_query;
+        $the_query = $wp_query;
+    }
+    
 
-    $max = $wp_query->max_num_pages;
+    $max = $the_query->max_num_pages;
     $paged = ( get_query_var('paged') > 1 ) ? get_query_var('paged') : 1;
-    $npl=explode('"',get_next_posts_link()); 
+    $npl=explode('"',get_next_posts_link('next', $max)); 
     if( isset($npl[1]) ){
         $npl_url = $npl[1]; 
         $last_page_class = '';
@@ -173,7 +190,8 @@ function vital_load_more_link( $paired_nav ){
         if( isset($npl[1]) ){
             $load_more_nav .= get_next_posts_link(
                 '<span class="load-more-icon"></span> 
-                <span class="load-text">'.__('Load more posts', 'vital').'</span>'
+                <span class="load-text">'.__('Load more posts', 'vital').'</span>',
+                $max
             ); 
         }else{
             $load_more_nav .= '<span class="load-more-icon"></span> 

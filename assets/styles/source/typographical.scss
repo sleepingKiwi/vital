@@ -243,7 +243,18 @@ p, h1, h2, h3, h4, h5, h6{
 img{
     display: block;
     margin-bottom: 24px;
+    max-width: 100%;
+    height: auto;
 }
+video, object, embed, iframe, .wp-audio-shortcode { 
+    max-width: 100%; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom:24px;
+}
+
+
 
 @import "settings.brand";
 @import "settings.font-defaults";

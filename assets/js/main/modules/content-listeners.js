@@ -111,7 +111,7 @@ vital.contentListeners = (function(){
              * we remove the event listener before re-adding it.
              */
             expandLinks[i].removeEventListener('click', _expandLinkClicked);
-            expandLinks[i].addEventListener('click', _expandLinkClicked);
+            expandLinks[i].addEventListener('click', _expandLinkClicked, false);
         }
 
     }//_expandersSetup

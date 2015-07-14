@@ -31,7 +31,7 @@ vital.scrollToTop = (function(){
 
         body.appendChild(topLink);
 
-        document.getElementById('js-to-top').addEventListener('click', _scrollToTop);
+        document.getElementById('js-to-top').addEventListener('click', _scrollToTop, false);
     }
 
     //revealing public methods

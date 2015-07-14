@@ -7,7 +7,11 @@ module.exports = function(grunt) {
 
     // load all grunt tasks named grunt-* from package.json
     // https://github.com/sindresorhus/load-grunt-tasks
-    require('load-grunt-tasks')(grunt);
+    //require('load-grunt-tasks')(grunt);
+
+    //as above but with JIT loading of tasks so they don't ALL get loaded whenever Watch runs...
+    //https://github.com/shootaroo/jit-grunt
+    require('jit-grunt')(grunt);
 
 
     // configurable paths
@@ -92,7 +96,7 @@ module.exports = function(grunt) {
         // autoprefixer
         autoprefixer: {
             options: {
-                browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', 'ie >= 8', 'ios >= 4', 'android >= 3'],
+                browsers: ['> 0.5%', 'last 2 versions', 'Firefox > 20', 'Opera 12.1', 'ie >= 8', 'ios >= 4', 'android >= 3'],
                 map: true
             },
             files: {

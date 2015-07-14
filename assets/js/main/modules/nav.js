@@ -81,8 +81,8 @@ vital.nav = (function(){
         l = menuToggles.length;
         if(l){
             for ( i = l - 1; i >= 0; i--) {
-                menuToggles[i].addEventListener('mousedown', _mobileTogglesMouseDown);
-                menuToggles[i].addEventListener('click', vital.u_clickKiller.clickKiller);
+                menuToggles[i].addEventListener('mousedown', _mobileTogglesMouseDown, false);
+                menuToggles[i].addEventListener('click', vital.u_clickKiller.clickKiller, false);
             }
         }
     }//_mobileMenuSetup
@@ -138,7 +138,7 @@ vital.nav = (function(){
                 apollo.addClass(currentDropMenu, 'active-dropdown');
                 apollo.addClass(e.currentTarget, 'active-dropdown-link');
 
-                document.querySelector('body').addEventListener('touchstart', _bodyDropClear);
+                document.querySelector('body').addEventListener('touchstart', _bodyDropClear, false);
             }
 
         }//not mobiles && touch event
@@ -183,13 +183,13 @@ vital.nav = (function(){
         l = dropdownToggles.length;
         if(l){
             for (i = l - 1; i >= 0; i--) {
-                dropdownToggles[i].addEventListener('touchstart', _dropdownTogglesMouseDown);
-                dropdownToggles[i].addEventListener('mousedown', _dropdownTogglesMouseDown);
+                dropdownToggles[i].addEventListener('touchstart', _dropdownTogglesMouseDown, false);
+                dropdownToggles[i].addEventListener('mousedown', _dropdownTogglesMouseDown, false);
 
                 /**
                  * kill standard click events at sizes where the drop menus don't have to expand on click...
                  */
-                dropdownToggles[i].addEventListener('click', _mobileKillClick);//click listener
+                dropdownToggles[i].addEventListener('click', _mobileKillClick, false);//click listener
             }//for
         }//if(l)
     }//_dropdownsSetup
@@ -266,7 +266,7 @@ vital.nav = (function(){
         l = mainNavLinks.length;
         if(l){
             for (i = l - 1; i >= 0; i--) {
-                mainNavLinks[i].addEventListener('focus', _mainNavLinksFocus);
+                mainNavLinks[i].addEventListener('focus', _mainNavLinksFocus, false);
             }//for
         }//if(l)
 
@@ -275,8 +275,8 @@ vital.nav = (function(){
         l = dropdownLinks.length;
         if(l){
             for (i = l - 1; i >= 0; i--) {
-                dropdownLinks[i].addEventListener('focus', _dropdownLinksFocus);
-                dropdownLinks[i].addEventListener('blur', _dropdownLinksBlur);
+                dropdownLinks[i].addEventListener('focus', _dropdownLinksFocus, false);
+                dropdownLinks[i].addEventListener('blur', _dropdownLinksBlur, false);
             }//for
         }//if(l)
 

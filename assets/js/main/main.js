@@ -112,7 +112,7 @@ vital.contentListeners.listen(theBody);
 
     window.addEventListener('scroll', function(){
         vital.debouncedEvents.requestAnimationTick('scroll');
-    });
+    }, false);
 
     vital.debouncedEvents.requestAnimationTick('scroll');
 
@@ -145,10 +145,10 @@ var footerPromotion = document.querySelectorAll('.tando-footer a');
 if(footerPromotion.length > 0){
     footerPromotion[0].addEventListener('mouseover', function(e){
         apollo.addClass(document.querySelector('.attribution .promotional'), 'promotional-show');
-    });
+    }, false);
     footerPromotion[0].addEventListener('mouseout', function(e){
         apollo.removeClass(document.querySelector('.attribution .promotional'), 'promotional-show');
-    });
+    }, false);
 }
 
 

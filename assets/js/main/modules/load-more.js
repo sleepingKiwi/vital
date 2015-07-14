@@ -174,7 +174,7 @@ vital.loadMore = (function(){
             _holderDiv = document.createElement('div');
             _navID = _morePostsLink.getAttribute('data-nav-id') !== '' ? _morePostsLink.getAttribute('data-nav-id') : false;
 
-            _morePostsLink.addEventListener('click', _loadMoreClicked);
+            _morePostsLink.addEventListener('click', _loadMoreClicked, false);
 
         }//if(morePostsLink.length)
     }//init()

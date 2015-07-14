@@ -49,13 +49,15 @@
 <?php wp_footer(); ?>
 
 <?php if (GOOGLE_ANALYTICS_ID){ ?>
-<!-- https://github.com/h5bp/html5-boilerplate/blob/master/doc/html.md#google-analytics-tracking-code -->
-<script>
-!function(t,a,n,d,o){t.GoogleAnalyticsObject=n,t[n]||(t[n]=function(){(t[n].q=t[n].q||[]).push(arguments)}),t[n].l=+new Date,d=a.createElement("script"),o=a.scripts[0],d.src="//www.google-analytics.com/analytics.js",o.parentNode.insertBefore(d,o)}(this,document,"ga");
-ga("create", "<?php echo GOOGLE_ANALYTICS_ID; ?>");
-ga("send", "pageview");
-</script>
 
+<script>
+    (function(T,e,d,w,o,r,t,h){T.GoogleAnalyticsObject=w;T[w]||(T[w]=
+    function(){(T[w].q=T[w].q||[]).push(arguments)});T[w].w=+new Date;
+    o=e.createElement(d);r=e.getElementsByTagName(d)[0];
+    o.src='https://www.google-analytics.com/analytics.js';
+    r.parentNode.insertBefore(o,r)}(window,document,'script','ga'));
+    ga('create','<?php echo GOOGLE_ANALYTICS_ID; ?>','auto');ga('send','pageview');
+</script>
 
 <?php } ?>
 
