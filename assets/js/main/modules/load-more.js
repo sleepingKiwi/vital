@@ -36,7 +36,6 @@ vital.loadMore = (function(){
         _holderDiv.innerHTML = resp;
             //get the content we want to load and empty the contents of the holder div
         var newContent = _holderDiv.querySelectorAll('.js-load-more-content');
-        _holderDiv.innerHTML = '';
 
             //increase the page count
         _currentPage ++;
@@ -69,6 +68,8 @@ vital.loadMore = (function(){
             _morePostsLink.parentNode.insertBefore(newContent[i], _morePostsLink);
         }
         newContent = null;
+        //IE 10 stores a reference to the original object when using queryselectorAll - so we can't clear this until we've finished using the nodelist we got from queryselectorall - if we clear it the nodes in the newContent nodelist are all blank in IE10...
+        _holderDiv.innerHTML = '';
 
             //add any listeners that might be needed on the newly ajaxed content
         vital.contentListeners.listen(document.querySelector('body'));

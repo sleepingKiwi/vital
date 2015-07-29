@@ -110,7 +110,7 @@ vital.contentListeners = (function(){
              * because this might already be applied to some elements (it's run after ajax loads)
              * we remove the event listener before re-adding it.
              */
-            expandLinks[i].removeEventListener('click', _expandLinkClicked);
+            expandLinks[i].removeEventListener('click', _expandLinkClicked, false);
             expandLinks[i].addEventListener('click', _expandLinkClicked, false);
         }
 

@@ -147,7 +147,7 @@ vital.nav = (function(){
     function _bodyDropClear(e){
         //function to remove dropdown classes when body is touched...
 
-        document.querySelector('body').removeEventListener('touchstart', _bodyDropClear);
+        document.querySelector('body').removeEventListener('touchstart', _bodyDropClear, false);
 
         //removing all active dropdown links
         var activeDrops = document.getElementsByClassName('active-dropdown-link');

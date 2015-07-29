@@ -58,6 +58,15 @@
         hyphens:         auto;
         word-wrap: break-word;
         max-width: 50%;
+
+        @include media-query(squire){
+            max-width: 48%;
+        }
+
+        a{
+            display: block;
+            max-width: 100%;
+        }
     }
 
     .nav-previous{

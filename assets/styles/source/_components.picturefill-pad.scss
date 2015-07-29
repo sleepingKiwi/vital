@@ -34,6 +34,7 @@
         z-index: 0;
 
         background: url('../../img/loader.gif') no-repeat center darken($brand-c-body-back,2%);
+        transition: opacity $brand-transition ease;
 
         .no-js &{
             display: none;
@@ -95,4 +96,18 @@ a > .picturefill-wrap-padded{
         opacity:1;
         position: relative;
     }
+}
+
+
+/**
+ * PIXELHOLDER backgrounds
+ */
+.picturefill-padder-back-image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    opacity: 0.8;
 }

@@ -6,7 +6,7 @@
         <section class="error-404 not-found">
             <header class="page-header">
                 <h1 class="page-title"><?php _e( '404', 'vital'); ?></h1>
-                <h3 class="page-subtitle"><?php _e( 'Page cannot not be found', 'vital'); ?></h3>
+                <h3 class="page-subtitle"><?php _e( 'Page cannot be found', 'vital'); ?></h3>
             </header><!-- .page-header -->
         
             <div class="page-content">
