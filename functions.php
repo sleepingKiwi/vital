@@ -29,20 +29,27 @@ if ( version_compare( $GLOBALS['wp_version'], '3.6-alpha', '<' ) ){
  */
 
 /*
-* Metadata file should look something like this:
-    {
-        "version" : "2.0",
-        "details_url" : "http://tedworthandoscar.co.uk/v/vital-2.html",
-        "download_url" : "http://tedworthandoscar.co.uk/v/updates/update.zip"
-    }
-* details_url is the page that displays in 'view version x details' popup
-* download_url is a zip of the theme!
+* We're now using an automated server for the theme updates: https://github.com/YahnisElsts/wp-update-server
+*
+* it's located at http://dist.tedworthandoscar.co.uk/wp-updates
+*
+* - REMEMBER - add Details URI: http://dist.tedworthandoscar.co.uk/theme/vital/vital-changelog.html to style.css
+* -- this is where update/version info is collected...
 */
+
+/**
+ * BUILDING ZIP
+ * - 
+ * -- Needs same name as theme ie. vital.zip
+ */
+
+/*
 require get_template_directory() . '/lib/theme-update-checker.php';
 $example_update_checker = new ThemeUpdateChecker(
     'vital', //Theme folder name, AKA "slug". 
-    'http://dist.tedworthandoscar.co.uk/vital/metadata.json' //URL of the metadata file.
+    'http://dist.tedworthandoscar.co.uk/wp-updates/?action=get_metadata&slug=vital' //metadata url
 );
+*/
 
 
 

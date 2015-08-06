@@ -1,7 +1,7 @@
 {
   "//": "use npm version to update - https://docs.npmjs.com/cli/version",
   "name": "vital",
-  "version": "0.20.0",
+  "version": "0.21.1",
   "description": "A bare bones WordPress theme created for internal use by Tedworth & Oscar.",
   "main": "Gruntfile.js",
   "dependencies": {},

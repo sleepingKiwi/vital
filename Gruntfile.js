@@ -141,8 +141,8 @@ module.exports = function(grunt) {
             },
             all: [
                 //we don't hint vendor or bower_components...
-                'assets/js/main/**/*.js',
-                'assets/js/docs/**/*.js'
+                'assets/js/source/main/**/*.js',
+                'assets/js/source/docs/**/*.js'
             ]
         },
 
@@ -156,34 +156,34 @@ module.exports = function(grunt) {
                 files: {
                     'assets/js/dist/main.js': [
                             //picturefill comes in outside of the cut the mustard test...
-                        'assets/js/main/vendor-tweaks/picturefill-vital.js',
+                        'assets/js/source/main/vendor-tweaks/picturefill-vital.js',
                             //wrapping all script in a test for browsers that 'cut the mustard'
-                        'assets/js/structural/mustard-pre.js',
+                        'assets/js/source/structural/mustard-pre.js',
                             //currently using custom version of this inside plugins...
                         //'assets/bower_components/filament-fixed/fixedfixed.js',
                             //no longer depending on jQuery so this isn't used
-                        //'assets/js/jquery-compat.js',
+                        //'assets/js/source/jquery-compat.js',
                             //verge for screen measurements
                         'assets/bower_components/verge/verge.js',
                             //class wrangling support for naff browsers
                         'assets/bower_components/apollo.js/dist/apollo.js',
                             //all 3rd party scripts which aren't served by bower
-                        'assets/js/vendor/**/*.js',
+                        'assets/js/source/vendor/**/*.js',
                             //'customised' 3rd party scripts...
-                        'assets/js/main/vendor-tweaks/fixedfixed-vital.js',
+                        'assets/js/source/main/vendor-tweaks/fixedfixed-vital.js',
                             //we wrap all of our own code in a closure for the sake of privacy
-                        'assets/js/structural/vital-closure-pre.js',
+                        'assets/js/source/structural/vital-closure-pre.js',
                             //all of our individual modules
-                        'assets/js/main/modules/**/*.js',
+                        'assets/js/source/main/modules/**/*.js',
                             //our 'init' script which co-ordinates modules as required
-                        'assets/js/main/main.js',
+                        'assets/js/source/main/main.js',
                             //closing the closure for our main code - can still be augmented later
-                        'assets/js/structural/vital-closure-post.js',
+                        'assets/js/source/structural/vital-closure-post.js',
                             //closing the wrapping if() for the 'cut the mustard' test
-                        'assets/js/structural/mustard-post.js'
+                        'assets/js/source/structural/mustard-post.js'
                     ],
                     'assets/js/dist/vital-docs.js': [
-                        'assets/js/docs/**/*.js'
+                        'assets/js/source/docs/**/*.js'
                     ]
                 }
             }
