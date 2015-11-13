@@ -27,6 +27,8 @@ Styling the MCE
 @import "inuit-box-sizing/generic.box-sizing";
 @import "inuit-shared/_generic.shared";
 @import "generic.fonts";
+//for button styling
+@import "base.forms";
 
 
 html .mceContentBody{

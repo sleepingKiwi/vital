@@ -27,47 +27,6 @@ function vital_image_full_quality( $quality ) {
 
 
 /**
- * EXPAND/COLLAPSE SHORTCODE
- */
-function vital_hidden_shortcode( $atts, $content = null ) {
-    if($content === null){
-        return '';
-    }else{
-
-    global $post;
-
-    extract( 
-        shortcode_atts( 
-        array( 
-            'link_show' => 'View Whole Post',
-            'link_hide' => 'Collapse Post',
-        ), 
-        $atts ) 
-    );
-
-    //is there a better way to ensure these are unique if there are two expanders in one post???
-    $expandID = $post->post_name.'-'.rand();
-    return '<div class="vitally-expandable" id="'.$expandID.'">' . do_shortcode($content) . '</div> <a href="'.get_permalink().'" data-expander="'.$expandID.'" class="expand-link" data-hide="' . $link_hide . '" data-show="' . $link_show . '">' . $link_show . '</a>';
-    }
-}
-add_shortcode('whole_post', 'vital_hidden_shortcode');
-
-add_filter("mce_external_plugins", "vital_add_buttons");
-add_filter('mce_buttons_3', 'vital_register_buttons');
-function vital_add_buttons($plugin_array) {
-    $plugin_array['vital'] = get_template_directory_uri() . '/lib/tinyMCE/wholepost-plugin.js';
-    return $plugin_array;
-}
-function vital_register_buttons($buttons) {
-    array_push( $buttons, 'wholepost' );
-    return $buttons;
-}
-
-
-
-
-
-/**
  * RESPONSIVE VIDEOS
  *
  * Is there a better way to handle this yet? Don't like using text matching...

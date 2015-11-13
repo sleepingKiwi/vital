@@ -28,7 +28,7 @@ function vital_widgets_init() {
     /**
      * REGISTER CUSTOM WIDGETS
      */
-    register_widget('Vital_Custom_Widget');
+    //register_widget('Vital_Custom_Widget');
 }
 add_action('widgets_init', 'vital_widgets_init');
 

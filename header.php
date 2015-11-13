@@ -16,7 +16,7 @@ We hope that you enjoy your stay - Tedworth & Oscar.
 <title><?php wp_title('-', true, 'right'); ?></title>
 
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
 <meta name="HandheldFriendly" content="True">
 <?php //http://speckyboy.com/2012/05/16/creating-a-mobile-web-application-with-meta-tags/ ?>
 

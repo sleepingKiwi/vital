@@ -29,7 +29,7 @@ function disable_default_dashboard_widgets() {
     
     // removing plugin dashboard boxes 
     remove_meta_box('yoast_db_widget', 'dashboard', 'normal');         // Yoast's SEO Plugin Widget
-    remove_meta_box('rg_forms_dashboard', 'dashboard', 'norma;');      // Gravity Forms Widget
+    remove_meta_box('rg_forms_dashboard', 'dashboard', 'normal');      // Gravity Forms Widget
 
     //core
     //remove_meta_box('dashboard_right_now', 'dashboard', 'normal');

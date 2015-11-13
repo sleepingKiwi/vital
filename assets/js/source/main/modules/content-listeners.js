@@ -26,12 +26,22 @@ vital.contentListeners = (function(){
             if(apollo.hasClass(prev, 'expand-show')){
 
                 apollo.removeClass(prev, 'expand-show');
-                _this.textContent = _this.getAttribute('data-show');
+                apollo.removeClass(_this, 'has-active-expander');
+
+                var dataShow = _this.getAttribute('data-show');
+                if(dataShow){
+                    _this.textContent = dataShow;
+                }
 
             }else{
 
                 apollo.addClass(prev, 'expand-show');
-                _this.textContent = _this.getAttribute('data-hide');
+                apollo.addClass(_this, 'has-active-expander');
+
+                var dataHide = _this.getAttribute('data-hide');
+                if(dataHide){
+                    _this.textContent = dataHide;
+                }
 
                 if( !apollo.hasClass(prev, 'once-opened-twice-shy') ){
                     apollo.addClass(prev, 'once-opened-twice-shy');
@@ -52,7 +62,12 @@ vital.contentListeners = (function(){
             apollo.addClass(e.currentTarget, 'expand-show');
                 //changing the text of the expand link
             var theAppropriateLink = document.querySelector('.expand-link[data-expander='+e.currentTarget.id+']');
-            theAppropriateLink.textContent = theAppropriateLink.getAttribute('data-hide');
+            apollo.addClass(theAppropriateLink, 'has-active-expander');
+            //theAppropriateLink.textContent = theAppropriateLink.getAttribute('data-hide');
+            var dataHide = theAppropriateLink.getAttribute('data-hide');
+            if(dataHide){
+                theAppropriateLink.textContent = dataHide;
+            }
 
             if( !apollo.hasClass(e.currentTarget, 'once-opened-twice-shy') ){
                 apollo.addClass(e.currentTarget, 'once-opened-twice-shy');

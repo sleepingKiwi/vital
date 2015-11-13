@@ -104,8 +104,9 @@ vital.nav = (function(){
 
         var currentDropMenu = e.currentTarget.parentNode.getElementsByClassName('dropdown-menu')[0];
 
-        var mobSized = window.getComputedStyle( e.currentTarget ).getPropertyValue( 'display' ) === 'block';
-        //console.log('mobSized = '+mobSized);
+        //var mobSized = window.getComputedStyle( e.currentTarget ).getPropertyValue( 'display' ) === 'block';
+        var mobSized = window.getComputedStyle( document.querySelector('.menu-toggle') ).getPropertyValue( 'display' ) === 'block';
+        console.log('mobSized = '+mobSized);
 
         if( mobSized && (e.type ==='mousedown') ){ 
 
@@ -135,6 +136,10 @@ vital.nav = (function(){
                 apollo.removeClass(currentDropMenu, 'active-dropdown');
                 apollo.removeClass(e.currentTarget, 'active-dropdown-link');
             }else{
+
+                    //clear open dropdowns
+                _bodyDropClear(null);
+
                 apollo.addClass(currentDropMenu, 'active-dropdown');
                 apollo.addClass(e.currentTarget, 'active-dropdown-link');
 

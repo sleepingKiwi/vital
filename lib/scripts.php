@@ -63,7 +63,7 @@ function vital_scripts() {
      * LIVERELOAD ON LOCALHOST
      * Check we're on localhost and if so insert the script for livereload!
      */
-    if (in_array($_SERVER['SERVER_ADDR'], array('127.0.0.1', '::1'))) {
+    if ( in_array($_SERVER['SERVER_ADDR'], array('127.0.0.1', '::1')) && $_SERVER['SERVER_PORT'] === '8888' ) {
     //wp_register_script( $handle, $src, $deps, $ver, $in_footer );
     wp_register_script('livereload', '//localhost:35729/livereload.js', null, false, true);
     wp_enqueue_script('livereload');

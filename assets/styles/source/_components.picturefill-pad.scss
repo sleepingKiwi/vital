@@ -110,4 +110,14 @@ a > .picturefill-wrap-padded{
     height: 100%;
     background-size: cover;
     opacity: 0.8;
+    transition: background 0ms ease $brand-transition;
+
+    .picturefill-loaded &{
+        background: transparent !important; 
+    }
+
+    .no-js &{
+        display: none;
+        background: transparent !important; 
+    }
 }

@@ -252,12 +252,23 @@ require_once locate_template('lib/template-tags.php');
  * ----------------
  * Lower priority for SEO by Yoast meta boxes
  * Maximum image quality
- * Expand/Collapse shortcode
  * Responsive oEmbed videos - with css in base.scss
  * Remove <p> from images - commented out by default
  * Automatic featured images
  */
-require_once locate_template('lib/custom.php');            
+require_once locate_template('lib/custom.php');          
+
+
+
+/**
+ * CUSTOMISING tinyMCE EDITOR
+ * --------------------------
+ * Expand/Collapse shortcode
+ * Columns shortcode
+ * Narrow text shortcode
+ * CTA style buttons
+ */  
+require_once locate_template('lib/tinymce.php');    
 
 
 

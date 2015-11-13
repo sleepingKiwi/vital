@@ -1,6 +1,6 @@
 {
   "name": "vital",
-  "version": "0.21.1",
+  "version": "0.22.0",
   "dependencies": {
     "inuit-starter-kit": "~0.2.8",
     "inuit-responsive-tools": "~0.1.2",

@@ -1,7 +1,8 @@
 {
   "//": "use npm version to update - https://docs.npmjs.com/cli/version",
   "name": "vital",
-  "version": "0.21.1",
+  "private": true,
+  "version": "0.22.0",
   "description": "A bare bones WordPress theme created for internal use by Tedworth & Oscar.",
   "main": "Gruntfile.js",
   "dependencies": {},
@@ -10,19 +11,19 @@
     "grunt-autoprefixer": "^3.0.0",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-concat": "^0.5.0",
-    "grunt-contrib-cssmin": "^0.12.1",
+    "grunt-contrib-cssmin": "^0.14.0",
     "grunt-contrib-jshint": "^0.11.0",
     "grunt-contrib-sass": "^0.9.2",
     "grunt-contrib-uglify": "^0.9.1",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-grunticon": "^2.1.2",
+    "grunt-grunticon": "^2.2.2",
     "grunt-imageoptim": "^1.4.1",
     "grunt-newer": "^1.1.0",
     "grunt-notify": "^0.4.1",
     "grunt-svgmin": "^2.0.0",
     "jit-grunt": "^0.9.1",
-    "load-grunt-tasks": "^3.1.0",
-    "time-grunt": "^1.0.0"
+    "load-grunt-tasks": "^3.3.0",
+    "time-grunt": "^1.2.0"
   },
   "engines": {
     "node": ">=0.10.29"

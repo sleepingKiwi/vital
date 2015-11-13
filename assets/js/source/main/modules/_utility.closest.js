@@ -38,7 +38,13 @@ vital.u_closest = (function(){
 
     
     function closest(el, fn){
-        return el && (fn(el) ? el : closest(el.parentNode, fn));
+            //modified slightly so that we don't return the #document node that lives above HTML
+            //this causes errors with class checking as it doesn't have a 'classList'
+        if(el.parentNode.tagName !== undefined){
+            return el && (fn(el) ? el : closest(el.parentNode, fn));
+        }else{
+            return fn(el);
+        }
     }
 
 

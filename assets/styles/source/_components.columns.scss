@@ -1,0 +1,61 @@
+/*------------------------------------*\
+    $column shortcodes
+\*------------------------------------*/
+
+/**
+ * Variable width columns
+ */
+
+
+/**
+ * DEALING WITH EMPTY <p> TAGS FROM WP
+ */
+.vital-column-right, .vital-column-left{
+    
+    //gets rid of empty p tags at the start and end of columns
+    p:empty:first-child, p:empty:last-child{
+        display: none;
+    }
+    
+    //gets rid of individual empty p tags between columns
+    & + p:empty{
+        display: none;
+    }
+}
+
+
+
+
+/**
+ * ACTUAL COLUMN STYLES
+ */
+
+@media screen and (max-width: 767px){
+    .vital-column-right, .vital-column-left{
+        width: 100% !important;
+        padding: 0 !important;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .vital-column-right, .vital-column-left{
+        float:left;
+
+        &.no-image-margins{
+            margin-bottom: $bsu;
+            img, p{
+                margin:0 auto !important;
+            }
+        }
+    }
+
+    .vital-column-clear{
+        clear: both;
+        display: block;
+        font-size: 0;
+        height: 0;
+        line-height: 0;
+        width: 100%;
+        overflow: hidden;
+    }
+}

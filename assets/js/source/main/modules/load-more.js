@@ -43,11 +43,15 @@ vital.loadMore = (function(){
             //if there's a nav we need to keep in sync add some styling class to the newly added page
         if(_navID){
             var navPageSelector = '#'+_navID+' .page-num-'+_currentPage;
-            apollo.addClass( document.querySelector(navPageSelector), 'also-included');
+            var navPageSelectorNode = document.querySelector(navPageSelector);
+            if(navPageSelectorNode){
+                apollo.addClass( navPageSelectorNode, 'also-included');
+            }
         }
         
             //set data- attributes
-        _nextLink = _nextLink.replace(/\/page\/[0-9]?/, '/page/'+ (_currentPage+1));
+        //http://www.regexr.com/
+        _nextLink = _nextLink.replace(/\/page\/[0-9]*/, '/page/'+ (_currentPage+1));
         _morePostsLink.setAttribute('data-current-page', _currentPage);
         _morePostsLink.setAttribute('data-npl', _nextLink);
         _morePostsLinkAnchor.setAttribute('href',_nextLink);
