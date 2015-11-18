@@ -86,9 +86,12 @@ We hope that you enjoy your stay - Tedworth & Oscar.
 ?>
 <script>
     //cut the mustard test: http://gomakethings.com/ditching-jquery-for-vanilla-js/
+    var doc = document, docEl = doc.documentElement;
     if ( 'querySelector' in document && 'addEventListener' in window ) {
-        var doc = document, docEl = doc.documentElement;
         docEl.className = docEl.className.replace(/(^|\s)no-js(\s|$)/, " js ");
+    }else{
+        //this class is mostly for styling
+        docEl.className = docEl.className.replace(/(^|\s)no-js(\s|$)/, " no-js haggard ");
     }
 </script>
 

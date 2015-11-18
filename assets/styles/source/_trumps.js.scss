@@ -1,0 +1,42 @@
+/*------------------------------------*\
+    $JS TRUMPS
+\*------------------------------------*/
+
+.js--only{
+    .no-js &{
+        display:none !important;
+    }
+}
+
+.js--no-js{
+    .js &{
+        display:none !important;
+    }
+}
+
+.js--no-js-visible{
+    .js &{
+        border: 0 !important;
+        clip: rect(0 0 0 0) !important;
+        height: 1px !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        position: absolute !important;
+        width: 1px !important;
+    }
+}
+
+
+.js--no-js--not-haggard{
+    .js &, .haggard &{
+        display: none !important;
+    }
+}
+
+.js--no-js--haggard{
+    display: none !important;
+    .no-js.haggard &{
+        display: block !important;
+    }
+}

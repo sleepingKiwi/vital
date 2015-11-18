@@ -226,6 +226,10 @@ $inuit-enable-layout--auto:     true;
 @import "inuit-print/trumps.print";
 @import "inuit-clearfix/trumps.clearfix";
 
+
+//hiding/showing js
+@import "trumps.js";
+
 // - html5bp helper classes
 @import "trumps.helpers";
 
