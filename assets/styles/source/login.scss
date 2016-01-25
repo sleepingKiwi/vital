@@ -199,6 +199,7 @@ body.login {
 		border: 2px solid $docs-link;
 
 		box-shadow: none;
+		text-shadow: none !important;
 
 		@include inuit-font-size(18px);
 		letter-spacing: 3px;
