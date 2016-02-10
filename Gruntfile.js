@@ -195,7 +195,7 @@ module.exports = function(grunt) {
                 options: {
                     sourceMap: true,
                     sourceMapIn: 'assets/js/dist/main.js.map',
-                    preserveComments: 'some'
+                    preserveComments: false
                 },
                 files: {
                     'assets/js/dist/main.min.js': [
