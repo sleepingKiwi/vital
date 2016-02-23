@@ -42,13 +42,40 @@ textarea
 
     transition: all $brand-transition ease;
 
+        /**
+         * For ridiculous reasons these need to be listed separately
+         */
+    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: $brand-c-subtle;
+    }
+    &::-moz-placeholder { /* Firefox 19+ */
+      color: $brand-c-subtle;
+    }
+    &:-ms-input-placeholder { /* IE 10+ */
+      color: $brand-c-subtle;
+    }
+    &:-moz-placeholder { /* Firefox 18- */
+      color: $brand-c-subtle;
+    }
     &::placeholder {
-        color: #ccc;
+        color: $brand-c-subtle;
     }
 
     &:focus, &:active{
+        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+          color: $brand-c-subtler;
+        }
+        &::-moz-placeholder { /* Firefox 19+ */
+          color: $brand-c-subtler;
+        }
+        &:-ms-input-placeholder { /* IE 10+ */
+          color: $brand-c-subtler;
+        }
+        &:-moz-placeholder { /* Firefox 18- */
+          color: $brand-c-subtler;
+        }
         &::placeholder {
-            color: #aaa;
+            color: $brand-c-subtler;
         }
     }
 }
