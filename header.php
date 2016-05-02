@@ -192,11 +192,11 @@ grunticon(["<?php echo get_template_directory_uri(); ?>/assets/img/icons/dist/ic
                 if (has_nav_menu('main-nav')){ 
             ?> 
             <nav id="site-navigation" class="main-navigation" role="navigation">
-
-                <a class="menu-toggle" title="Open site menu" href="#site-navigation">
-                    <?php _e( 'Menu', 'vital' ); ?>
+                
+                <a class="menu-toggle js--only" title="Open site menu" href="#menu--header" data-menu="menu--header">
+                    <span class="hamburger"></span>
+                    <span class="screen-reader-text"><?php _e( 'Menu', 'vital' ); ?></span>
                 </a>
-
 
                 <?php 
                     /**
@@ -212,7 +212,12 @@ grunticon(["<?php echo get_template_directory_uri(); ?>/assets/img/icons/dist/ic
                      * so bare that in mind if there are issues...
                      */
                     vital_fragment_cache('nav_main-nav', WEEK_IN_SECONDS, function() {
-                        wp_nav_menu( array( 'theme_location' => 'main-nav' ) ); 
+                        wp_nav_menu( 
+                            array( 
+                                'theme_location' => 'main-nav',
+                                'items_wrap' => '<ul id="menu--header" class="%2$s %1$s menu--header js--toggle-visuallyhidden">%3$s</ul>'
+                            ) 
+                        ); 
                     });
                 ?>
 

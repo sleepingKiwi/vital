@@ -1,0 +1,63 @@
+/*------------------------------------*\
+    $css loading spinners
+\*------------------------------------*/
+
+/**
+ * Positioning should be handled on a case by case basis...
+ * because we're using visibility here you might want to override that 
+ * for a given use case to be display:none etc.
+ */
+
+.js--spinner{
+    visibility: hidden;
+    .js--loading &, &.js--loading{
+        visibility: visible;
+    }
+}
+
+.js--spinner {
+  width: $bsu;
+  height: $bsu;
+}
+.js--spinner--l {
+    width: $bsu*1.5;
+    height: $bsu*1.5;
+}
+.js--spinner--xl {
+    width: $bsu-l;
+    height: $bsu-l;
+}
+.js--spinner--s {
+    width: $bsu-s*1.5;
+    height: $bsu-s*1.5;
+}
+.js--spinner--xs {
+    width: $bsu-s;
+    height: $bsu-s;
+}
+
+
+
+/**
+ * Scale & fade
+ */
+
+.js--spinner--scale{
+    background-color: $brand-c-subtle;
+    border-radius: 100%;  
+    opacity: 0;
+
+    .js--loading &, &.js--loading{
+        animation: sk-scaleout 1.0s infinite ease-in-out;
+    }
+}
+
+@keyframes sk-scaleout {
+  0% { 
+    transform: scale(0);
+    opacity: 0.8;
+  } 100% {
+    transform: scale(1.0);
+    opacity: 0;
+  }
+}

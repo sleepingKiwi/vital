@@ -2,7 +2,9 @@
     $Header
 \*------------------------------------*/
 
-.site-header {}
+.site-header {
+    margin-bottom: $bsu;
+}
 
 .site-branding {
     text-align: center;

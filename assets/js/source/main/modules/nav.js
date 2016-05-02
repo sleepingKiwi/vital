@@ -38,6 +38,19 @@ vital.nav = (function(){
     /*------------------------------------*\
         Mobile Menu
     \*------------------------------------*/
+
+
+    //menu is hidden with javascript at mobile sizes by the js--toggle-visuallyhidden class
+    //this is overwritten in css at larger screen sizes and also overwritten in noscript
+
+
+    //The mobile menu is animated as if it's another dropdown in this version.
+    //to use FLIP style animations the menu needs to be positioned absolutely, this version
+    //pushes all content down instead. For a FLIPped example see black jamm or look at:
+    //https://aerotwist.com/blog/flip-your-animations/
+
+
+
     function _mobileTogglesMouseDown(e){
         //called after mousedown event on anything with .menu-toggle class...
 
@@ -47,22 +60,19 @@ vital.nav = (function(){
             e.stopImmediatePropagation();
             var self = e.currentTarget;
 
-            var menu = document.getElementsByClassName('menu');
-                //with this current implementation every menuToggle toggles every menu (if there are multiple)
-                // look into using data attr to link toggles and menus like the expand links are...
-            var i, l;
-            l = menu.length;
-            if(l){
-                for (i = l - 1; i >= 0; i--) {
-                    if(apollo.hasClass(menu[i], 'expanded-mobile-menu')){
-                        apollo.removeClass(menu[i], 'expanded-mobile-menu');
-                        apollo.removeClass(self, 'menu-open');
-                    }else{
-                        apollo.addClass(menu[i], 'expanded-mobile-menu');
-                        apollo.addClass(self, 'menu-open');
-                    }
-                }//for
-            }//if any .menu exist
+            var menu = document.getElementById( self.getAttribute('data-menu') );
+            if(menu){
+                if(apollo.hasClass(menu, 'active-dropdown')){
+                    apollo.removeClass(self, 'menu-open');
+                    _dropAnimate_hide(menu);
+                    //apollo.removeClass(menu[i], 'expanded-mobile-menu');
+                    //menu[i].style.height = null;
+                }else{
+                    apollo.addClass(self, 'menu-open');
+                    _dropAnimate_show(menu);
+                    //_expandMobileMenu(menu[i]);
+                }
+            }
         }//left clicks
     }//_mobileTogglesMouseDown(e)
 
@@ -94,6 +104,137 @@ vital.nav = (function(){
     /*------------------------------------*\
         Dropdown Menu
     \*------------------------------------*/
+    
+    /**
+     * TIDYING UP ANIMATIONS
+     */
+    function _dropAnimate_tidy(e){
+            //get rid of this listener
+        e.currentTarget.removeEventListener('transitionend', _dropAnimate_tidy, false);
+            //remove inline height style now it's animated to
+        e.currentTarget.style.removeProperty('height');
+            //remove the animating-dropdown class which turns on transitions.
+        apollo.removeClass(e.currentTarget, 'animating-dropdown');
+            //inactive dropdowns should be visually hidden after transitioning
+        if(!apollo.hasClass(e.currentTarget, 'active-dropdown')){
+            apollo.addClass(e.currentTarget, 'js--toggle-visuallyhidden');
+        }
+    }//function _dropAnimate_tidy(e){
+
+
+    /**
+     * ANIMATE SHOWING MOBILE DROPDOWNS
+     */
+    function _dropAnimate_show(dropdown, dropdownLink){
+
+            //make sure we're clean before starting this process...
+        _dropAnimate_tidy( { currentTarget: dropdown } );
+
+            //highlight the active link if it has been specified 
+        if(dropdownLink !== undefined){
+            apollo.addClass(dropdownLink, 'active-dropdown-link');
+        }
+
+            //set this dropdown to it's 'active' state (actually does nothing but act as a js indicator)
+        apollo.addClass(dropdown, 'active-dropdown');
+
+            //remove the visuallyhidden class to get dropdown to full height:
+        apollo.removeClass(dropdown, 'js--toggle-visuallyhidden');
+
+        var mobSized = window.getComputedStyle( document.querySelector('.menu-toggle') ).getPropertyValue( 'display' ) === 'block';
+
+            //we only do the actual animation steps if we know transitionend event is supported
+            //they also only apply at mobile sizes - for desktop the active-dropdown class is enough!
+        if(vital.u_detect.transitionend && mobSized){
+                //grab the dimensions of the menu whilst it's expanded
+            var animateTo = dropdown.getBoundingClientRect();
+
+                //set height to 0 so we have something to transition from
+            dropdown.style.height = 1 + 'px';
+
+
+                // Wait for the next frame so we know all the style changes have taken hold.
+            requestAnimationFrame(function() {
+
+                    //switch on animations.
+                    //has to be done with class because the changes above need to be instant...
+                apollo.addClass(dropdown, 'animating-dropdown');
+
+                    //listen for this animation to finish so we can clear up inline styles etc.
+                dropdown.addEventListener('transitionend', _dropAnimate_tidy, false);
+                
+                    //replace the 1px height with the full menu height for a smooth transition
+                dropdown.style.height = animateTo.height + 'px';
+
+            });//requestAnimationFrame(function() {
+
+        }//if(vital.u_detect.transitionend){
+
+    }//function _dropAnimate_show(dropdown, dropdownLink){
+
+
+
+
+    /**
+     * ANIMATE HIDING MOBIE DROPDOWNS
+     */
+    function _dropAnimate_hide(dropdown, dropdownLink){
+
+            //make sure we're clean before starting this process...
+        _dropAnimate_tidy( { currentTarget: dropdown } );
+
+            //un-highlight the active link if it has been specified 
+        if(dropdownLink !== undefined){
+            apollo.removeClass(dropdownLink, 'active-dropdown-link');
+        }
+
+            //remove the active state from this dropdown
+        apollo.removeClass(dropdown, 'active-dropdown');
+
+        var mobSized = window.getComputedStyle( document.querySelector('.menu-toggle') ).getPropertyValue( 'display' ) === 'block';
+
+             //we only do the actual animation steps if we know transitionend event is supported
+             //they also only apply at mobile sizes - for desktop the active-dropdown class is enough!
+        if(vital.u_detect.transitionend && mobSized){
+
+                //get current dropdown size - this is what we'll animate 'from' 
+            var animateFrom = dropdown.getBoundingClientRect();
+
+                //set the dropdown to it's own height - purely for animation reasons!
+            dropdown.style.height = animateFrom.height + 'px';
+
+                // Wait for the next frame so we know all the style changes have taken hold.
+            requestAnimationFrame(function() {
+
+                    //switch on animations.
+                    //has to be done with class because the changes above need to be instant...
+                apollo.addClass(dropdown, 'animating-dropdown');
+
+                    //listen for this animation to finish so we can clear up inline styles etc.
+                dropdown.addEventListener('transitionend', _dropAnimate_tidy, false);
+                
+                    //replace the full height with 1px to shrink the menu
+                dropdown.style.height = '1px';
+
+            });//requestAnimationFrame(function() {
+
+        }else{//if(vital.u_detect.transitionend){
+
+            //if we can't detect transitionend then just set it straight back to non visible
+            //rather than waiting for the animation to finish first
+            apollo.addClass(dropdown, 'js--toggle-visuallyhidden');
+
+        }//if(vital.u_detect.transitionend){
+
+    }//function _dropAnimate_hide(dropdown, dropdownLink){
+                
+
+
+
+
+     /**
+      * EVENT HANDLERS
+      */
     function _dropdownTogglesMouseDown(e){
         //called on touchstart or mousedown events on dropdown-toggle classed things
 
@@ -106,7 +247,7 @@ vital.nav = (function(){
 
         //var mobSized = window.getComputedStyle( e.currentTarget ).getPropertyValue( 'display' ) === 'block';
         var mobSized = window.getComputedStyle( document.querySelector('.menu-toggle') ).getPropertyValue( 'display' ) === 'block';
-        console.log('mobSized = '+mobSized);
+        //console.log('mobSized = '+mobSized);
 
         if( mobSized && (e.type ==='mousedown') ){ 
 
@@ -116,12 +257,11 @@ vital.nav = (function(){
                 e.preventDefault();
 
                 if(apollo.hasClass(currentDropMenu, 'active-dropdown')){
-                    apollo.removeClass(currentDropMenu, 'active-dropdown');
-                    apollo.removeClass(e.currentTarget, 'active-dropdown-link');
+                    _dropAnimate_hide(currentDropMenu, e.currentTarget);
                 }else{
-                    apollo.addClass(currentDropMenu, 'active-dropdown');
-                    apollo.addClass(e.currentTarget, 'active-dropdown-link');
+                    _dropAnimate_show(currentDropMenu, e.currentTarget);
                 }
+                
             }
 
         }else if( !mobSized && (e.type === 'touchstart') ){ 
@@ -133,15 +273,15 @@ vital.nav = (function(){
             e.preventDefault();
 
             if(apollo.hasClass(currentDropMenu, 'active-dropdown')){
-                apollo.removeClass(currentDropMenu, 'active-dropdown');
-                apollo.removeClass(e.currentTarget, 'active-dropdown-link');
+                //apollo.removeClass(currentDropMenu, 'active-dropdown');
+                //apollo.removeClass(e.currentTarget, 'active-dropdown-link');
+                _dropAnimate_hide(currentDropMenu, e.currentTarget);
             }else{
 
                     //clear open dropdowns
                 _bodyDropClear(null);
 
-                apollo.addClass(currentDropMenu, 'active-dropdown');
-                apollo.addClass(e.currentTarget, 'active-dropdown-link');
+                _dropAnimate_show(currentDropMenu, e.currentTarget);
 
                 document.querySelector('body').addEventListener('touchstart', _bodyDropClear, false);
             }
@@ -174,7 +314,8 @@ vital.nav = (function(){
          */
         l = activeDrops.length;
         for (i = l - 1; i >= 0; i--) {
-            apollo.removeClass(activeDrops[i], 'active-dropdown');
+            //apollo.removeClass(activeDrops[i], 'active-dropdown');
+            _dropAnimate_hide(activeDrops[i]);
         }
     }
 
@@ -216,9 +357,9 @@ vital.nav = (function(){
     function _mainNavLinksFocus(){
         //called when any of the main nav links (.main-navigation a) are focused
         var theMenu = document.querySelectorAll('.main-navigation .menu')[0];
-        if(!apollo.hasClass(theMenu, 'expanded-mobile-menu')){
-            apollo.addClass(theMenu, 'expanded-mobile-menu');
-            
+        if(!apollo.hasClass(theMenu, 'active-dropdown')){
+            //_expandMobileMenu(theMenu);
+            _dropAnimate_show(theMenu);
             apollo.addClass(document.getElementsByClassName('menu-toggle')[0], 'menu-open');
         }
     }
@@ -227,11 +368,15 @@ vital.nav = (function(){
     function _dropdownLinksFocus(e){
         //called when '.dropdown-menu li a' is focused
         var loopNode = e.currentTarget;
+        apollo.addClass(loopNode, 'currently-focused-link');
         while( loopNode.parentNode.tagName.toLowerCase() !== 'nav' ){
             var loopParent = loopNode.parentNode;
 
-            if( apollo.hasClass(loopParent, 'dropdown-menu') ){
-                apollo.addClass(loopParent, 'active-dropdown');
+
+            if( apollo.hasClass(loopParent, 'dropdown-menu') && !apollo.hasClass(loopParent, 'active-dropdown') ){
+                console.log('expanding a menu due to focus');
+                    //if it isn't already, expand the menu that this link lives in
+                _dropAnimate_show(loopParent);
             }
 
             if( apollo.hasClass(loopParent, 'dropdown') ){
@@ -246,19 +391,27 @@ vital.nav = (function(){
     function _dropdownLinksBlur(e){
         //called when '.dropdown-menu li a' is blurred
         var loopNode = e.currentTarget;
-        while( loopNode.parentNode.tagName.toLowerCase() !== 'nav' ){
-            var loopParent = loopNode.parentNode;
+        apollo.removeClass(loopNode, 'currently-focused-link');
+            //put into rAF so that the focus event can add a currently-focused-class before this blur function runs!
+        requestAnimationFrame(function(){
+            while( loopNode.parentNode.tagName.toLowerCase() !== 'nav' ){
 
-            if( apollo.hasClass(loopParent, 'dropdown-menu') ){
-                apollo.removeClass(loopParent, 'active-dropdown');
-            }
+                var loopParent = loopNode.parentNode;
 
-            if( apollo.hasClass(loopParent, 'dropdown') ){
-                apollo.removeClass(loopParent, 'focused');
-            }
+                if( apollo.hasClass(loopParent, 'dropdown-menu') && !loopParent.querySelector('.currently-focused-link') ){
+                    console.log('closing a menu due to blur event');
+                        //hide if there are no focused links anywhere under this parent
+                    _dropAnimate_hide(loopParent);
+                }
 
-            loopNode = loopParent;
-        }
+                if( apollo.hasClass(loopParent, 'dropdown') ){
+                    apollo.removeClass(loopParent, 'focused');
+                }
+
+                loopNode = loopParent;
+
+            }//while( loopNode.parentNode.tagName.toLowerCase() !== 'nav' ){
+        });//requestAnimationFrame(function(){
     }
 
 

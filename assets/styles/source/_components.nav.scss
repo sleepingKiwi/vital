@@ -6,87 +6,83 @@
     text-align:center;
 }
 
+
+
+
 /**
- * Header navigation styles
+ * Hamburger toggle
  */
-.main-navigation {
+.menu-toggle{
+    height: $bsu*0.75;
+    width: $bsu;
+    display: block;
+    margin:  0 auto;
+    position: relative;
 
-    text-align: center;
-    padding: 0 0 1em;
+    transition: margin-bottom $brand-transition ease;
 
-
-    .menu-toggle{
-        display: block;
-        margin:0 auto;
-
-        padding: 0.8em 0 0.6em;
-
-        color:$brand-c-main;
-
-        &:hover, &:focus{
-            color:$brand-c-highlight;
-        }
-
-        //hidden at wider sizes
-        @include media-query(squire){
-            display: none;
-        }
-    }//end .menu-toggle
-
-
-    //The toggle is set to link to the footer nav if js isn't present so we don't hide it by default
-    .no-js & .menu-toggle{
-        //display:none;
-    }
-
-
-    //Instead we hide the <ul> without js
-    .no-js & .menu{
+    //hidden at wider sizes
+    @include media-query(squire){
         display: none;
     }
+}//end .menu-toggle
+
+.menu-open{
+    margin-bottom: $bsu;
+}
 
 
-    //hiding menu in header 
-    .menu{
+.menu-toggle .hamburger {
+    position: absolute;
+    top: 8px;
+    display: block;
+    width: $bsu;
+    height: 2px;
+    margin:0;
+    background-color: $brand-c-main;
+    font-size: 0px;
+    transition: background-color $brand-transition ease, transform $brand-transition ease;
+}
 
-        //hidden until expanded
-        border: 0 transparent solid; margin: -1px auto; overflow: hidden; padding: 0; max-height:1px; min-height:0; clip: rect(0 0 0 0); opacity:0;
-        transition: max-height 600ms ease-out, min-height 600ms ease-in, padding 600ms ease-in, background-color 600ms ease-in-out, opacity 400ms ease, border 500ms ease;
+.menu-open .hamburger {
+    background-color: transparent;
+}
 
-    }//-end .menu (<ul>)
+.menu-toggle .hamburger:before,
+.menu-toggle .hamburger:after {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $brand-c-main;
+    content: '';
+    transition: transform $brand-transition;
+}
 
-    //expanding menu 
-    .no-js & .menu, .expanded-mobile-menu{
-        transition: max-height 800ms ease-in, min-height 500ms ease-out, padding 400ms ease-in, opacity 400ms ease;
+.menu-toggle .hamburger:before {
+    transform: translateY(-(8px));
+}
 
-        /* min/max heights allow me to css transition to height auto */
-        clip: auto;
-        min-height:8em;
-        max-height:100em;
-        padding:0 0 0.5em;
-        opacity: 1;
-    }
+.menu-toggle .hamburger:after {
+    transform: translateY(8px);
+}
+
+.menu-open .hamburger:before {
+    transform: translateY(0) rotate(45deg);
+}
+
+.menu-open .hamburger:after {
+    transform: translateY(0) rotate(-45deg);
+}
 
 
-    /**
-     * Wider screen header menu layouts
-     */
-    @include media-query(squire){
 
-        //expand menu at wider sizes
-        .menu, .no-js & .menu, .expanded-mobile-menu{
-            clip: auto;
-            min-height:0;
-            max-height:100em;
-            padding:0 0 0.5em;
-            opacity: 1;
-            overflow: visible;
-        }//end .menu
-
-    }//end wider screen ($squire)
-
-}//-end .main-navigation (header navigation menu <nav>)
-
+/**
+ * Header only navigation styles
+ */
+.menu--header {
+    text-align: center;
+}
 
 
 
@@ -96,125 +92,245 @@
  */
 .menu{
 
+        //remove 300ms delay on mobile devices..
+        //also removes scroll
+        //https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action#Values
+    //touch-action: none;
+
     margin:0;
+    list-style:none;
 
-    //clearfixing the menus
-    *zoom: 1;
-    &:before, &:after { content: " "; display: table; }
-    &:after { clear: both; }
+        //at mobile sizes overflow hidden should stay even after the 
+        //js--toggle-visuallyhidden class is removed - this is for smoooth 
+        //animations... it's removed at desktop sizes.
+    overflow: hidden;
 
+    @include media-query(squire){
+        overflow: visible;
+
+        &.js--toggle-visuallyhidden{
+            //at this size the menus overwrite the js--toggle-visuallyhidden class
+            background: transparent;
+            clip: auto;
+            height: auto;
+            width: auto;
+            margin: 0;
+            padding: 0;
+            position: relative;
+
+            opacity: 1;
+            overflow: visible;
+        }
+    }
+
+
+    .no-js &.js--toggle-visuallyhidden{
+        //in no-js the menus overwrite the js--toggle-visuallyhidden class that
+        //is applied to them
+        clip: auto;
+        height: auto;
+        width: auto;
+        margin: 0;
+        padding: 0;
+        position: relative;
+
+        opacity: 1;
+    }
+
+        //mobile menu animation is using the same javascript logic as the 
+        //dropdowns - which is why it shares the .animating-dropdown class
+    &.animating-dropdown{
+        transition: 
+            height $brand-transition ease,
+            opacity $brand-transition ease;
+    }//end mobile active dropdowns
+
+
+    ul{
+        margin: 0;
+        list-style: none;
+    }
 
     //li in  menus
     li{
-
-        &:first-child {}
-                
-        &:last-child {}
-
         @include media-query(squire){
             display:inline-block;
             *display: inline;
             *zoom:1;
+            vertical-align: top;
             position: relative;
-            padding:0;
+            padding:0 0 0 $bsu-s;
         }//end li at-least($squire)
-
+        @include media-query(baron){
+            padding:0 0 0 $bsu;
+        }
     }//end .menu li
 
 
     //links in menus
     a{
-
         display: block;
-        padding: 0.5em 0;
-        border-radius: $brand-round;
+        padding: $bsu-s 0;
+        line-height: 1;
+        color: $brand-c-main;
+        background: $brand-c-inverse;
+        @include inuit-font-size(18px);
 
         &:hover, &:focus{
-            background-color: darken($brand-c-body-back, 2%);
+            color: $brand-c-main;
+        }
+
+        &:focus{
+            outline: 0;
+            background: $brand-c-subtler;
         }
 
         @include media-query(squire){
-            padding:0.3em 0.5em;
+            background: transparent;
+            padding:4px $bsu-s;
+            color: $brand-c-main;
+            @include inuit-font-size(16px);
+            line-height: 1;
+            &:hover, &:focus{
+                color: $brand-c-link;
+                background: transparent;
+            }
         }
-
     }//end .menu a
 
-    .focused a{
-        background-color: darken($brand-c-body-back, 2%);
+    .focused > a{
+        @include media-query(squire){
+            color: $brand-c-link;
+        }
     }
 
+
+
+
+
+    /**
+     * DROPDOWNS
+     * ---------
+     */
     //dropdown menus
     .dropdown-menu{
 
-        //get progressively smaller and more indented
-        margin:0;
-        font-size: 0.95em;
-        padding-left:4px;
+            // visually hidden with the js--visuallyhidden class which is 
+            // added/removed by js
+            // we can't use Scale because we need this to push down other li
+        overflow: hidden;
+        padding: 0 $bsu-s*0.5;
+        background: $brand-c-subtler;
 
-        //hidden until expanded
-        border: 0 transparent solid; margin: -1px auto; overflow: hidden; padding: 0; max-height:1px; min-height:0; clip: rect(0 0 0 0); opacity:0;
-        transition: max-height 600ms ease-out, min-height 600ms ease-in, padding 600ms ease-in, background-color 600ms ease-in-out, opacity 400ms ease, border 500ms ease;
+        li{
+            &:first-child{
+                margin-top: $bsu-s*0.5;
+            }
+            &:last-child{
+                margin-bottom: $bsu-s*0.5;
+            }
+        }
+
+        a{
+            background: $brand-c-subtler;
+            @include inuit-font-size(16px);
+            @include media-query(squire){
+                @include inuit-font-size(14px);
+                line-height: 1;
+            }
+
+            &:focus{
+                background: $brand-c-subtler;
+            }
+        }
 
     }//end .menu .dropdown-menu
 
-    .active-dropdown, .active-dropdown .dropdown-menu{
-        transition: max-height 800ms ease-in, min-height 500ms ease-out, padding 500ms ease-out, opacity 800ms ease-out;
-
-        clip: auto;
-        min-height:1.5em;
-        max-height:100em;
-        padding:0.4em 0;
-        opacity:1;
+    .animating-dropdown{
+        transition: 
+            height $brand-transition ease,
+            opacity $brand-transition ease;
     }//end mobile active dropdowns
 
     //wider screen dropdowns
     @include media-query(squire){
-        .dropdown-menu{
+        .dropdown-menu, .dropdown-menu{
 
             position: absolute;
             clip: auto;
             z-index: $brand-z-1--dropdown-menu;
             top: 100%;
-            left:0;
+            left: $bsu-s;//padding on parent li
+            //min-width: 100%;
             white-space:nowrap;
             text-align: left;
-            padding:0.4em;
+            padding:$bsu-s*0.5 0;
+            background: $brand-c-inverse;
             -webkit-transform: translateZ(0);
 
-            li{
-                display: block;
-                padding-top: 0.3em;
-                padding-bottom: 0.3em;
+            //animations at this size are handled by css
+            //following rules override the js--visuallyhidden class
+            clip: auto;
+            height: auto;
+            width: auto;
+            margin: 0;
 
-                &:last-child {
-                    padding-bottom: 1px;
-                }
+            opacity: 0;
+            max-height: 1px;
+            max-width: 1px;
+            visibility: hidden;
+            pointer-events:none;
+            transform: translateY(-$bsu-s*0.5);
+            
+            transition: 
+                max-height 0ms ease $brand-transition,
+                max-width 0ms ease $brand-transition,
+                visibility 0ms ease $brand-transition,
+                transform $brand-transition ease,
+                opacity $brand-transition ease;
+
+
+            a{
+                background: $brand-c-inverse;
             }
 
         }//end .dropdown-menu ($squire)
 
         .dropdown:hover .dropdown-menu, .active-dropdown{
-            transition: max-height 800ms ease-in, min-height 500ms ease-out, padding 500ms ease-out, opacity 800ms ease-out, border 500ms ease;
+                //no js just gets a more or less animation-free version of the dropdowns
+                //js users get the animation handled from js side...
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+            max-height: 2000px;
+            max-width: 1000px;
+            transition:
+                transform $brand-transition ease,
+                opacity $brand-transition ease;
+        }
 
-            min-height:1.5em;
-            max-height:100em;
-            padding:0.4em;
-            opacity:1;
 
-            background: darken($brand-c-body-back, 5%);
-            border-radius: $brand-round;
-            //box-shadow: $brand-box-shadow;
-            .dropdown-menu{ //multi level dropdowns don't get extra box-shadow or padding
-                box-shadow: none;
-                padding: 0 0 0 4px;
+        .dropdown-menu li{
+            padding: 0;
+            margin: 0;
+            display: block;
+            &:first-child, &:last-child{
+                padding: 0;
+                margin: 0;
+                a{
+                    padding:$bsu-s*0.5 $bsu-s;
+                }
             }
-        }//end hovered dropdown
-
-        .dropdown:hover > a {
-            background-color: darken($brand-c-body-back, 2%); //keep hovered link styles whilst hovering over sub-items
         }
 
     }//end wide screen dropdowns ($squire)
+
+    @include media-query(baron){
+        .dropdown-menu{
+            left: $bsu;//padding on parent li
+        }
+    }
         
 
     //second level dropdown menu - they get a '-' prefixed
@@ -224,9 +340,13 @@
         position: relative;
         top:auto;
         left: auto;
+        min-width: 0;
+        width: auto;
+        font-size: 0.9em;
         padding: 0;
+        margin: 0;
         @include media-query(squire){
-            padding: 0 0 0 4px;
+            padding: 0 0 0 $bsu-s;
         }
         a{
             &:before{
@@ -244,40 +364,57 @@
         position: relative;
 
         &:after{
-            content: " [+]";
-            font-size: 0.9em;
-            color: lighten($brand-c-main, 20%);
-            vertical-align: top;
+            font-family: monospace;
+            content: "+";
+            color: $brand-c-subtle;
+            line-height: 1;
+            position: absolute;
+            top:50%;
+            margin-top:-6px;
+            left: auto;
+            margin-left: $bsu-s*0.5;
+            transition: transform $brand-transition ease;
 
-            @include media-query(squire){
-                content: none;
+            .no-js &{
+                display: none;
             }
         }//end .dropdown-toggle:after
+
+        &:focus{
+            &:after{
+                transform: rotate(45deg);
+            }
+        }
+
+        @include media-query(squire){
+            &:after{
+                margin-left: auto;
+                right: 0;
+
+                .no-js &{
+                    display: block;
+                }
+            }
+            &:hover, &:focus{
+                &:after{
+                    transform: rotate(45deg);
+                }
+            }
+        }
 
     }//end .menu .dropdown-toggle
     .active-dropdown-link{
         &:after{
-            content: " [-]";
+            transform: rotate(45deg);
+        }
+    }
+
+    @include media-query(squire){
+        .dropdown:hover > .dropdown-toggle {
+            &:after{
+                transform: rotate(45deg);
+            }
         }
     }
 
 }//end .menu
-
-
-
-
-
-/**
- * Footer navigation
- */
-.footer-navigation{
-    text-align: center;
-    padding: 1em 0;
-
-    @include media-query(squire){
-        .dropdown-menu{
-            // no dropdowns in footer for wide screens by default
-            display: none;
-        }
-    }
-}//end .footer-navigation

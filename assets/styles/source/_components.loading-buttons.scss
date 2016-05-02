@@ -1,0 +1,93 @@
+/*------------------------------------*\
+    $Loading Buttons
+\*------------------------------------*/
+.loading-button-wrap{
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    max-width: 100%;
+    
+    border-radius: $brand-round;
+
+    display: inline-block;
+    *display:inline;
+    *zoom:1;
+    vertical-align: top;
+    //width: 400px;
+    //background: mix($brand-c-link,white,50%);
+
+    //positioned above the backgrounds
+    input, .button, button{
+        position: relative;
+        z-index: $brand-z-2--loading-button;
+        //z-index: 1;
+        padding-left: $bsu-l;
+        padding-right: $bsu-l;
+        background: transparent;
+        border: 0;
+
+        &[disabled]{
+            background: #eee;
+        }
+    }
+
+    //background that will become a spinner
+    &:after{
+        content: ' ';
+        position: absolute;
+        //right: $bsu-s;
+        z-index: $brand-z-1--loading-button-back;
+        right: 50%;
+        top: 50%;
+        margin-top:-1px;
+        height: 2px;
+        width: $bsu;
+        border-radius: 2px;
+        background: $brand-c-link;
+        transform: scale(35);
+        transition: background $brand-transition ease-in;
+    }
+
+    //more dropped back background behind the other background!
+    &:before{
+        content: ' ';
+        position: absolute;
+        //right: $bsu-s;
+        z-index: $brand-z-1--loading-button-back;
+        top:0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: $brand-c-link;
+        transition: background $brand-transition ease-in;
+    }
+
+    &:hover{
+        &:after{
+            background: $brand-c-highlight;
+        }
+        &:before{
+            background: $brand-c-highlight;
+        }
+    }
+}//submit-loader
+
+.loading-button-wrap--loading{
+    &:after{
+        transform: scale(1);
+        right: $bsu-s;
+        animation: load_spin 800ms linear $brand-transition*0.3 infinite;
+        transition: transform $brand-transition*0.3 ease, right $brand-transition*0.3 ease, background $brand-transition ease-in;
+    }
+    &:before{
+        background: mix($brand-c-highlight,white,50%) !important;
+        transition: background 0ms ease-in;
+    }
+}
+
+
+
+@keyframes load_spin { 
+    from { transform: rotate(0) scale(1); } 
+    to { transform: rotate(360deg) scale(1); }  
+}

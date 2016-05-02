@@ -187,18 +187,28 @@ $inuit-enable-layout--auto:     true;
 
 @import "components.header";
 @import "components.nav";
+
 @import "components.post-and-content";
+
 @import "components.page-navigation";
 @import "components.comments";
+
 @import "components.sidebar";
 @import "components.widgets";
 @import "components.footer";
 
 @import "components.to-top";
-
 @import "components.expandable-content";
 @import "components.columns";
 @import "components.picturefill-pad";
+@import "components.popup";
+
+@import "components.loading-buttons";
+@import "components.spinners";
+
+@import "components.adaptive-content";
+
+
 
 
 

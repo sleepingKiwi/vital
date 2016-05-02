@@ -13,7 +13,8 @@
     "inuit-shared": "~0.1.3",
     "html5shiv": "~3.7.2",
     "verge": "ryanve/verge#~1.9.1",
-    "apollo.js": "~1.7.0"
+    "apollo.js": "~1.7.0",
+    "hammerjs": "^2.0.6"
   },
   "devDependencies": {}
 }

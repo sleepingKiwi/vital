@@ -12,7 +12,7 @@ class Vital_Nav_Walker extends Walker_Nav_Menu {
     }
 
     function start_lvl(&$output, $depth = 0, $args = array()) {
-        $output .= "\n<ul class=\"dropdown-menu\">\n";
+        $output .= "\n<ul class=\"dropdown-menu js--toggle-visuallyhidden\">\n";
     }
 
     function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
@@ -33,7 +33,7 @@ class Vital_Nav_Walker extends Walker_Nav_Menu {
             $item_html = preg_replace('/<a[^>]*>(.*)<\/a>/iU', '$1', $item_html);
         }
 
-        $item_html = apply_filters('roots/wp_nav_menu_item', $item_html);
+        //$item_html = apply_filters('roots/wp_nav_menu_item', $item_html);
         $output .= $item_html;
     }
 
@@ -79,7 +79,7 @@ function vital_nav_menu_args($args = '') {
     $vital_nav_menu_args['container'] = false; //remove <div> containers wrapping the <ul> by default
 
     if (!$args['items_wrap']) {
-        $vital_nav_menu_args['items_wrap'] = '<ul class="%2$s">%3$s</ul>';
+        $vital_nav_menu_args['items_wrap'] = '<ul class="%2$s %1$s">%3$s</ul>';
     }
 
     if (!$args['walker']) {

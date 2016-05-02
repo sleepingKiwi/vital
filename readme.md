@@ -1,6 +1,6 @@
 vital
 ====
- - v 0.20.0
+ - v 0.24.0
 
 ![](https://github.com/sleepingKiwi/vital/blob/master/screenshot.png)
 
@@ -18,7 +18,7 @@ That said, it is maintained under an [MIT][] license and if you find it useful i
 
 The templates and function files owe a big debt to [Roots][], [_S][], [HTML5 Boilerplate][] and [elsewhere][Stack Overflow]. 
 
-Development of *vital* is made infinitely easier by [Grunt][] and [Bower][].
+Development of *vital* is made easier by [Grunt][] and [Bower][].
 
 Styling (with [sass][]) builds upon [inuitcss][] by [@csswizardry][] and relies on [grunt-autoprefixr][].
 

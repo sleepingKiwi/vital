@@ -13,7 +13,7 @@ vital.windowLoaded = (function(){
      * PRIVATE
      */
     /*------------------------------------*\
-        $Bones Gravatars        
+        $bones gravatars        
     \*------------------------------------*/
     function _loadGravatars(){
         /* load gravatars */

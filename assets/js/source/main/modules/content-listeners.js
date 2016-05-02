@@ -3,133 +3,55 @@
 \*------------------------------------*/
 
 /**
- * listeners that might frequently need to be set up 
+ * a centralised class for managing listeners that might frequently need to be re-applied
+ * for example after ajax loads etc.
+ * 
+ * it's up to the functions registered here to clean up before re-applying themselves (if relevant)
+ * this class is just a dumb list that is run through every time it's called
+ *
+ * functions can be added or removed using the addFunction() and removeFunction() methods
+ * optional priority values determine the order that functions are called in (if relevant)
  */
 
 
 vital.contentListeners = (function(){
 
+
+    /**
+     *
+     * $_sortByPriority - sorts an array of items on the priority value...
+     *
+     * $addFunction
+     *
+     * $removeFunction
+     *
+     * $listen - this is the big one! Runs through every method we've added...
+     * 
+     */
+
+
     /**
      * PRIVATE
      */
-    function _expandLinkClicked(e){
+
+     var _listenerFunctions = [];
+
+
+    /*------------------------------------*\
+        $_sortByPriority
+    \*------------------------------------*/
+    function _sortByPriority(a, b){
         
-        //click event for left clicks only! http://www.jacklmoore.com/notes/click-events
-        if (!(e.which > 1 || e.shiftKey || e.altKey || e.metaKey)) {
-
-            e.preventDefault();
-
-            //finding the expander this link is paired with...
-            var _this = e.currentTarget;
-            var prev = document.getElementById( _this.getAttribute('data-expander') );
-
-            if(apollo.hasClass(prev, 'expand-show')){
-
-                apollo.removeClass(prev, 'expand-show');
-                apollo.removeClass(_this, 'has-active-expander');
-
-                var dataShow = _this.getAttribute('data-show');
-                if(dataShow){
-                    _this.textContent = dataShow;
-                }
-
-            }else{
-
-                apollo.addClass(prev, 'expand-show');
-                apollo.addClass(_this, 'has-active-expander');
-
-                var dataHide = _this.getAttribute('data-hide');
-                if(dataHide){
-                    _this.textContent = dataHide;
-                }
-
-                if( !apollo.hasClass(prev, 'once-opened-twice-shy') ){
-                    apollo.addClass(prev, 'once-opened-twice-shy');
-                    vital.debouncedEvents.requestAnimationTick('scroll');
-                }           
-
-            }
-
-        }//left clicks
-    }//_expandLinkClicked
-
-
-    function _expanderLinkFocused(e){
-        //console.log(e.currentTarget); //the expander
-        //console.log(e.target); //whatever link we're currently focusing
-        if( !apollo.hasClass(e.currentTarget, 'expand-show') ){
-
-            apollo.addClass(e.currentTarget, 'expand-show');
-                //changing the text of the expand link
-            var theAppropriateLink = document.querySelector('.expand-link[data-expander='+e.currentTarget.id+']');
-            apollo.addClass(theAppropriateLink, 'has-active-expander');
-            //theAppropriateLink.textContent = theAppropriateLink.getAttribute('data-hide');
-            var dataHide = theAppropriateLink.getAttribute('data-hide');
-            if(dataHide){
-                theAppropriateLink.textContent = dataHide;
-            }
-
-            if( !apollo.hasClass(e.currentTarget, 'once-opened-twice-shy') ){
-                apollo.addClass(e.currentTarget, 'once-opened-twice-shy');
-                vital.debouncedEvents.requestAnimationTick('scroll');
-            } 
-
-        }    
-    }//_expanderLinkFocused()
-
-
-    function _expandersSetup(body){
-
-            //for loop vars...
-        var i, l;
-
-        console.log('setting up expanderListeners');
-
-        //disabled on single by default
-        if(!apollo.hasClass(body, 'single-post')){
-
-            //adding 'in-an-expander' class to all picturefill elements inside expanders for deferred loading...
-            var pictureFillWraps = document.querySelectorAll('.vitally-expandable .picturefill-wrap');
-            l = pictureFillWraps.length;
-
-            for( i=0; i<l; i++ ){
-                apollo.addClass( pictureFillWraps[i], 'in-an-expander' );
-            }
-
-
-            /**
-             * setting up focus listeners for expandable content 
-             * (so that links automatically open it on tab-through)
-             *
-             * rather than adding a focus event to every link in every expander we use event 
-             * delegation to capture focus events on the parents (the expanders) whenever anything 
-             * inside them is focused!
-             * - because focus events don't bubble we have to set the 'useCapture' event argument
-             * to true - http://www.quirksmode.org/blog/archives/2008/04/delegating_the.html
-             */
-            var expanders = document.querySelectorAll('.vitally-expandable');
-            l = expanders.length;
-
-            for( i=0; i<l; i++ ){
-                expanders[i].addEventListener('focus', _expanderLinkFocused, true);
-            }
+        if (a.priority > b.priority) {
+        return 1;
         }
-
-        /**
-         * adding click listeners
-         */
-        var expandLinks = document.querySelectorAll('.expand-link');
-        l = expandLinks.length;
-        for(i=0; i<l; i++){
-            /**
-             * because this might already be applied to some elements (it's run after ajax loads)
-             * we remove the event listener before re-adding it.
-             */
-            expandLinks[i].removeEventListener('click', _expandLinkClicked, false);
-            expandLinks[i].addEventListener('click', _expandLinkClicked, false);
+        if (a.priority < b.priority) {
+        return -1;
         }
+        // a must be equal to b
+        return 0;
 
-    }//_expandersSetup
+    }
 
 
 
@@ -137,15 +59,83 @@ vital.contentListeners = (function(){
     /**
      * PUBLIC
      */
-    function listen(body){
-        //setting up listeners which are often reapplied
 
-        _expandersSetup(body);
+
+    /*------------------------------------*\
+        $addFunction
+    \*------------------------------------*/
+    /**
+     * Function to add a function to an array which is looped through when the listen function is called
+     * _priority is optional but defaults to 10 (with lower priorities happening earlier)
+     * _args is an optional object of options passed to the function when called
+     */
+    function addFunction(funk, _priority, _args){   
+
+        if( (_priority < 0) || (typeof _priority !== 'number') ){
+            //if priority is < 0, missing, or not a number we set it's priority to 10 which is the default
+            _priority = 10;
+        }
+
+        _listenerFunctions.push( {func: funk, priority: _priority, args: _args} );
+
+        //sort the array we just pushed to by priority
+        _listenerFunctions.sort(_sortByPriority);
+
+    }
+
+
+
+    /*------------------------------------*\
+        $removeFunction
+    \*------------------------------------*/
+    /**
+     * Remove a function from an array!
+     * returns true if function was removed.
+     */
+    function removeFunction(funk, _priority){
+
+        var i = _listenerFunctions.length - 1;
+        for (i; i >= 0; i--) {
+            if( _listenerFunctions[i].func === funk && _listenerFunctions[i].priority === _priority ){
+                //we found an exact match for priority and function so let's remove it
+                _listenerFunctions.splice(i, 1);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+
+    /*------------------------------------*\
+        $listen
+    \*------------------------------------*/
+    function listen(body){
+        /**
+         * This function loops through any/all functions added to the _listenerFunctions array
+         * the array is already ordered by priority (it's sorted every time a function is added)
+         */
+
+        //console.log('reapplying listeners. Here\'s the _listenerFunctions Array: ');
+        //console.log(_listenerFunctions);
+
+        var i, l;
+
+        l = _listenerFunctions.length;
+        i = 0;
+
+        for (i; i < l; i++) {
+            //console.log('_listenerFunctions '+i+': '+_listenerFunctions[i].func.toString());
+            _listenerFunctions[i].func( _listenerFunctions[i].args );
+        }
     }
 
     //revealing public methods
     return {
         listen : listen,
+        addFunction : addFunction,
+        removeFunction : removeFunction,
     };
 
 }()); //vital.contentListeners

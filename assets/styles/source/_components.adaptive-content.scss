@@ -1,0 +1,249 @@
+/*------------------------------------*\
+    $Adaptive Content Container
+\*------------------------------------*/
+
+
+.adaptive-content-container{
+
+    transition: height $brand-transition ease;
+    overflow: hidden;
+    position: relative;
+
+    ul{
+        list-style: none;
+        margin:0;
+    }
+    
+    .adaptive-content{
+        position: relative;
+        z-index: 1;
+    }
+
+    .js & .adaptive-content:not(.active-content), .no-js & .adaptive-content:not(.active-content){
+        //non active 'slides' are visually hidden...
+        border: 0;
+        //clip: rect(0 0 0 0);
+        max-height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 100%;
+        max-width: 1px;
+        opacity: 0;
+        top: 0;
+        left: 0;
+
+        transition: opacity $brand-transition ease, max-height 0ms ease $brand-transition, margin 0ms ease $brand-transition, max-width 0ms ease $brand-transition, padding 0ms ease $brand-transition;
+        //transition: opacity $brand-transition*0.5 ease, max-height 0ms ease $brand-transition*0.5, margin 0ms ease $brand-transition*0.5, max-width 0ms ease $brand-transition*0.5, padding 0ms ease $brand-transition*0.5;
+    }
+
+    .js & .active-content, .no-js & .active-content{
+        max-height: 9999px;
+        max-width: 9999px;
+        margin: 0;
+        width: 100%;
+        transition: opacity $brand-transition ease;
+        z-index: 2;
+    }
+
+}
+ 
+ul.adaptive-content-container{
+    list-style: none;
+    margin:0;
+}
+
+
+
+.adaptive-content-no-transitions{
+    .adaptive-content{
+        transition: none !important;
+    }
+}
+
+
+/**
+ * View All...
+ */
+
+.js .viewing-all .adaptive-content-container .adaptive-content.adaptive-content{
+    max-height: 9999px;
+    max-width: 9999px;
+    opacity: 1;
+    position: relative;
+    margin: 0 auto $bsu;
+} 
+.js .viewing-all{
+    .adaptive-content-container{
+        height: auto !important;
+        transition: none !important;
+    }
+    .adaptive-position-dots, .adaptive-direction-nav{
+        display: none;
+    }
+    .adaptive-content-with-nav{
+        padding: 0;
+    }
+}
+
+
+
+
+/**
+ * CONTROLS
+ */
+.adaptive-content-control-wrap{
+    position: relative;
+}
+
+
+
+.adaptive-view-all-link{
+    cursor: pointer;
+    color: $brand-c-subtle;
+
+    display: block;
+
+    font-size: 0.9em;
+    //font-family: $brand-ff-italic;
+    //font-style: italic;
+
+    transition: color $brand-transition ease;
+
+    &:hover, &:focus{
+        color: $brand-c-highlight;
+    }
+}
+
+
+.adaptive-position-dots{
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    display: block;
+    padding: 18px $bsu;
+    line-height: 0;
+
+    background: transparent;
+
+    transition: background $brand-transition ease;
+    
+    @include media-query(squire){
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+
+        .adaptive-content-with-nav-wrap:hover &{
+            background: rgba($brand-c-body-back, 0.9);
+        }
+    }
+}
+.adaptive-position-dot{
+    margin: 0 $bsu-s*0.5;
+    display: inline-block;
+    vertical-align: top;
+
+    height: 12px;
+    width: 12px;
+    background: $brand-c-subtle;
+    border-radius: 100%;
+
+    cursor: pointer;
+    transition: background-color $brand-transition ease;
+
+    @include media-query(squire){
+        background: $brand-c-inverse;
+    }
+
+    &:hover{
+        background: $brand-c-subtler;
+    }
+    &.adaptive-current-position{
+        background: $brand-c-main;
+    }
+
+    @include media-query(squire){
+        .adaptive-content-with-nav-wrap:hover &{
+            background: $brand-c-subtle;
+            &:hover{
+                background: $brand-c-subtler;
+            }
+            &.adaptive-current-position{
+                background: $brand-c-main;
+            }
+        }
+    }
+}
+
+
+.js .adaptive-content-with-nav-wrap{
+    padding: 0 $bsu;
+}
+.adaptive-direction-nav{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    overflow: hidden;
+    height: $bsu+$bsu+$bsu-s; //padding + dot height
+
+    .vitalicon{
+        cursor: pointer;
+        display: block;
+
+        position: absolute;
+        bottom: 9px;
+        left: $bsu-s;
+        z-index: 3;
+    
+        opacity: 0.6;
+        transition: opacity $brand-transition ease, transform $brand-transition ease;
+
+        height: 30px;
+        width: 30px;
+
+        @include media-query(squire){
+            transform: translateX(-$bsu-l*1.5);
+        }
+
+        svg{
+            height: 30px;
+            width: 30px;
+        }
+        img{
+            display: block;
+            padding: 5px;
+        }
+
+        &:hover{
+            opacity: 1;
+        }
+    }
+    .adaptive-direction-next{
+        left: auto;
+        right: $bsu-s;
+        @include media-query(squire){
+            transform: translateX($bsu-l*1.5);
+        }
+    }
+
+    .adaptive-content-with-nav-wrap:hover &{
+        .vitalicon{
+            transform: translateX(0);
+        }
+    }
+}
+
+
+
+
+
+
+/**
+ * CHEVRONS IN THE HTML...
+ */
+.js--chev-right, .js--chev-left{
+    display: none;
+}

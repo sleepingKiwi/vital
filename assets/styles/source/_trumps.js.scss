@@ -14,17 +14,22 @@
     }
 }
 
-.js--no-js-visible{
+    //visually hidden when js is available
+    //these are generally things that are animated/shown by js
+.js--no-js-visible, .js--visuallyhidden{
     .js &{
-        border: 0 !important;
-        clip: rect(0 0 0 0) !important;
-        height: 1px !important;
-        margin: -1px !important;
-        overflow: hidden !important;
-        padding: 0 !important;
-        position: absolute !important;
-        width: 1px !important;
+        @extend .visuallyhidden;
+        opacity: 0;
     }
+}
+
+.js--toggle-visuallyhidden{
+    //This class is applied by default and is expected to be removed by js or 
+    //overwritten within css - it differs from js--visuallyhidden in specificity
+    //.js &{
+        @extend .visuallyhidden;
+        opacity: 0;
+    //}
 }
 
 

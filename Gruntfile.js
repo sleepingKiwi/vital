@@ -167,6 +167,8 @@ module.exports = function(grunt) {
                         'assets/bower_components/verge/verge.js',
                             //class wrangling support for naff browsers
                         'assets/bower_components/apollo.js/dist/apollo.js',
+                            //swipe and touch support for sliders
+                        'assets/bower_components/hammerjs/hammer.js',
                             //all 3rd party scripts which aren't served by bower
                         'assets/js/source/vendor/**/*.js',
                             //'customised' 3rd party scripts...

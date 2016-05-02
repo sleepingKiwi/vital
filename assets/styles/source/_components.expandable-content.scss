@@ -5,47 +5,55 @@
 /*******************
 HIDDEN TEXT SECTIONS
 *******************/
-.vitally-expandable{
-    border: 0; 
+.js--vitally-expandable{ 
     margin: -1px auto; 
-    overflow: hidden; 
-    padding: 0; 
-    max-height:1px; 
-    min-height:0; 
-    clip: rect(0 0 0 0); 
-    opacity:0;
+    overflow: hidden;
+    height: 1px;
+    //visibility: hidden; //visibility hidden prevents focus and isn't really needed here
+    pointer-events: none;
+    opacity: 0;
 
-
-    transition: max-height 800ms ease, min-height 800ms ease, padding 800ms ease, opacity 800ms ease;
+    transition: 
+        visibility 0ms ease $brand-transition,
+        margin 0ms ease $brand-transition,
+        opacity $brand-transition ease;
 }
 
-.expand-show, .no-js .vitally-expandable, .single-page-primary .vitally-expandable, .single-post .vitally-expandable{
-    transition: max-height 1200ms ease-in, min-height 700ms ease-out, opacity 800ms ease;
-
-    clip: auto;
-    min-height:3em;
-    max-height:2000em;
-    padding:0.5em 0;
+.js--vitally-expanded, .js--vitally-expandable--squire, .js--vitally-expandable--squire.js--vitally-expanded{
+    margin:0 auto;
+    //visibility: visible;
+    pointer-events: auto;
+    height: auto;
     opacity: 1;
+
+    transition: opacity $brand-transition ease;
 }
 
-.expand-link, .expand-link:visited{
-    display:block;
-    text-align:center;
-    margin-bottom:($base-spacing-unit);
-    margin-bottom:($base-spacing-unit / $base-font-size)*1rem;
-
-    font-family:$brand-ff-header;
-    font-size:1.5em;
-    letter-spacing:1px;
-
-    color: $brand-c-main;
-
-    &:hover, &:focus{
-        color: $brand-c-highlight;
+@include media-query(squire){
+    .js--vitally-expandable--squire{
+        margin: -1px auto; 
+        overflow: hidden;
+        height: 1px;
+        //visibility: hidden;
+        pointer-events: none;
+        opacity: 0;
+        transition: 
+            visibility 0ms ease $brand-transition,
+            opacity $brand-transition ease;
     }
 }
 
-.no-js .expand-link, .single-page-primary .expand-link, .single-post .expand-link{
-    display:none;
+
+.js--animating-expander-hide, .js--vitally-expandable--squire.js--animating-expander-hide{
+    transition: 
+        visibility 0ms ease $brand-transition,
+        margin 0ms ease $brand-transition,
+        height $brand-transition ease,
+        opacity $brand-transition ease;
+}
+
+.js--animating-expander-show, .js--vitally-expandable--squire.js--animating-expander-show{
+    transition:
+        opacity $brand-transition ease,
+        height $brand-transition ease;
 }

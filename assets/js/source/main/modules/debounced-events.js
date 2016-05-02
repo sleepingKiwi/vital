@@ -23,7 +23,13 @@ vital.debouncedEvents = (function(){
      *
      * $pageUpdateTick - called by requestAnimationFrame, calls appropriate event functions
      *
+     * $sortByPriority - sorts an array of items on the priority value...
+     *
      * $requestAnimationTick - using requestAnimationFrame to debounce event handlers
+     *
+     * $addFunctionOn
+     *
+     * $removeFunctionOn
      * 
      */
 
@@ -32,87 +38,33 @@ vital.debouncedEvents = (function(){
      * PRIVATE
      */
 
+    var _scrollFunctionArray = [];
+    var _resizeFunctionArray = [];
+
+
     /*----------------------------------------*\
         $scrollupdate
-            loading picturefills
-            scrollToTop
     \*----------------------------------------*/
-
-        //this function used to match expanders in a call to 'closest' below
-    function _closestExpanderMatch(el) {
-        return apollo.hasClass(el, 'vitally-expandable');
-    }
-
     function _scrollUpdate(){
-
-        //console.log('scroll Update Ticked');
-
-        /*- $loading picturefills -*/
-        var fillArray = [];
-        //var deferredImages = document.getElementsByClassName('data-deferred');
+        
         /**
-         * getElementsByClassName returns a Live NodeList - it's length updates dynamically
-         * this is great most of the time but because our for loop was removing the applicable
-         * classes the node list kept getting shorter and the for loop would never reach all elements
-         * //http://stackoverflow.com/questions/11705171/can-not-modify-classes-of-dom-elements
-         * we could loop backwards through the list or cast to a static array but we've switched
-         * to use querySelectorAll which returns a static (non live) list anyway...
+         * This function loops through any/all functions added to the _scrollFunctionArray in order
          */
-        var deferredImages = document.querySelectorAll('.data-deferred');
+
+        //console.log('doing a scroll update. Here\'s the _scrollFunctionArray: ');
+        //console.log(_scrollFunctionArray);
+
         var i, l;
-        l = deferredImages.length;
 
-        //console.log('found '+l+' deferred images');
+        l = _scrollFunctionArray.length;
+        i = 0;
 
-        //console.log(deferredImages);
+        //console.log(_scrollFunctionArray);
 
-        for(i=0; i<l; i++){
-            var self = deferredImages[i];
-
-            //console.log(i);
-            //console.log(verge.rectangle(self));
-
-            if( verge.inY(self, 25) ){
-
-                //console.log('in Y');
-
-                //by default we'll perform the deferred load unless we find a reason not to
-                var visible = true;
-
-                //this image is inside an expandable block (the class in-an-expander is added in the expandersClick() function which is called whenever new content is loaded on the page)
-                if(apollo.hasClass(self, 'in-an-expander')){
-                    //get the closest node with class of 'vitally-expandable'
-                    var expandableContainer = vital.u_closest.closest( self, _closestExpanderMatch);
-                    //if the container isn't expanded then don't load images inside it!
-                    if( !apollo.hasClass(expandableContainer, 'expand-show') ){
-                        visible = false;
-                    }
-                }
-
-                if(visible){
-                    apollo.removeClass(self, 'data-deferred');
-                    self.removeAttribute('data-deferred');
-                    fillArray.push(self);
-                }
-
-            }//if in 25px of Y
-        }// for loop of deferredImages 
-
-
-        /* global picturefill */
-        picturefill(fillArray);
-
-
-        /*- $scrollToTop -*/
-        /**
-         * hide/show to top link.
-         */
-        //var sd = $(window).scrollTop();
-        //console.log(window.pageYOffset);
-        if (window.pageYOffset > 300) {
-            apollo.addClass(document.getElementById('js-to-top'), 'top-show');
-        } else {
-           apollo.removeClass(document.getElementById('js-to-top'), 'top-show');
+        for (i; i < l; i++) {
+            //console.log('_scrollUpdate '+i+': '+_scrollFunctionArray[i].func.toString());
+            //console.log('\n---\n');
+            _scrollFunctionArray[i].func( _scrollFunctionArray[i].args );
         }
 
     }
@@ -123,7 +75,24 @@ vital.debouncedEvents = (function(){
         $resizeUpdate
     \*----------------------------------------*/
     function _resizeUpdate(){
-        //boom
+        
+        /**
+         * This function loops through any/all functions added to the _resizeFunctionArray in order
+         */
+
+        //console.log('doing a resize update. Here\'s the _resizeFunctionArray: ');
+        //console.log(_resizeFunctionArray);
+
+        var i, l;
+
+        l = _resizeFunctionArray.length;
+        i = 0;
+
+        for (i; i < l; i++) {
+            //console.log('_resizeUpdate '+i+': '+_resizeFunctionArray[i].func.toString());
+            _resizeFunctionArray[i].func( _resizeFunctionArray[i].args );
+        }
+
     }
 
 
@@ -154,6 +123,24 @@ vital.debouncedEvents = (function(){
 
 
 
+    /*------------------------------------*\
+        $sortByPriority
+    \*------------------------------------*/
+    function _sortByPriority(a, b){
+        
+        if (a.priority > b.priority) {
+        return 1;
+        }
+        if (a.priority < b.priority) {
+        return -1;
+        }
+        // a must be equal to b
+        return 0;
+
+    }
+
+
+
     /**
      * PUBLIC
      */
@@ -175,9 +162,65 @@ vital.debouncedEvents = (function(){
         _animationTicking = true;
     }
 
+
+    /*------------------------------------*\
+        $addFunctionOn
+    \*------------------------------------*/
+    /**
+     * Function to add a function to an array which is looped through on scroll events
+     * _priority is optional but defaults to 10 (with lower priorities happening earlier)
+     * _args is an optional object of options passed to the function when called
+     */
+    function addFunctionOn(type, funk, _priority, _args){   
+
+        var funkArray = type === 'scroll' ? _scrollFunctionArray : (type === 'resize' ? _resizeFunctionArray : false);
+
+        if(funkArray !== false){
+            if( (_priority < 0) || (typeof _priority !== 'number') ){
+                //if priority is < 0, missing, or not a number we set it's priority to 10 which is the default
+                _priority = 10;
+            }
+
+            funkArray.push( {func: funk, priority: _priority, args: _args} );
+
+            //sort the array we just pushed to by priority
+            funkArray.sort(_sortByPriority);
+        }
+
+    }
+
+
+
+    /*------------------------------------*\
+        $removeFunctionOn
+    \*------------------------------------*/
+    /**
+     * Remove a function from an array!
+     * returns true if function was removed.
+     */
+    function removeFunctionOn(type, funk, _priority){
+        var funkArray = type === 'scroll' ? _scrollFunctionArray : (type === 'resize' ? _resizeFunctionArray : false);
+
+        var i = funkArray.length - 1;
+        for (i; i >= 0; i--) {
+            if( funkArray[i].func === funk && funkArray[i].priority === _priority ){
+                //we found an exact match for priority and function so let's remove it
+                funkArray.splice(i, 1);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+
+
     //revealing public methods
     return {
         requestAnimationTick : requestAnimationTick,
+        addFunctionOn : addFunctionOn,
+        removeFunctionOn : removeFunctionOn
     };
 
 }()); //vital.debouncedEvents

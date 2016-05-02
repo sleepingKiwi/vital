@@ -20,39 +20,60 @@
  */
 
 
+
+
+
+
 /**
+ * CLEAN ME UP
+ * ===========
+ *
+ * There is a lot of js included here by default.
+ * remember to pull out anything you don't need!
  * 
- * CONTENTS
- * --------
+ * One day (soon...) we will move to a more sensible modular system/build system
  *
- * define theBody var
- *
- * page ready class
- *
- * responsive indicator injection - allows accurate js reading of current breakpoint
- *
- * To Top Link
- *
- * Content Listeners - first run of content listeners 
- *      (expandable content clicks)
- *
- * Lazy loading images on scroll - set up scroll event handler
- *
- * svg fallbacks
- *
- * footer promotion
- *
- * Ajax post loading
- *
- * Navigation scripts
- *
- * Window load event scripts
- *
+ * that day is not today.
  */
 
 
 
 
+
+
+
+
+/**
+ * GENERAL MODULES
+ * ===============
+ * Reusable modules or code with minimal tweaks for this specific site
+ */
+/**
+ * define theBody var
+ *
+ * responsive indicator
+ *
+ * to top link
+ *
+ * listener: window load events
+ *
+ * lazy loading images on scroll
+ *
+ * detecting and adding classes to 'in y' elements
+ *
+ * adding 'hovered' classes to elements that want them
+ *
+ * navigation - (the main nav menus)
+ *
+ * adaptive content
+ *
+ * expandable content - contentListeners
+ *
+ * adaptive content activator link - contentListeners
+ *
+ * generic popups - contentListeners
+ *
+ */
 /*------------------------------------*\
     $define theBody var
 \*------------------------------------*/
@@ -61,20 +82,17 @@
 
 
 
-/*------------------------------------*\
-    $page ready class
-\*------------------------------------*/
-vital.pageReady.init(theBody);
-
-
-
 
 /*------------------------------------*\
-    $Responsive Indicator
+    $responsive indicator
 \*------------------------------------*/
 /**
-Used to reliably inform us which of our css breakpoints we're in and to make sure js triggers inline with css - the responsive indicator has it's width changed at each breakpoint in css. This method is used due to cross-browser/device inconsistencies with detecting screen widths in js.
-*/
+ * Used to reliably inform us which of our css breakpoints we're in.
+ * makes sure js triggers inline with css.
+ *
+ * The responsive indicator has it's width changed at each breakpoint in css.
+ * Method is used due to cross-browser/device inconsistencies with detecting screen widths in js.
+ */
 var respInd = document.createElement('span');
 respInd.className = 'responsive-indicator';
 theBody.appendChild(respInd);
@@ -82,10 +100,18 @@ theBody.appendChild(respInd);
 
 
 
+
+
 /*------------------------------------*\
-    $To Top Link
+    $to top link
 \*------------------------------------*/
+/**
+ * Adding a 'to top' link to the body and making it scroll to the top.
+ */
 vital.scrollToTop.init(theBody);
+    //3rd arg (_priority) optional but defaults to 10 if left out (lower priorities happen earlier)
+    //4th arg (_args) is an, also optional, object of options
+vital.debouncedEvents.addFunctionOn( 'scroll', vital.scrollToTop.scroll, 10, {debug: false} );
 
 
 
@@ -94,49 +120,138 @@ vital.scrollToTop.init(theBody);
 
 
 /*------------------------------------*\
-    $Content Listeners
+    $listener: window load events
 \*------------------------------------*/
 /**
- * Initialise content listeners that will need to be reapplied
+ * script which needs to wait for -everything- else in the DOM to have loaded...
+ * ---
+ * - bones gravatars
  */
-vital.contentListeners.listen(theBody);
+vital.windowLoaded.init();
 
 
 
 
 
 /*------------------------------------*\
-    $Lazy loading images on scroll
+    $lazy loading images on scroll
 \*------------------------------------*/
-//if( document.querySelectorAll('.data-deferred').length > 0 ){
+    //loading picturefill elements on scroll events with a fairly low priority.
+vital.debouncedEvents.addFunctionOn( 'scroll', vital.picturefillLoader.scroll, 5, {debug: false} );
 
-    window.addEventListener('scroll', function(){
-        vital.debouncedEvents.requestAnimationTick('scroll');
-    }, false);
 
-    vital.debouncedEvents.requestAnimationTick('scroll');
 
-//}
+
+/*-----------------------------------------------------*\
+    $detecting and adding classes to 'in y' elements
+\*-----------------------------------------------------*/
+    //adding classes to any elements that want to check whether they're within a certain distance 
+    //of the viewport in the Y axis
+vital.debouncedEvents.addFunctionOn( 'scroll', vital.onscreeny.update, 10, {debug: false} );
+vital.debouncedEvents.addFunctionOn( 'resize', vital.onscreeny.update, 10, {debug: false} );
+
+
+
+
+/*--------------------------------------------------------*\
+    $adding 'hovered' classes to elements that want them
+\*--------------------------------------------------------*/
+vital.hoverWatch.init({debug: false});
 
 
 
 
 /*------------------------------------*\
-    $svg fallbacks
+    $navigation - (the main nav menus)
 \*------------------------------------*/
-//setup fallbacks for svg if required
-//vital.svg.initFallbacks();
+//setup various listeners on the navigation(s)
+vital.nav.init();
+
+
+
+
+/*------------------------------------*\
+    $adaptive content
+\*------------------------------------*/
+    //removing default from touch js that prevents text highlighting:
+    //http://hammerjs.github.io/tips/
+/* global Hammer */
+delete Hammer.defaults.cssProps.userSelect;
+    
+    //initialising all adaptive content
+vital.adaptiveContent.init();
+    
+    //resizing heights of adaptive content on resize events
+    //we give a late priority of 20 because this should probably happen after any other loading etc.
+    //adjustHeight function doesn't take options so we leave fourth arg blank
+vital.debouncedEvents.addFunctionOn('resize', vital.adaptiveContent.adjustHeight, 20 );
+
+
+
+
+
+
+/*------------------------------------------*\
+    $expandable content - contentListeners
+\*------------------------------------------*/
+    // contentListeners.addFunction(funk, _priority, _args) takes a function and optional priority
+    // and arguments object and adds them to a list of functions which are called whenever we call
+    // vital.contentListeners.listen
+    // default priority is 10, lower priorities go first!
+vital.contentListeners.addFunction(vital.expandable.init, 10);
+
+
+
+
+/*-------------------------------------------------------*\
+    $adaptive content activator link - contentListeners
+\*-------------------------------------------------------*/
+vital.contentListeners.addFunction(vital.adaptiveContentActivators.listen, 10);
+
+
+
+
+/*--------------------------------------*\
+    $generic popups - contentListeners
+\*--------------------------------------*/
+vital.contentListeners.addFunction(vital.popup.init, 10, {debug:false});
+
+
+
+
+
+
+
+
+/*------------------------------------------------------------------------*\
+  ========================================================================
+\*------------------------------------------------------------------------*/
+
+
+
+
+
+
+
 /**
- * We're no longer using a js fallback (provisionally) especially because we don't serve js to old
- * browsers any more...
- * instead using the <image> inside inline SVG approach outlined by Amelia Bellamy-Royds here: 
- * https://css-tricks.com/a-complete-guide-to-svg-fallbacks/#fallback-inline-svg-imgtag
+ * SITE SPECIFIC
+ * =============
+ * These modules aren't generic
+ * generally they apply to specific pages or elements that are unique to this site.
+ */
+/**
+ * 
+ * ajax post loading
+ * 
+ * footer promotion        
+ *
  */
 
-
-
-
-
+/*------------------------------------*\
+    $ajax post loading
+\*------------------------------------*/
+//setup for listeners for the more posts functionality
+vital.loadMore.init();
 
 /*------------------------------------*\
     $footer promotion        
@@ -153,24 +268,74 @@ if(footerPromotion.length > 0){
 
 
 
+
+
+
+
+
+
+
+/*------------------------------------------------------------------------*\
+  ========================================================================
+\*------------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * FINAL BITS AND BOBS
+ * ===================
+ * We want this to run after everything else!
+ */
+/**
+ * apply all content listeners
+ *
+ * add debounced scroll/resize listeners
+ *
+ * page ready class
+ */
+
+/*------------------------------------------*\
+    $apply all content listeners
+\*------------------------------------------*/
+/**
+ * Functions are added above using the addFunction(funk, _priority, _args) function
+ * where _priority is an optional integer which defaults to 10. 
+ * functions with lower priorities are run before those with higher.
+ */
+vital.contentListeners.listen();
+
+
+/*------------------------------------------*\
+    $add debounced scroll/resize listeners
+\*------------------------------------------*/
+/**
+ * Functions are added above using the addFunctionOn(type, funk, _priority, _args) function
+ * where type can be 'scroll' or 'resize' and where _priority is an optional integer
+ * which defaults to 10. functions with lower priorities are run before those with higher.
+ */
+    //we also call each function explicitly to run for a first time
+window.addEventListener('scroll', function(){
+    vital.debouncedEvents.requestAnimationTick('scroll');
+}, false);
+
+vital.debouncedEvents.requestAnimationTick('scroll');
+
+window.addEventListener('resize', function(e){
+    vital.debouncedEvents.requestAnimationTick('resize');
+}, false);
+
+vital.debouncedEvents.requestAnimationTick('resize');
+
+
 /*------------------------------------*\
-    $ajax post loading
+    $page ready class
 \*------------------------------------*/
-//setup for listeners for the more posts functionality
-vital.loadMore.init();
-
-
-
-/*------------------------------------*\
-    $Navigation - (the main nav menus)
-\*------------------------------------*/
-//setup various listeners on the navigation(s)
-vital.nav.init();
-
-
-
-/*------------------------------------*\
-    $Window Load Events
-\*------------------------------------*/
-//any script which needs to wait for -everything- else in the DOM to have loaded
-vital.windowLoaded.init();
+vital.pageReady.init(theBody);
