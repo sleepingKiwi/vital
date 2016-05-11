@@ -58,7 +58,7 @@ vital.picturefillLoader = (function(){
              * we could loop backwards through the list or cast to a static array but we've switched
              * to use querySelectorAll which returns a static (non live) list anyway...
              */
-        var deferredImages = document.querySelectorAll('.data-deferred');
+        var deferredImages = document.querySelectorAll('.js--vitally-responsible--deferred');
         var i, l;
         l = deferredImages.length;
 
@@ -67,7 +67,7 @@ vital.picturefillLoader = (function(){
             //console.log(deferredImages);
         }
 
-            //loop through all elements with .data-deferred class
+            //loop through all elements with .js--vitally-responsible--deferred class
         for(i=0; i<l; i++){
             var self = deferredImages[i];
 
@@ -75,8 +75,8 @@ vital.picturefillLoader = (function(){
                 console.log('%c [DEBUG] looping: '+i, 'color:#9999ff; font-size:0.9em;');
             }
 
-                //if they're not within 250px of screen (on Y axis) they're ignored
-            if( verge.inY(self, 250) ){
+                //if they're not within 350px of screen (on Y axis) they're ignored
+            if( verge.inY(self, 350) ){
 
                 if(opts.debug){
                     console.log('%c [DEBUG] in Y', 'color:#9999ff; font-size:0.9em;');
@@ -95,24 +95,53 @@ vital.picturefillLoader = (function(){
                     if( !apollo.hasClass(expandableContainer, 'expand-show') ){
                         visible = false;
                     }
-                }else if(apollo.hasClass(self, 'deferred-in-slideshow')){
+                }else if(apollo.hasClass(self, 'js--vitally-responsible--deferred-in-slideshow')){
                         //a slideshow image that doesn't want to be loaded yet!
                         //this class is controlled by adaptive-content.js
                     visible = false;
                 }
 
                 if(visible){
-                    apollo.removeClass(self, 'data-deferred');
-                    self.removeAttribute('data-deferred');
+                    //self.removeAttribute('data-deferred');
+
+                    var picImg = document.createElement( 'img' );
+                    picImg.alt = self.getAttribute( 'data-alt' );
+                    picImg.width = self.getAttribute( 'data-width' );
+                    picImg.height = self.getAttribute( 'data-height' );
+                    picImg.setAttribute( 'sizes',  self.getAttribute( 'data-sizes' ) );
+                    picImg.setAttribute( 'srcset',  self.getAttribute( 'data-srcset' ) );
+
+                    self.appendChild( picImg );
+
+                    apollo.removeClass(self, 'js--vitally-responsible--deferred');
+                    apollo.addClass(self, 'js--vitally-responsible--loading');
+
+                    //adding loaded class after each image loads
+                    //passing 'self' responsive image span so that we can add a class when it's done!
+                    /*jshint loopfunc: true */
+                    picImg.onload = (
+                        function (imageContainer, loadedImage) {
+                            return function() {
+                                apollo.removeClass(imageContainer, 'js--vitally-responsible--loading');
+                                apollo.addClass(imageContainer, 'js--vitally-responsible--loaded');
+                                loadedImage.onload = null;
+                            };
+                        }
+                    )( self, picImg ); 
+                    
+
                     fillArray.push(self);
                 }
 
-            }//if in 250px of Y
+            }//if in 350px of Y
         }// for loop of deferredImages 
 
 
         /* global picturefill */
-        picturefill(fillArray);
+        //picturefill(fillArray);
+        picturefill({
+            elements: fillArray
+        });
     }
 
     //revealing public methods

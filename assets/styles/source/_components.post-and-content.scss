@@ -60,11 +60,11 @@
     }
 
     //remove margin on single images within a paragraph (double margin issues)
-    p > a:only-child img, p > img:only-child, p > .picturefill:only-child img{
+    p > a:only-child img, p > img:only-child, p > .js--vitally-responsible:only-child img{
         margin-bottom: 0;
     }
 
-    .picturefill-wrap.aligncenter img, .picturefill-wrap.alignnone img { 
+    .js--vitally-responsible.aligncenter img, .js--vitally-responsible.alignnone img { 
         margin-right: auto; 
         margin-left: auto; 
         display: block; 
@@ -84,7 +84,7 @@
             float: right; 
             text-align: right;
         }
-        .aligncenter, img.aligncenter, .picturefill-wrap.aligncenter img{ 
+        .aligncenter, img.aligncenter, .js--vitally-responsible.aligncenter img{ 
             margin-right: auto; 
             margin-left: auto; 
             display: block; 

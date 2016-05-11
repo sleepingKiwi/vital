@@ -40,7 +40,7 @@ function vital_fragment_cache($key, $ttl, $function) {
         }
     }
 
-    $key = apply_filters('fragment_cache_prefix','frag_').$key;
+    $key = apply_filters('fragment_cache_prefix','vitalfrag_').$key;
     $output = get_transient($key);
     if ( false === $output ) {
         ob_start();
@@ -48,7 +48,7 @@ function vital_fragment_cache($key, $ttl, $function) {
         $output = ob_get_clean();
         set_transient($key, $output, $ttl);
     }/*else{
-    echo 'FROM TRANSIENT frag_'.$key;
+    echo 'FROM TRANSIENT vitalfrag_'.$key;
     }*/
     echo $output;
 }
@@ -56,7 +56,7 @@ function vital_fragment_cache($key, $ttl, $function) {
 
 
 function vital_fragment_clear($key) {
-    $key = apply_filters('fragment_cache_prefix','frag_').$key;
+    $key = apply_filters('fragment_cache_prefix','vitalfrag_').$key;
     delete_transient($key);
 }
 
@@ -67,9 +67,12 @@ function vital_fragment_clear($key) {
 function vital_delete_all_transients(){
     global $wpdb;
 
-    $sql = "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_frag_%'";
+    $transient_string = '_transient_'.apply_filters('fragment_cache_prefix','vitalfrag_').'%';
+    $transient_timeout_string = '_transient_timeout_'.apply_filters('fragment_cache_prefix','vitalfrag_').'%';
+
+    $sql = "DELETE FROM $wpdb->options WHERE option_name LIKE '$transient_string'";
     $clean_one = $wpdb -> query( $sql );
-    $sql_two = "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_frag_%'";
+    $sql_two = "DELETE FROM $wpdb->options WHERE option_name LIKE '$transient_timeout_string'";
     $clean_two = $wpdb -> query( $sql_two );
 
     return $clean_one.'-'.$clean_two;

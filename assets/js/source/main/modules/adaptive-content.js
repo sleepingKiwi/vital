@@ -49,10 +49,10 @@ vital.adaptiveContent = (function(){
 
 
         function _undefferImages(aContent){
-            var respImages = aContent.querySelectorAll('.deferred-in-slideshow');
+            var respImages = aContent.querySelectorAll('.js--vitally-responsible--deferred-in-slideshow');
             var i = respImages.length - 1;
             for (i; i >= 0; i--) {
-                apollo.removeClass(respImages[i], 'deferred-in-slideshow');
+                apollo.removeClass(respImages[i], 'js--vitally-responsible--deferred-in-slideshow');
             }
         }
 
