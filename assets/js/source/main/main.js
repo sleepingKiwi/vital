@@ -136,8 +136,8 @@ vital.windowLoaded.init();
 /*------------------------------------*\
     $lazy loading images on scroll
 \*------------------------------------*/
-    //loading picturefill elements on scroll events with a fairly low priority.
-vital.debouncedEvents.addFunctionOn( 'scroll', vital.picturefillLoader.scroll, 5, {debug: false} );
+    //loading responsible image elements on scroll events with a fairly low priority.
+vital.debouncedEvents.addFunctionOn( 'scroll', vital.responsibleLoader.scroll, 5, {debug: false} );
 
 
 

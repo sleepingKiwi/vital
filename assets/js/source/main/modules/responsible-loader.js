@@ -1,15 +1,20 @@
-/*------------------------------------*\
-    picturefill loader class
-\*------------------------------------*/
+/*-------------------------------------------*\
+    responsible (lazy) images loader class
+\*-------------------------------------------*/
 
 /**
- * this class handles the loading of picturefill images 
+ * this class handles the loading of lazy responsive images 
  * includes any edge cases such as images inside expanders 
  * or as part of an adaptive-content carousel
+ *
+ * PICTUREFILL:
+ * - honestly we could probably lose picturefill if we're just going with sizes/srcset because the
+ *   fallback isn't terrible and it's widely supported.
+ *   it IS still quite useful if we want to use 'picture'...
  */
 
 
-vital.picturefillLoader = (function(){
+vital.responsibleLoader = (function(){
 
     /**
      * PRIVATE
@@ -45,7 +50,7 @@ vital.picturefillLoader = (function(){
         vital.u_extend.extend( opts, _opts );
 
         if(opts.debug){
-            console.log('%c [DEBUG] vital.picturefillLoader scroll update ticked', 'color:#9999ff; font-size:0.9em;');
+            console.log('%c [DEBUG] vital.responsibleLoader scroll update ticked', 'color:#9999ff; font-size:0.9em;');
         }
 
         var fillArray = [];
@@ -149,4 +154,4 @@ vital.picturefillLoader = (function(){
         scroll : scroll,
     };
 
-}()); //vital.picturefillLoader
+}()); //vital.responsibleLoader

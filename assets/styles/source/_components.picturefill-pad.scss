@@ -1,5 +1,5 @@
 /*------------------------------------*\
-    $PICTUREFILL STYLING
+    $RESPONSIBLE IMAGE STYLING
 \*------------------------------------*/
 
     //the responsive image wrap itself
@@ -72,7 +72,12 @@
     background: darken($brand-c-body-back, 2%);
     transition: opacity $brand-transition ease;
 
-    &:after{
+    .no-js &{
+        opacity: 0;
+        background: transparent;
+    }
+
+    .js &:after{
         content: ' ';
         position: absolute;
         display: block;
@@ -93,31 +98,37 @@
 
 
 
-    //link that shows whilst waiting for images to load or if js fails...
+    //alt text - shown whilst waiting for images to load or if js fails...
     //set this to display none if it doesn't suit the theme!
-.js--vitally-responsible__fallback-link{
+.js--vitally-responsible__alt{
     position: absolute;
+    display: block;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
     padding: $bsu;
-    text-align: left;
+    text-align: center;
     color: $brand-c-main;
-    opacity: 0.2;
-    font-size: 12px;
+    opacity: 0.4;
+    font-size: 13px;
     font-weight: normal;
     font-style: italic;
     overflow: hidden;
     transition: opacity $brand-transition ease, color $brand-transition ease;
     z-index: 3;
 
-    &:hover, &:focus{
-        opacity: 0.4;
+    &:hover{
+        opacity: 0.6;
     }
 
     .js--vitally-responsible--loaded &{
         z-index: 0;
+        opacity: 0;
+    }
+
+    .no-js &{
+        display: none;
     }
 }
 
@@ -145,7 +156,7 @@
 
 
 .js--vitally-responsible--loaded{
-    .picturefill-padder{
+    .js--vitally-responsible__padder{
         //position: absolute;
         //background-image: none;
         opacity: 0;

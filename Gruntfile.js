@@ -155,16 +155,15 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'assets/js/dist/main.js': [
-                            //picturefill comes in outside of the cut the mustard test...
-                            //so that IE 8 and lower still get images! It's the only breaking bit
-                            //of javascript really...
-                        'assets/bower_components/picturefill/dist/picturefill.min.js',
                             //wrapping all script in a test for browsers that 'cut the mustard'
                         'assets/js/source/structural/mustard-pre.js',
                             //currently using custom version of this inside plugins...
                         //'assets/bower_components/filament-fixed/fixedfixed.js',
                             //no longer depending on jQuery so this isn't used
                         //'assets/js/source/jquery-compat.js',
+                            //picturefill for srcset support in older browsers..
+                            //we could probably lose this and it wouldn't be that big of a deal.
+                        'assets/bower_components/picturefill/dist/picturefill.min.js',
                             //verge for screen measurements
                         'assets/bower_components/verge/verge.js',
                             //class wrangling support for naff browsers
