@@ -14,9 +14,9 @@
 
 
 /**
- * Twenty Thirteen method to stop theme from being used in WordPress < 3.6.
+ * Twenty Thirteen method to stop theme from being used in WordPress < 4.5.
  */
-if ( version_compare( $GLOBALS['wp_version'], '3.6-alpha', '<' ) ){
+if ( version_compare( $GLOBALS['wp_version'], '4.5-alpha', '<' ) ){
     require get_template_directory() . '/lib/back-compat.php';
 }
 
@@ -130,7 +130,21 @@ require_once locate_template('lib/fragment-cache.php');
  * Add theme support for jetpack inf scrolling (because why not...)
  * Set the authordata global when viewing an author archive
  */
-require_once locate_template('lib/init.php');              
+require_once locate_template('lib/init.php');    
+
+
+
+
+
+
+/**
+ * CUSTOMISING THE CUSTOMIZER --- (expand on how much the customizer is used...)
+ * --------------------------
+ * removing site icons section
+ * removing colors section
+ * removing widgets section
+ */        
+require_once locate_template('lib/customizer.php');     
 
 
 
@@ -160,6 +174,20 @@ require_once locate_template('lib/config.php');
  * Fix for empty search queries and search returning '+' instead of ' '
  */
 require_once locate_template('lib/cleanup.php');
+
+
+
+
+
+
+
+/**
+ * CUSTOMISING OEMBEDS
+ * -------------------
+ * removing default icon in oEmbed titles
+ * - link for disabling oEmbed functionality
+ */
+require_once locate_template('lib/embeds.php');
 
 
 
