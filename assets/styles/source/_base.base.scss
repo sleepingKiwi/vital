@@ -18,4 +18,10 @@ body{
 	font-family: $brand-ff-main;
 	color: $brand-c-main;
 	background-color: $brand-c-body-back;
+
+        // loading the custom fonts in no-js makes design sense in most cases
+        // because the FOIT is better than the custom fonts never appearing!
+    .js--main-fonts &, .no-js &{
+        font-family: $brand-ff-main-loaded;        
+    }
 }

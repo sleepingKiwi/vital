@@ -37,7 +37,7 @@ html .mceContentBody{
 
   max-width: $brand-layout-max;
 
-  font-family: $brand-ff-main;
+  font-family: $brand-ff-main-loaded;
 
   img{
     max-width: 100%;
@@ -51,7 +51,7 @@ h3,.gamma,
 h4,.delta,
 h5,.epsilon,
 h6,.zeta{
-  font-family: $brand-ff-header;
+  font-family: $brand-ff-header-loaded;
 }
 
 

@@ -42,6 +42,13 @@ textarea
 
     transition: all $brand-transition ease;
 
+
+        // loading the custom fonts in no-js makes design sense in most cases
+        // because the FOIT is better than the custom fonts never appearing!
+    .js--main-fonts &, .no-js &{
+        font-family: $brand-ff-main-loaded;        
+    }
+
         /**
          * For ridiculous reasons these need to be listed separately
          */
@@ -116,6 +123,11 @@ input[type="button"] {
     text-decoration: none;
     outline: 0;
     width:auto;
+
+    .js--main-fonts &, .no-js &{
+        font-family: $brand-ff-main-loaded;        
+    }
+
     &:hover, &:focus {
         background: lighten($brand-c-highlight, 5%);
     }
@@ -168,5 +180,9 @@ a.button_disabled {
     }
     ::-webkit-validation-bubble-message {
         font-family: $brand-ff-main;
+
+        .js--main-fonts &, .no-js &{
+            font-family: $brand-ff-main-loaded;        
+        }
     }
 }

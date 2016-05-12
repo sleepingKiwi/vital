@@ -161,9 +161,11 @@ module.exports = function(grunt) {
                         //'assets/bower_components/filament-fixed/fixedfixed.js',
                             //no longer depending on jQuery so this isn't used
                         //'assets/js/source/jquery-compat.js',
+                            //loading fonts consistently with FOUT rather than FOIT
+                        'assets/bower_components/fontfaceonload/dist/fontfaceonload.js',
                             //picturefill for srcset support in older browsers..
                             //we could probably lose this and it wouldn't be that big of a deal.
-                        'assets/bower_components/picturefill/dist/picturefill.min.js',
+                        'assets/bower_components/picturefill/dist/picturefill.js',
                             //verge for screen measurements
                         'assets/bower_components/verge/verge.js',
                             //class wrangling support for naff browsers

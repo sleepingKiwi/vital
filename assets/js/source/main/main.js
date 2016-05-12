@@ -57,6 +57,8 @@
  *
  * listener: window load events
  *
+ * loading custom fonts and setting html class
+ *
  * lazy loading images on scroll
  *
  * detecting and adding classes to 'in y' elements
@@ -128,6 +130,19 @@ vital.debouncedEvents.addFunctionOn( 'scroll', vital.scrollToTop.scroll, 10, {de
  * - bones gravatars
  */
 vital.windowLoaded.init();
+
+
+
+
+
+
+/*------------------------------------------------*\
+    $loading custom fonts and setting html class
+\*------------------------------------------------*/
+    //*
+    // ** remember to update this with the actual font names used in your theme!
+    //*
+vital.fontLoader.init();
 
 
 

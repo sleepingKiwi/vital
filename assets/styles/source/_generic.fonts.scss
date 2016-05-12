@@ -2,12 +2,67 @@
     $FONTS
 \*------------------------------------*/
 
+ /**
+  * We use font load events to add a class to our <html> tag to let us know 
+  * fonts loaded (using https://github.com/zachleat/fontfaceonload)
+  * -
+  * implementation details - see the font-loader.js file in js/main/modules
+  * -
+  * some sites/clients probably won't want the fallback fonts shown in this way
+  * for them we can either strip out the js and use default behaviour or 
+  * use the js/classes to fade in the fonts once loaded...
+  */
 
 /**
- * Main font (generally body font)
+ * DON'T FORGET:
+ *
+ * - new fonts need to be added to the font-loader.js file to be loaded without
+ *   forcing a Flash Of Invisible Text
+ *
+ * - edit the editor styles css if you add lots of new fonts here!
  */
 
+
+/**
+ * Main font (generally body font) 
+ * we have two weights in this example
+ */
+
+@font-face {
+    font-family: 'montserratbold';
+    src: url('../../fonts/montserrat/montserrat-bold-webfont.eot');
+    src: url('../../fonts/montserrat/montserrat-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../fonts/montserrat/montserrat-bold-webfont.woff2') format('woff2'),
+         url('../../fonts/montserrat/montserrat-bold-webfont.woff') format('woff'),
+         url('../../fonts/montserrat/montserrat-bold-webfont.ttf') format('truetype'),
+         url('../../fonts/montserrat/montserrat-bold-webfont.svg#montserratbold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'montserratregular';
+    src: url('../../fonts/montserrat/montserrat-regular-webfont.eot');
+    src: url('../../fonts/montserrat/montserrat-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../fonts/montserrat/montserrat-regular-webfont.woff2') format('woff2'),
+         url('../../fonts/montserrat/montserrat-regular-webfont.woff') format('woff'),
+         url('../../fonts/montserrat/montserrat-regular-webfont.ttf') format('truetype'),
+         url('../../fonts/montserrat/montserrat-regular-webfont.svg#montserratregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 $brand-ff-main: $sans-serif;
+$brand-ff-main-loaded: 'montserratregular', $sans-serif;
+
+    //if you remove this (i.e. a bold variant isn't required for this site) 
+    //don't forget to edit _base.typography.scss to remove references
+$brand-ff-bold: $sans-serif;
+$brand-ff-bold-loaded: 'montserratbold', $sans-serif;
+
+    //if you want to add an italic or bolditalic then again make sure to 
+    //edit _base.typography.scss to add the default styling for things like <em>
 
 
 /**
@@ -28,4 +83,5 @@ $brand-ff-main: $sans-serif;
 
 }
 
-$brand-ff-header: 'goudyBookletter1911', $serif;
+$brand-ff-header: $serif;
+$brand-ff-header-loaded: 'goudyBookletter1911', $serif;

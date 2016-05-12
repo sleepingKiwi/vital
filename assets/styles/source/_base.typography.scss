@@ -8,5 +8,39 @@ h3,.gamma,
 h4,.delta,
 h5,.epsilon,
 h6,.zeta{
-	font-family: $brand-ff-header;
+    font-family: $brand-ff-header;
+    font-weight: normal;
+    
+        // loading the custom fonts in no-js makes design sense in most cases
+        // because the FOIT is better than the custom fonts never appearing!
+        // -
+        // use critical-fonts or all-fonts whichever is appropriate
+        // see font-loader.js for implementation
+    .js--header-fonts &, .no-js &{
+        font-family: $brand-ff-header-loaded;     
+    }
 }
+
+strong{
+    font-weight: bold;
+    font-family: $brand-ff-bold;
+
+    .js--bold-fonts &, .no-js &{
+        font-family: $brand-ff-bold-loaded;        
+    }
+}
+
+strong em, em strong{
+    font-style: italic;
+    font-weight: bold;
+    font-family: $brand-ff-bold;
+
+    .js--bold-fonts &, .no-js &{
+        font-family: $brand-ff-bold-loaded;        
+    }
+}
+
+/**
+ * if we were having italic or bolditalic fonts then we would add more specific
+ * rules here for <em> tags etc.
+ */
