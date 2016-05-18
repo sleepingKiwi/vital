@@ -25,7 +25,7 @@ function vital_hidden_shortcode( $atts, $content = null ) {
 
     //is there a better way to ensure these are unique if there are two expanders in one post???
     $expandID = $post->post_name.'-'.rand();
-    return '<div class="vitally-expandable" id="'.$expandID.'">' . do_shortcode($content) . '</div> <a href="'.get_permalink().'" data-expander="'.$expandID.'" class="expand-link" data-hide="' . $link_hide . '" data-show="' . $link_show . '">' . $link_show . '</a>';
+    return '<div class="js--vitally-expandable js--vitally-expandable--shortcode" id="'.$expandID.'">' . do_shortcode($content) . '</div> <a href="'.get_permalink().'" data-expander="'.$expandID.'" class="js--expand-link js--expand-link--shortcode" data-hide="' . $link_hide . '" data-show="' . $link_show . '">' . $link_show . '</a>';
     }
 }
 add_shortcode('whole_post', 'vital_hidden_shortcode');
