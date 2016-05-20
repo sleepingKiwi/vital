@@ -242,3 +242,4 @@ grunticon(["<?php echo get_template_directory_uri(); ?>/assets/img/icons/dist/ic
     </header><!-- #masthead -->
 
     <div id="content" class="site-content wrap">
+    <div class="site-content__center-container">

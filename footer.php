@@ -1,4 +1,5 @@
-    from sidebar or main content --></div><!-- #content -->
+    from sidebar or main content --></div><!-- .site-content__center-container -->
+    </div><!-- #content -->
 
     <footer id="colophon" class="site-footer" role="contentinfo">
         

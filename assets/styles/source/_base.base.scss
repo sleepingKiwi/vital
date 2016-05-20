@@ -25,3 +25,53 @@ body{
         font-family: $brand-ff-main-loaded;        
     }
 }
+
+
+
+
+/**
+ * Should be in a different css file really.
+ * Flexbox based layout as a default:
+ */
+
+/**
+ * FIXED FOOTER WITH FLEXBOX
+ * -------------------------
+ * asking the site container to take up a minimum of full screen height.
+ * flex: 1; uses the flex shortcode and sets flex-grow to 1 for the site content
+ * which makes it take up as much available space as it can (effectively pushing
+ * our footer down to the bottom!)
+ */
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+.site-content {
+    //sets flex-grow to 1 which pushes footer down
+  flex: 1;
+
+    //site content also displays as flex so that content (.content-area) can be
+    //centered vertically on pages with content that doesn't fill the screen...
+    //-
+    //in sites without sidebars the site-content__center-container 
+    //element can be removed in header/footer
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+}
+
+
+/**
+ * Generally the site content can do with a consistent padding in this kind of
+ * layout. look at removing the margins around header/footer and working with
+ * padding on the content instead...
+ */
+.site-content{
+        //this padding should be overwritten as required 
+        //typically content will have $bsu of margin at the bottom...
+    //padding: $bsu 0 0;
+}

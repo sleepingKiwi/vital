@@ -112,6 +112,8 @@ a.button,
 input[type="reset"],
 input[type="submit"],
 input[type="button"] {
+    display: inline-block;
+    vertical-align: middle;
     -webkit-appearance: none;
     border-radius: $brand-round;
     background: $brand-c-highlight;
