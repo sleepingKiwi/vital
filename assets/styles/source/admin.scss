@@ -126,7 +126,7 @@ $docs-ff-headers: bebas, Helmet, Freesans, Tahoma, Geneva, sans-serif;
         font-weight: normal;
     }
 
-    #poststuff & h3.hndle, .acf-label{
+    #poststuff & h3.hndle, #poststuff & h2.hndle, .acf-label{
         font-size: 20px;
         line-height: 1;
         padding: 12px 0 0;
@@ -169,7 +169,7 @@ $docs-ff-headers: bebas, Helmet, Freesans, Tahoma, Geneva, sans-serif;
         }   
     }
 
-    #poststuff &.closed h3.hndle{
+    #poststuff &.closed h3.hndle, #poststuff &.closed h2.hndle{
         padding: 0;
         opacity: 0.8;
         &:before{
