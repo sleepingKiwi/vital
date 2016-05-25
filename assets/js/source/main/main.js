@@ -63,7 +63,11 @@
  *
  * detecting and adding classes to 'in y' elements
  *
+ * height sizing 
+ *
  * adding 'hovered' classes to elements that want them
+ *
+ * smooth scrolling links
  *
  * navigation - (the main nav menus)
  *
@@ -168,10 +172,33 @@ vital.debouncedEvents.addFunctionOn( 'resize', vital.onscreeny.update, 10, {debu
 
 
 
+
+
+/*------------------------------------*\
+    $height sizing 
+\*------------------------------------*/
+    //forcing viewport height minimums on resize events
+vital.debouncedEvents.addFunctionOn( 'resize', vital.forceHeights.resize, 10, {debug: false} );
+
+
+
+
+
+
 /*--------------------------------------------------------*\
     $adding 'hovered' classes to elements that want them
 \*--------------------------------------------------------*/
 vital.hoverWatch.init({debug: false});
+
+
+
+
+
+/*------------------------------------*\
+    $smooth scrolling links
+\*------------------------------------*/
+vital.contentListeners.addFunction(vital.scrollLinks.init, 10);
+
 
 
 
