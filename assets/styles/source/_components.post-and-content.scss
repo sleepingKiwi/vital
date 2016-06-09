@@ -59,8 +59,23 @@
         margin-bottom:($bsu / $base-font-size)*1rem;
     }
 
+    .js--vitally-responsible{
+        margin-bottom:$bsu;
+        margin-bottom:($bsu / $base-font-size)*1rem;
+        img{
+            margin-bottom: 0;//these now position absolutely so no need for this
+        }
+    }
+
+    /*
     //remove margin on single images within a paragraph (double margin issues)
-    p > a:only-child img, p > img:only-child, p > .js--vitally-responsible:only-child img{
+    p > a:only-child img, p > img:only-child, p > .js--vitally-responsible:only-child img, p > .js--vitally-responsible:only-child{
+        margin-bottom: 0;
+    }
+    */
+
+    //remove margin on final images within a paragraph (double margin issues)
+    p > a:last-child img, p > img:last-child, p > .js--vitally-responsible:last-child img, p > .js--vitally-responsible:last-child{
         margin-bottom: 0;
     }
 

@@ -43,7 +43,7 @@
 
         &.no-image-margins{
             margin-bottom: $bsu;
-            img, p{
+            img, p, .js--vitally-responsible{
                 margin:0 auto !important;
             }
         }
