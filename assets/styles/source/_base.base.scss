@@ -47,12 +47,14 @@ body{
   min-height: 100vh;
   flex-direction: column;
 
-  justify-content: center;
+  justify-content: space-between; //makes it so that the header won't float centrally if other content hasn't yet loaded
 }
 
 .site-content {
     //sets flex-grow to 1 which pushes footer down
-  flex: 1;
+    //shrink to 0 because we don't want content to shrink
+    //basis to auto even though there's no definitive sizes set
+  flex: 1 0 auto;
 
     //site content also displays as flex so that content (.content-area) can be
     //centered vertically on pages with content that doesn't fill the screen...
@@ -70,8 +72,15 @@ body{
  * layout. look at removing the margins around header/footer and working with
  * padding on the content instead...
  */
+
+//the following method shows an example of applying padding only where flex isn't supported...
+/*
 .site-content{
-        //this padding should be overwritten as required 
-        //typically content will have $bsu of margin at the bottom...
-    //padding: $bsu 0 0;
+    padding: $bsu 0 0;
 }
+@supports(display: flex) {
+  .site-content{
+    padding: 0;
+  }
+}
+*/

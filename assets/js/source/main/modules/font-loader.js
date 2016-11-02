@@ -41,7 +41,13 @@ vital.fontLoader = (function(){
             FontFaceOnload('montserratregular', {
                 success: function() {
                     document.documentElement.className += ' js--main-fonts';
-                    sessionStorage.mainfont = true;
+                    try{
+                            //sessionStorage can return errors if the user has disabled it
+                            //but particularly in private browsing mode on iOS...
+                            //as it's purely used as a nice caching improvement here it's fine just 
+                            //to ignore this call if there's an error
+                        sessionStorage.mainfont = true;
+                    } catch(er){}
                 },
                 weight: 'normal',
                 style: 'normal'
@@ -52,7 +58,9 @@ vital.fontLoader = (function(){
             FontFaceOnload('goudyBookletter1911', {
                 success: function() {
                     document.documentElement.className += ' js--header-fonts';
-                    sessionStorage.headerfont = true;
+                    try{
+                        sessionStorage.headerfont = true;
+                    } catch(er){}
                 },
                 weight: 'normal',
                 style: 'normal'
@@ -65,7 +73,9 @@ vital.fontLoader = (function(){
             FontFaceOnload('montserratbold', {
                 success: function() {
                     document.documentElement.className += ' js--bold-fonts';
-                    sessionStorage.boldfont = true;
+                    try{
+                        sessionStorage.boldfont = true;
+                    } catch(er){}
                 },
                 weight: 'bold',
                 style: 'normal'

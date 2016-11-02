@@ -90,10 +90,14 @@ We hope that you enjoy your stay - Tedworth & Oscar.
     if ( 'querySelector' in document && 'addEventListener' in window ) {
         docEl.className = docEl.className.replace(/(^|\s)no-js(\s|$)/, " js ");
 
-        //if we've cut the mustard we also check for our font loading sessionStorage:
-        if( sessionStorage.mainfont ) { document.documentElement.className += ' js--main-fonts'; }
-        if( sessionStorage.headerfont ) { document.documentElement.className += ' js--header-fonts'; }
-        if( sessionStorage.boldfont ) { document.documentElement.className += ' js--bold-fonts'; }
+        try{
+            //if we've cut the mustard we also check for our font loading sessionStorage:
+            //not feature detecting just silently abandoning on an error as this isn't critical
+            if( sessionStorage.mainfont ) { document.documentElement.className += ' js--main-fonts'; }
+            if( sessionStorage.headerfont ) { document.documentElement.className += ' js--header-fonts'; }
+            if( sessionStorage.boldfont ) { document.documentElement.className += ' js--bold-fonts'; }
+        } catch(er){}
+
     }else{
         //this class is mostly for styling
         docEl.className = docEl.className.replace(/(^|\s)no-js(\s|$)/, " no-js haggard ");
