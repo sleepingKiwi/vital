@@ -21,7 +21,7 @@ module.exports = function(grunt) {
     };
 
     grunt.initConfig({
-        
+
         //never seem to use this...
         //pkg: grunt.file.readJSON('package.json'),
 
@@ -96,11 +96,15 @@ module.exports = function(grunt) {
         // autoprefixer
         autoprefixer: {
             options: {
-                browsers: ['> 0.5%', 'last 2 versions', 'Firefox > 20', 'Opera 12.1', 'ie >= 8', 'ios >= 4', 'android >= 3'],
+                    //firefox 28+ is when flexbox starts working properly...
+                browsers: ['> 0.5%', 'last 2 versions', 'Firefox > 30', 'Opera 12.1', 'ie >= 8', 'ios >= 7', 'android >= 4.4'],
+                    //occasionally I will explicitly add support for an older browser
+                    //  - mostly this covers -moz-box-sizing and -webkit-box-sizing
+                remove: false,
                 map: true
             },
             files: {
-                // explains this expanded syntax well: 
+                // explains this expanded syntax well:
                 // http://gruntjs.com/configuring-tasks#building-the-files-object-dynamically
                 expand: true,
                 flatten: true,
@@ -120,7 +124,7 @@ module.exports = function(grunt) {
                 keepSpecialComments: 1
             },
             minify: {
-                // explains this expanded syntax well: 
+                // explains this expanded syntax well:
                 // http://gruntjs.com/configuring-tasks#building-the-files-object-dynamically
                 expand: true,
                 cwd: 'assets/styles/dist',
@@ -189,6 +193,9 @@ module.exports = function(grunt) {
                     ],
                     'assets/js/dist/vital-docs.js': [
                         'assets/js/source/docs/**/*.js'
+                    ],
+                    'assets/js/dist/ie.js': [
+                        'assets/js/source/main/ie.js'
                     ]
                 }
             }
@@ -205,6 +212,9 @@ module.exports = function(grunt) {
                 files: {
                     'assets/js/dist/main.min.js': [
                         'assets/js/dist/main.js'
+                    ],
+                    'assets/js/dist/ie.min.js': [
+                        'assets/js/dist/ie.js'
                     ],
                     'assets/js/dist/vital-docs.min.js': [
                         'assets/js/dist/vital-docs.js'
@@ -293,13 +303,13 @@ module.exports = function(grunt) {
 
 
     // register task
-    grunt.registerTask('styles', ['clean:styles', 'sass:dist', 'autoprefixer', 'notify:styles']);  
+    grunt.registerTask('styles', ['clean:styles', 'sass:dist', 'autoprefixer', 'notify:styles']);
 
-    grunt.registerTask('js', ['clean:js', 'jshint', 'concat', 'uglify', 'notify:js']);  
+    grunt.registerTask('js', ['clean:js', 'jshint', 'concat', 'uglify', 'notify:js']);
 
     grunt.registerTask('icons', ['clean:icons', 'svgmin', 'grunticon', 'notify:icons']);
 
-    grunt.registerTask('default', ['styles', 'js', 'icons']);  
+    grunt.registerTask('default', ['styles', 'js', 'icons']);
 
 
 }//module.exports

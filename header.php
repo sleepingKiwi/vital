@@ -1,4 +1,4 @@
-<!doctype html>  
+<!doctype html>
 <html class ="no-js" <?php language_attributes(); ?> >
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
@@ -20,8 +20,8 @@ We hope that you enjoy your stay - Tedworth & Oscar.
 <meta name="HandheldFriendly" content="True">
 <?php //http://speckyboy.com/2012/05/16/creating-a-mobile-web-application-with-meta-tags/ ?>
 
-    
-<?php 
+
+<?php
 /*
  *
  * For more icon/favicon options and to generate: http://css-tricks.com/favicon-quiz/
@@ -31,7 +31,7 @@ We hope that you enjoy your stay - Tedworth & Oscar.
  *
  * CURRENTLY NOT INCLUDING THE MULTIPLE PNG ICON SIZES BECAUSE THEY ARE ALL REQUESTED BY CHROME/FIREFOX...
  *
-*/ 
+*/
 ?>
 <!-- favicons -->
 <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/assets/img/favicons/favicon.ico">
@@ -49,8 +49,8 @@ We hope that you enjoy your stay - Tedworth & Oscar.
 <meta name="msapplication-config" content="<?php echo get_template_directory_uri(); ?>/assets/img/favicons/browserconfig.xml">
 
 
-<?php /*include if relevant 
-<meta name="apple-mobile-web-app-capable" content="yes"/> 
+<?php /*include if relevant
+<meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="">
 */?>
@@ -71,7 +71,7 @@ We hope that you enjoy your stay - Tedworth & Oscar.
  * This article has great reference for javascript loading techniques:
  * https://www.igvita.com/2014/05/20/script-injected-async-scripts-considered-harmful/
  *
- * It's tempting to run a BBC style 'cutting the mustard' test to decide whether to load 
+ * It's tempting to run a BBC style 'cutting the mustard' test to decide whether to load
  * the main script file or not. However it means we can't use the async keyword on that script
  * and more worryingly would bypass the browsers 'speculative parser'
  * The approach we've taken is to run that test inside the main js file... it means users on
@@ -80,7 +80,7 @@ We hope that you enjoy your stay - Tedworth & Oscar.
  * https://github.com/filamentgroup/enhance
  *
  * TODO:
- * Properly look into and run tests around filamentgroups core workflow: 
+ * Properly look into and run tests around filamentgroups core workflow:
  * https://github.com/filamentgroup/Southstreet
  */
 ?>
@@ -110,11 +110,11 @@ We hope that you enjoy your stay - Tedworth & Oscar.
 
 
 
-<?php 
+<?php
 /**
  * GRUNTICONS
  * ----------
- * loading appropriate css for grunticons 
+ * loading appropriate css for grunticons
  */
 ?>
 <script>
@@ -128,7 +128,15 @@ grunticon(["<?php echo get_template_directory_uri(); ?>/assets/img/icons/dist/ic
 
 
 
-
+<?php
+/*----------------------------------------*\
+    TODO
+\*----------------------------------------*/
+    /**
+     * USE THE NEWLY AVAILABLE script_loader_tag TO DEAL WITH THIS IN lib/scripts.php
+     * See the method in there that we're using to add async/defer to main script tags etc.
+    **/
+?>
 <?php
 /**
  * HTML5 SHIV
@@ -146,15 +154,15 @@ grunticon(["<?php echo get_template_directory_uri(); ?>/assets/img/icons/dist/ic
 
 
 
-<?php //preferable to chuck humans.txt at site root 
+<?php //preferable to chuck humans.txt at site root
 /*
  * <!-- http://humanstxt.org/ -->
  * <link rel="author" href="<?php echo get_template_directory_uri(); ?>/assets/extras/humans.txt" />
  */
 ?>
-        
+
 </head>
-    
+
 <body <?php body_class(); ?>>
 
 <!--[if lt IE 8]>
@@ -180,8 +188,8 @@ grunticon(["<?php echo get_template_directory_uri(); ?>/assets/img/icons/dist/ic
                 if ( ! empty( $header_image ) ){ ?>
                     <h2 class="site-logo">
                         <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="nofollow">
-                            <img class="logo" 
-                                src="<?php echo esc_url( $header_image ); ?>"  
+                            <img class="logo"
+                                src="<?php echo esc_url( $header_image ); ?>"
                                 alt="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"
                             />
                         </a>
@@ -196,24 +204,24 @@ grunticon(["<?php echo get_template_directory_uri(); ?>/assets/img/icons/dist/ic
                 <?php } ?>
             </div><!-- .site-branding -->
 
-            <?php 
+            <?php
                 //stops debug errors appearing if nav menus don't exist
-                if (has_nav_menu('main-nav')){ 
-            ?> 
+                if (has_nav_menu('main-nav')){
+            ?>
             <nav id="site-navigation" class="main-navigation" role="navigation">
-                
+
                 <a class="menu-toggle js--only" title="Open site menu" href="#menu--header" data-menu="menu--header">
                     <span class="hamburger"></span>
                     <span class="screen-reader-text"><?php _e( 'Menu', 'vital' ); ?></span>
                 </a>
 
-                <?php 
+                <?php
                     /**
                      * USING TRANSIENTS TO CACHE THE MENU
                      * ----------------------------------
-                     * This isn't for every theme or situation... - menus cached this way save a ton 
+                     * This isn't for every theme or situation... - menus cached this way save a ton
                      * of queries on each page load BUT the 'active' classes won't function as
-                     * intended etc. 
+                     * intended etc.
                      *
                      * This transient is deleted in lib/fragment-cache.php every time this menu is updated
                      * Currently there's no hook when the manage_locations tab is used to change menus
@@ -221,21 +229,21 @@ grunticon(["<?php echo get_template_directory_uri(); ?>/assets/img/icons/dist/ic
                      * so bare that in mind if there are issues...
                      */
                     vital_fragment_cache('nav_main-nav', WEEK_IN_SECONDS, function() {
-                        wp_nav_menu( 
-                            array( 
+                        wp_nav_menu(
+                            array(
                                 'theme_location' => 'main-nav',
                                 'items_wrap' => '<ul id="menu--header" class="%2$s %1$s menu--header js--toggle-visuallyhidden">%3$s</ul>'
-                            ) 
-                        ); 
+                            )
+                        );
                     });
                 ?>
 
-                <?php 
+                <?php
                     /**
                      * DON'T WANT TRANSIENTS?
                      * ----------------------
                      */
-                    //wp_nav_menu( array( 'theme_location' => 'main-nav' ) ); 
+                    //wp_nav_menu( array( 'theme_location' => 'main-nav' ) );
                 ?>
 
 
