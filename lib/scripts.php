@@ -124,7 +124,7 @@ add_filter( 'style_loader_tag', 'vital_ie_conditional', 10, 2 );
 
          case 'vital-ie-scripts':
                  //load only for IE and lt 9
-             return '<!--[if lt IE 8]>'.$tag.'<![endif]-->'.PHP_EOL;
+             return '<!--[if lt IE 9]>'.$tag.'<![endif]-->'.PHP_EOL;
          break;
 
          default:
