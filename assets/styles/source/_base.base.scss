@@ -19,10 +19,14 @@ body{
 	color: $brand-c-main;
 	background-color: $brand-c-body-back;
 
+  // for fonts that render weirdly bold on osx...
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
         // loading the custom fonts in no-js makes design sense in most cases
         // because the FOIT is better than the custom fonts never appearing!
     .js--main-fonts &, .no-js &{
-        font-family: $brand-ff-main-loaded;        
+        font-family: $brand-ff-main-loaded;
     }
 }
 
@@ -59,11 +63,11 @@ body{
     //site content also displays as flex so that content (.content-area) can be
     //centered vertically on pages with content that doesn't fill the screen...
     //-
-    //in sites without sidebars the site-content__center-container 
+    //in sites without sidebars the site-content__center-container
     //element can be removed in header/footer
   display: flex;
   flex-direction: column;
-  justify-content: center;  
+  justify-content: center;
 }
 
 
